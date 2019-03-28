@@ -38,6 +38,7 @@ class Alg_WC_Custom_Order_Numbers_Core {
 
 			// check if subscriptions is enabled
 			if( in_array('woocommerce-subscriptions/woocommerce-subscriptions.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+				add_action( 'woocommerce_checkout_subscription_created', array( $this, 'update_custom_order_meta' ), PHP_INT_MAX, 1 );
 				add_filter( 'wcs_renewal_order_created', array( $this, 'remove_order_meta_renewal' ), PHP_INT_MAX, 2 );
 			}
 		}
@@ -325,7 +326,7 @@ class Alg_WC_Custom_Order_Numbers_Core {
 	 * @since   1.0.0
 	 */
 	function add_order_number_meta( $order_id, $do_overwrite ) {
-		if ( 'shop_order' !== get_post_type( $order_id ) ) {
+		if ( ! in_array( get_post_type( $order_id ), array( 'shop_order', 'shop_subscription' ) ) ) {
 			return false;
 		}
 		if ( true === $do_overwrite || 0 == get_post_meta( $order_id, '_alg_wc_custom_order_number', true ) ) {
@@ -380,6 +381,20 @@ class Alg_WC_Custom_Order_Numbers_Core {
 		$this->add_order_number_meta( $new_order_id, true );
 		return $renewal_order;
 	}
+
+	/**
+	 * Updates the custom order number for the WC Subscription
+	 * @param $subscription - Subscription for which the order has been created
+	 * @since 1.2.6
+	 */
+	function update_custom_order_meta( $subscription ) {
+		
+		$subscription_id = $subscription->get_id();
+		// update the custom order number
+		$this->add_order_number_meta( $subscription_id, true );
+	
+	}
+
 
 }
 
