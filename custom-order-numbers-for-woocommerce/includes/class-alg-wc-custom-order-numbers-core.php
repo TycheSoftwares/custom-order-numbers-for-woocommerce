@@ -35,6 +35,11 @@ class Alg_WC_Custom_Order_Numbers_Core {
 				add_action( 'add_meta_boxes',       array( $this, 'add_order_number_meta_box' ) );
 				add_action( 'save_post_shop_order', array( $this, 'save_order_number_meta_box' ), PHP_INT_MAX, 2 );
 			}
+
+			// check if subscriptions is enabled
+			if( in_array('woocommerce-subscriptions/woocommerce-subscriptions.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+				add_filter( 'wcs_renewal_order_created', array( $this, 'remove_order_meta_renewal' ), PHP_INT_MAX, 2 );
+			}
 		}
 	}
 
@@ -359,6 +364,21 @@ class Alg_WC_Custom_Order_Numbers_Core {
 			return $current_order_number;
 		}
 		return false;
+	}
+
+	/**
+	 * Updates the custom order number for a renewal order created
+	 * using WC Subscriptions
+	 * @param WC_Order $renewal_order - Order Object of the renewed order
+	 * @param $subscription - Subscription for which the order has been created
+	 * @return WC_Order $renewal_order
+	 * @since 1.2.6
+	 */
+	function remove_order_meta_renewal( $renewal_order, $subscription ) {
+		$new_order_id = $renewal_order->get_id();
+		// update the custom order number
+		$this->add_order_number_meta( $new_order_id, true );
+		return $renewal_order;
 	}
 
 }
