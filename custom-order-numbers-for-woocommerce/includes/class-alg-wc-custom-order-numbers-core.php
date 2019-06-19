@@ -25,6 +25,7 @@ class Alg_WC_Custom_Order_Numbers_Core {
 			add_action( 'wp_insert_post',           array( $this, 'add_new_order_number' ), PHP_INT_MAX ); // 'woocommerce_new_order'
 			add_filter( 'woocommerce_order_number', array( $this, 'display_order_number' ), PHP_INT_MAX, 2 );
 			if ( 'yes' === get_option( 'alg_wc_custom_order_numbers_order_tracking_enabled', 'yes' ) ) {
+				add_action( 'init', array( $this, 'alg_remove_tracking_filter' ) );
 				add_filter( 'woocommerce_shortcode_order_tracking_order_id', array( $this, 'add_order_number_to_tracking' ), PHP_INT_MAX );
 			}
 			if ( 'yes' === get_option( 'alg_wc_custom_order_numbers_search_by_custom_number_enabled', 'yes' ) ) {
@@ -395,6 +396,12 @@ class Alg_WC_Custom_Order_Numbers_Core {
 	
 	}
 
+	/**
+	 * Remove the WooCommerc filter which convers the order numbers to integers by removing the * * characters.
+	 */
+	function alg_remove_tracking_filter() {
+		remove_filter( 'woocommerce_shortcode_order_tracking_order_id', 'wc_sanitize_order_id' );
+	}
 
 }
 
