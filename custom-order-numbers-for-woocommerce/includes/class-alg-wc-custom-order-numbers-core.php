@@ -59,6 +59,11 @@ class Alg_WC_Custom_Order_Numbers_Core {
 			$is_wc_version_below_3 = version_compare( get_option( 'woocommerce_version', null ), '3.0.0', '<' );
 			$order_date            = ( $is_wc_version_below_3 ? $order->order_date : $order->get_date_created() );
 			$current_order_date    = strtotime( $order_date );
+
+			if( !$current_order_date || $current_order_date == '' ) {
+				$current_order_date = current_time('timestamp');
+			}
+			
 			update_option( 'alg_wc_custom_order_numbers_counter_previous_order_date', $current_order_date );
 			if ( 0 != $previous_order_date ) {
 				$do_reset = false;
