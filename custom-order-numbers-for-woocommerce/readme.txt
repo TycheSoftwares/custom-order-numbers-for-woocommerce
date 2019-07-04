@@ -2,8 +2,8 @@
 Contributors: tychesoftwares
 Tags: woocommerce, custom order numbers, woo commerce
 Requires at least: 4.4
-Tested up to: 5.1.1
-Stable tag: 1.2.6
+Tested up to: 5.2.2
+Stable tag: 1.2.7
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -42,6 +42,10 @@ Plugin lets you set custom order numbers in WooCommerce.
 3. Start by visiting plugin settings at WooCommerce > Settings > Custom Order Numbers.
 
 == Changelog ==
+
+= 1.2.7 - 04/07/2019 =
+* The orders were not being tracked when 'Enable order tracking by custom number' is enabled.
+* When the order was placed manually, the 'Sequential: Next order number' was being reset.
 
 = 1.2.6 - 28/03/2019 =
 * Added uninstall.php to ensure the plugin settings are removed from the DB when the plugin is deleted.
