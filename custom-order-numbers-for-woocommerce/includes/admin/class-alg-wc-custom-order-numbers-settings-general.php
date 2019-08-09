@@ -126,7 +126,7 @@ class Alg_WC_Custom_Order_Numbers_Settings_General extends Alg_WC_Custom_Order_N
 				array(
 					'title'     => __( 'Order number date prefix', 'custom-order-numbers-for-woocommerce' ),
 					'desc'      => apply_filters( 'alg_wc_custom_order_numbers', '<br>' . sprintf( 'You will need <a href="%s" target="_blank">%s</a> plugin to set this option.',
-						'https://wpfactory.com/item/custom-order-numbers-woocommerce/', 'Custom Order Numbers for WooCommerce Pro' ), 'settings' ),
+						'https://www.tychesoftwares.com/store/premium-plugins/custom-order-numbers-woocommerce/?utm_source=conupgradetopro&utm_medium=link&utm_campaign=CustomOrderNumbersLite', 'Custom Order Numbers for WooCommerce Pro' ), 'settings' ),
 					'desc_tip'  => __( 'Date prefix before order number (optional). This will change the prefixes for all existing orders. Value is passed directly to PHP `date` function, so most of PHP date formats can be used. The only exception is using `\` symbol in date format, as this symbol will be excluded from date. Try: Y-m-d- or mdy.', 'custom-order-numbers-for-woocommerce' ),
 					'id'        => 'alg_wc_custom_order_numbers_date_prefix',
 					'default'   => '',
@@ -136,7 +136,7 @@ class Alg_WC_Custom_Order_Numbers_Settings_General extends Alg_WC_Custom_Order_N
 				array(
 					'title'     => __( 'Order number width', 'custom-order-numbers-for-woocommerce' ),
 					'desc'      => apply_filters( 'alg_wc_custom_order_numbers', '<br>' . sprintf( 'You will need <a href="%s" target="_blank">%s</a> plugin to set this option.',
-						'https://wpfactory.com/item/custom-order-numbers-woocommerce/', 'Custom Order Numbers for WooCommerce Pro' ), 'settings' ),
+						'https://www.tychesoftwares.com/store/premium-plugins/custom-order-numbers-woocommerce/?utm_source=conupgradetopro&utm_medium=link&utm_campaign=CustomOrderNumbersLite', 'Custom Order Numbers for WooCommerce Pro' ), 'settings' ),
 					'desc_tip'  => __( 'Minimum width of number without prefix (zeros will be added to the left side). This will change the minimum width of order number for all existing orders. E.g. set to 5 to have order number displayed as 00001 instead of 1. Leave zero to disable.', 'custom-order-numbers-for-woocommerce' ),
 					'id'        => 'alg_wc_custom_order_numbers_min_width',
 					'default'   => 0,
@@ -146,7 +146,7 @@ class Alg_WC_Custom_Order_Numbers_Settings_General extends Alg_WC_Custom_Order_N
 				array(
 					'title'     => __( 'Order number custom suffix', 'custom-order-numbers-for-woocommerce' ),
 					'desc'      => apply_filters( 'alg_wc_custom_order_numbers', '<br>' . sprintf( 'You will need <a href="%s" target="_blank">%s</a> plugin to set this option.',
-						'https://wpfactory.com/item/custom-order-numbers-woocommerce/', 'Custom Order Numbers for WooCommerce Pro' ), 'settings' ),
+						'https://www.tychesoftwares.com/store/premium-plugins/custom-order-numbers-woocommerce/?utm_source=conupgradetopro&utm_medium=link&utm_campaign=CustomOrderNumbersLite', 'Custom Order Numbers for WooCommerce Pro' ), 'settings' ),
 					'desc_tip'  => __( 'Suffix after order number (optional). This will change the suffixes for all existing orders.', 'custom-order-numbers-for-woocommerce' ),
 					'id'        => 'alg_wc_custom_order_numbers_suffix',
 					'default'   => '',
@@ -156,7 +156,7 @@ class Alg_WC_Custom_Order_Numbers_Settings_General extends Alg_WC_Custom_Order_N
 				array(
 					'title'     => __( 'Order number date suffix', 'custom-order-numbers-for-woocommerce' ),
 					'desc'      => apply_filters( 'alg_wc_custom_order_numbers', '<br>' . sprintf( 'You will need <a href="%s" target="_blank">%s</a> plugin to set this option.',
-						'https://wpfactory.com/item/custom-order-numbers-woocommerce/', 'Custom Order Numbers for WooCommerce Pro' ), 'settings' ),
+						'https://www.tychesoftwares.com/store/premium-plugins/custom-order-numbers-woocommerce/?utm_source=conupgradetopro&utm_medium=link&utm_campaign=CustomOrderNumbersLite', 'Custom Order Numbers for WooCommerce Pro' ), 'settings' ),
 					'desc_tip'  => __( 'Date suffix after order number (optional). This will change the suffixes for all existing orders. Value is passed directly to PHP `date` function, so most of PHP date formats can be used. The only exception is using `\` symbol in date format, as this symbol will be excluded from date. Try: Y-m-d- or mdy.', 'custom-order-numbers-for-woocommerce' ),
 					'id'        => 'alg_wc_custom_order_numbers_date_suffix',
 					'default'   => '',
@@ -168,7 +168,7 @@ class Alg_WC_Custom_Order_Numbers_Settings_General extends Alg_WC_Custom_Order_N
 					'desc'      => '<br>' . sprintf( __( 'Replaced values: %s.', 'custom-order-numbers-for-woocommerce' ),
 							'<code>' . implode( '</code>, <code>', array( '{prefix}', '{date_prefix}', '{number}', '{suffix}', '{date_suffix}' ) ) . '</code>' ) .
 						apply_filters( 'alg_wc_custom_order_numbers', '<br>' . sprintf( 'You will need <a href="%s" target="_blank">%s</a> plugin to set this option.',
-							'https://wpfactory.com/item/custom-order-numbers-woocommerce/', 'Custom Order Numbers for WooCommerce Pro' ), 'settings' ),
+							'https://www.tychesoftwares.com/store/premium-plugins/custom-order-numbers-woocommerce/?utm_source=conupgradetopro&utm_medium=link&utm_campaign=CustomOrderNumbersLite', 'Custom Order Numbers for WooCommerce Pro' ), 'settings' ),
 					'id'        => 'alg_wc_custom_order_numbers_template',
 					'default'   => '{prefix}{date_prefix}{number}{suffix}{date_suffix}',
 					'type'      => 'text',
@@ -193,7 +193,7 @@ class Alg_WC_Custom_Order_Numbers_Settings_General extends Alg_WC_Custom_Order_N
 					'desc'      => __( 'Enable', 'custom-order-numbers-for-woocommerce' ),
 					'desc_tip'  => __( 'This will add "Order Number" meta box to each order\'s edit page. "Order Numbers Counter" must be set to "Sequential".', 'custom-order-numbers-for-woocommerce' ) .
 						apply_filters( 'alg_wc_custom_order_numbers', '<br>' . sprintf( 'You will need <a href="%s" target="_blank">%s</a> plugin to set this option.',
-							'https://wpfactory.com/item/custom-order-numbers-woocommerce/', 'Custom Order Numbers for WooCommerce Pro' ), 'settings' ),
+							'https://www.tychesoftwares.com/store/premium-plugins/custom-order-numbers-woocommerce/?utm_source=conupgradetopro&utm_medium=link&utm_campaign=CustomOrderNumbersLite', 'Custom Order Numbers for WooCommerce Pro' ), 'settings' ),
 					'id'        => 'alg_wc_custom_order_numbers_manual_enabled',
 					'default'   => 'no',
 					'type'      => 'checkbox',
