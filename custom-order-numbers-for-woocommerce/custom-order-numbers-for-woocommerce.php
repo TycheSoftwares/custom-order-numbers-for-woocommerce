@@ -112,7 +112,7 @@ final class Alg_WC_Custom_Order_Numbers {
 		$custom_links = array();
 		$custom_links[] = '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_custom_order_numbers' ) . '">' . __( 'Settings', 'woocommerce' ) . '</a>';
 		if ( 'custom-order-numbers-for-woocommerce.php' === basename( __FILE__ ) ) {
-			$custom_links[] = '<a href="https://www.tychesoftwares.com/store/premium-plugins/custom-order-numbers-woocommerce/">' . __( 'Unlock All', 'custom-order-numbers-for-woocommerce' ) . '</a>';
+			$custom_links[] = '<a href="https://www.tychesoftwares.com/store/premium-plugins/custom-order-numbers-woocommerce/?utm_source=conupgradetopro&utm_medium=unlockall&utm_campaign=CustomOrderNumbersLite">' . __( 'Unlock All', 'custom-order-numbers-for-woocommerce' ) . '</a>';
 		}
 		return array_merge( $custom_links, $links );
 	}
