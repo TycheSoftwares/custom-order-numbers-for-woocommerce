@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Check if WooCommerce is active.
 $plugin_name = 'woocommerce/woocommerce.php';
 if (
-	! in_array( $plugin_name, apply_filters( 'active_plugins', get_option( 'active_plugins', array() ) ) ) &&
+	! in_array( $plugin_name, apply_filters( 'active_plugins', get_option( 'active_plugins', array() ) ), true ) &&
 	! ( is_multisite() && array_key_exists( $plugin_name, get_site_option( 'active_sitewide_plugins', array() ) ) )
 ) {
 	return;
@@ -22,7 +22,7 @@ if ( 'custom-order-numbers-for-woocommerce.php' === basename( __FILE__ ) ) {
 	// Check if Pro is active, if so then return.
 	$plugin_file = 'custom-order-numbers-for-woocommerce-pro/custom-order-numbers-for-woocommerce-pro.php';
 	if (
-		in_array( $plugin_file, apply_filters( 'active_plugins', get_option( 'active_plugins', array() ) ) ) ||
+		in_array( $plugin_file, apply_filters( 'active_plugins', get_option( 'active_plugins', array() ) ), true ) ||
 		( is_multisite() && array_key_exists( $plugin_file, get_site_option( 'active_sitewide_plugins', array() ) ) )
 	) {
 		return;
@@ -54,7 +54,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers' ) ) :
 		 * @var   Alg_WC_Custom_Order_Numbers The single instance of the class
 		 * @since 1.0.0
 		 */
-		protected static $_instance = null;
+		protected static $instance = null;
 
 		/**
 		 * Main Alg_WC_Custom_Order_Numbers Instance
@@ -67,10 +67,10 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers' ) ) :
 		 * @return  Alg_WC_Custom_Order_Numbers - Main instance
 		 */
 		public static function instance() {
-			if ( is_null( self::$_instance ) ) {
-				self::$_instance = new self();
+			if ( is_null( self::$instance ) ) {
+				self::$instance = new self();
 			}
-			return self::$_instance;
+			return self::$instance;
 		}
 
 		/**

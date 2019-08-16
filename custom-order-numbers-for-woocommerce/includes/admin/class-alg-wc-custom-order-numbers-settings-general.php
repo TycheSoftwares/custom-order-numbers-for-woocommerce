@@ -62,7 +62,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Settings_General' ) ) :
 			$user_roles_no_admin = array();
 			foreach ( apply_filters( 'editable_roles', ( isset( $wp_roles->roles ) ? $wp_roles->roles : array() ) ) as $role_key => $role ) {
 				$user_roles[ $role_key ] = $role['name'];
-				if ( ! in_array( $role_key, array( 'administrator', 'super_admin' ) ) ) {
+				if ( ! in_array( $role_key, array( 'administrator', 'super_admin' ), true ) ) {
 					$user_roles_no_admin[ $role_key ] = $role['name'];
 				}
 			}
