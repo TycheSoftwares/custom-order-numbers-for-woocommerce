@@ -398,7 +398,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 			if ( ! in_array( get_post_type( $order_id ), array( 'shop_order', 'shop_subscription' ), true ) ) {
 				return false;
 			}
-			if ( true === $do_overwrite || '0' === get_post_meta( $order_id, '_alg_wc_custom_order_number', true ) ) {
+			if ( true === $do_overwrite || 0 == get_post_meta( $order_id, '_alg_wc_custom_order_number', true ) ) {
 				$counter_type = get_option( 'alg_wc_custom_order_numbers_counter_type', 'sequential' );
 				if ( 'sequential' === $counter_type ) {
 					// Using MySQL transaction, so in case of a lot of simultaneous orders in the shop - prevent duplicate sequential order numbers.
