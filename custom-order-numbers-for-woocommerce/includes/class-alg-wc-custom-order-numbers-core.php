@@ -413,8 +413,8 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 							array( 'option_value' => ( $current_order_number + 1 ) ),
 							array( 'option_name' => 'alg_wc_custom_order_numbers_counter' )
 						);
-						$current_order_number++;
-						if ( null !== $result_update || $current_order_number === $result_select->option_value ) {
+						$current_order_number_new = $current_order_number + 1;
+						if ( null !== $result_update || $current_order_number_new === $result_select->option_value ) {
 							// all ok.
 							$wpdb->query( 'COMMIT' ); //phpcs:ignore
 							update_post_meta( $order_id, '_alg_wc_custom_order_number', $current_order_number );
