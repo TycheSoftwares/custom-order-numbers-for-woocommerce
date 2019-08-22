@@ -46,7 +46,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers' ) ) :
 		 * @var   string
 		 * @since 1.0.0
 		 */
-		public $version = '1.2.8';
+		public $version = '1.2.9';
 
 		/**
 		 * The single instance of the class
@@ -91,26 +91,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers' ) ) :
 			// Settings & Scripts.
 			if ( is_admin() ) {
 				add_filter( 'woocommerce_get_settings_pages', array( $this, 'add_woocommerce_settings_tab' ) );
-				add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'action_links' ) );
 			}
-		}
-
-		/**
-		 * Show action links on the plugin screen
-		 *
-		 * @param   mixed $links - Links to be displayed for the plugin on WP Dashboard->Plugins.
-		 * @return  array
-		 *
-		 * @version 1.2.0
-		 * @since   1.0.0
-		 */
-		public function action_links( $links ) {
-			$custom_links   = array();
-			$custom_links[] = '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_custom_order_numbers' ) . '">' . __( 'Settings', 'woocommerce' ) . '</a>';
-			if ( 'custom-order-numbers-for-woocommerce.php' === basename( __FILE__ ) ) {
-				$custom_links[] = '<a href="https://www.tychesoftwares.com/store/premium-plugins/custom-order-numbers-woocommerce/?utm_source=conupgradetopro&utm_medium=unlockall&utm_campaign=CustomOrderNumbersLite">' . __( 'Unlock All', 'custom-order-numbers-for-woocommerce' ) . '</a>';
-			}
-			return array_merge( $custom_links, $links );
 		}
 
 		/**
