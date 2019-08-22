@@ -148,11 +148,10 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		 * @since   1.1.1
 		 */
 		public function create_order_number_meta_box() {
-			$html  = '';
-			$html .= '<input type="number" name="alg_wc_custom_order_number" style="width:100%;" value="' .
-			get_post_meta( get_the_ID(), '_alg_wc_custom_order_number', true ) . '">';
-			$html .= '<input type="hidden" name="alg_wc_custom_order_numbers_meta_box">';
-			echo esc_html( $html );
+			?>
+			<input type="number" name="alg_wc_custom_order_number" style="width:100%;" value="<?php echo esc_attr( get_post_meta( get_the_ID(), '_alg_wc_custom_order_number', true ) ); ?>">
+			<input type="hidden" name="alg_wc_custom_order_numbers_meta_box">
+			<?php
 		}
 
 		/**
@@ -189,35 +188,59 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		 * @todo    [dev] more results
 		 */
 		public function create_renumerate_orders_tool() {
-			$html                   = '';
-			$result_message         = '';
 			$last_renumerated_order = 0;
+			?>
+			<div class="wrap">
+			<h1><?php esc_html_e( 'Renumerate Orders', 'custom-order-numbers-for-woocommerce' ); ?></h1>
+			<?php
 			if ( isset( $_POST['alg_renumerate_orders'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 				$total_renumerated_orders = $this->renumerate_orders();
 				$last_renumerated_order   = $total_renumerated_orders[1];
 				$total_renumerated_orders = $total_renumerated_orders[0];
-				$result_message           = '<p><div class="updated"><p><strong>' .
-				// translators: <number of orders> orders successfully renumerated.
-				sprintf( __( '%d orders successfully renumerated!', 'custom-order-numbers-for-woocommerce' ), $total_renumerated_orders ) . '</strong></p></div></p>';
+				?>
+				<p>
+					<div class="updated">
+						<p><strong>
+						<?php
+						// translators: <number of orders> orders successfully renumerated.
+						echo sprintf( esc_html__( '%d orders successfully renumerated!', 'custom-order-numbers-for-woocommerce' ), esc_attr( $total_renumerated_orders ) );
+						?>
+						</strong></p>
+					</div>
+				</p>
+				<?php
 			}
-			$html .= '<h1>' . __( 'Renumerate Orders', 'custom-order-numbers-for-woocommerce' ) . '</h1>';
-			$html .= $result_message;
-			$html .= '<p>' . sprintf(
-				// translators: Settings Link.
-				__( 'Plugin settings: <a href="%s">WooCommerce > Settings > Custom Order Numbers</a>.', 'custom-order-numbers-for-woocommerce' ),
-				admin_url( 'admin.php?page=wc-settings&tab=alg_wc_custom_order_numbers' )
-			) . '</p>';
+			?>
+			<p>
+				<?php
+				echo sprintf(
+					// translators: Settings Link.
+					__( 'Plugin settings: <a href="%s">WooCommerce > Settings > Custom Order Numbers</a>.', 'custom-order-numbers-for-woocommerce' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					esc_url( admin_url( 'admin.php?page=wc-settings&tab=alg_wc_custom_order_numbers' ) )
+				);
+				?>
+			</p>
+			<?php
 			$next_order_number = ( 0 !== $last_renumerated_order ) ? ( $last_renumerated_order + 1 ) : get_option( 'alg_wc_custom_order_numbers_counter', 1 );
-			$html             .= '<p>' . __( 'Press the button below to renumerate all existing orders.', 'custom-order-numbers-for-woocommerce' ) . '</p>';
+			?>
+			<p><?php esc_html_e( 'Press the button below to renumerate all existing orders.', 'custom-order-numbers-for-woocommerce' ); ?></p>
+			<?php
 			if ( 'sequential' === get_option( 'alg_wc_custom_order_numbers_counter_type', 'sequential' ) ) {
+				?>
+				<p>
+				<?php
 				// translators: First Order Number.
-				$html .= '<p>' . sprintf( __( 'First order number will be <strong>%d</strong>.', 'custom-order-numbers-for-woocommerce' ), $next_order_number ) . '</p>';
+				echo sprintf( __( 'First order number will be <strong>%d</strong>.', 'custom-order-numbers-for-woocommerce' ), esc_attr( $next_order_number ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				?>
+				</p>
+				<?php
 			}
-			$html .= '<form method="post" action="">';
-			$html .= '<input class="button-primary" type="submit" name="alg_renumerate_orders" value="' . __( 'Renumerate orders', 'custom-order-numbers-for-woocommerce' ) . '"' .
-			' onclick="return confirm(\'' . __( 'Are you sure?', 'custom-order-numbers-for-woocommerce' ) . '\')">';
-			$html .= '</form>';
-			echo '<div class="wrap">' . esc_html( $html ) . '</div>';
+			?>
+			<form method="post" action="">
+				<input class="button-primary" type="submit" name="alg_renumerate_orders" value="<?php esc_html_e( 'Renumerate orders', 'custom-order-numbers-for-woocommerce' ); ?>" onclick="return confirm('<?php echo esc_html__( 'Are you sure?', 'custom-order-numbers-for-woocommerce' ); ?>')">
+			</form>
+			</div>
+			<?php
 		}
 
 		/**
@@ -272,7 +295,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 			! isset( $query->query ) ||
 			! isset( $query->query['s'] ) ||
 			false === is_numeric( $query->query['s'] ) ||
-			0 == $query->query['s'] ||
+			'0' === $query->query['s'] ||
 			'shop_order' !== $query->query['post_type'] ||
 			! $query->query_vars['shop_order_search']
 			) {
@@ -375,7 +398,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 			if ( ! in_array( get_post_type( $order_id ), array( 'shop_order', 'shop_subscription' ), true ) ) {
 				return false;
 			}
-			if ( true === $do_overwrite || 0 == get_post_meta( $order_id, '_alg_wc_custom_order_number', true ) ) {
+			if ( true === $do_overwrite || '0' === get_post_meta( $order_id, '_alg_wc_custom_order_number', true ) ) {
 				$counter_type = get_option( 'alg_wc_custom_order_numbers_counter_type', 'sequential' );
 				if ( 'sequential' === $counter_type ) {
 					// Using MySQL transaction, so in case of a lot of simultaneous orders in the shop - prevent duplicate sequential order numbers.
