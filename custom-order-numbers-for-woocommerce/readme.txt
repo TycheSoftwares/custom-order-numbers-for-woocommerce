@@ -1,9 +1,10 @@
 === Custom Order Numbers for WooCommerce ===
 Contributors: tychesoftwares
-Tags: woocommerce, custom order numbers, woo commerce
+Tags: woocommerce, custom order numbers, sequential order numbers
 Requires at least: 4.4
 Tested up to: 5.2.2
-Stable tag: 1.2.9
+Stable tag: trunk
+Requires PHP: 5.6
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -11,7 +12,7 @@ Custom order numbers for WooCommerce.
 
 == Description ==
 
-Plugin lets you set custom order numbers in WooCommerce.
+This plugin lets you set [custom order numbers](https://www.tychesoftwares.com/store/premium-plugins/custom-order-numbers-woocommerce/?utm_source=wprepo&utm_medium=topprolink&utm_campaign=CustomNumbers) in WooCommerce.
 
 = Main Features =
 * WooCommerce order numbers can be **sequential**, **random** or by **order ID**.
@@ -22,13 +23,58 @@ Plugin lets you set custom order numbers in WooCommerce.
 * You can also enable **order tracking** by custom number.
 * Optionally you can enable **admin order search** by custom number.
 
-= Premium Version =
+### Check out the PRO version of [Custom Order Numbers for WooCommerce plugin](https://www.tychesoftwares.com/store/premium-plugins/custom-order-numbers-woocommerce/?utm_source=wprepo&utm_medium=prolink&utm_campaign=CustomNumbers).
+= Features of Premium Version =
 * Order number **template**.
 * Order number **date prefix**.
 * Order number **width**.
 * Order number custom **suffix**.
 * Order number **date suffix**.
 * **Manual** order number counter.
+
+### Some of our other Pro plugins
+
+1. **[Abandoned Cart Pro for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/woocommerce-abandoned-cart-pro/?utm_source=wprepo&utm_medium=link&utm_campaign=CustomNumbers "Abandoned Cart Pro for WooCommerce")**
+
+2. **[Booking & Appointment Plugin for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/woocommerce-booking-plugin/?utm_source=wprepo&utm_medium=link&utm_campaign=CustomNumbers "Booking & Appointment Plugin for WooCommerce")**
+
+3. **[Order Delivery Date Pro for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=wprepo&utm_medium=link&utm_campaign=CustomNumbers "Order Delivery Date Pro for WooCommerce")**
+
+4. **[Product Delivery Date Pro for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/product-delivery-date-pro-for-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=CustomNumbers "Product Delivery Date Pro for WooCommerce")**
+
+5. **[Deposits For WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/deposits-for-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=CustomNumbers "Deposits For WooCommerce")**
+
+6. **[Payment Gateway Based Fees and Discounts for WooCommerce - Pro](https://www.tychesoftwares.com/store/premium-plugins/payment-gateway-based-fees-and-discounts-for-woocommerce-plugin/?utm_source=wprepo&utm_medium=link&utm_campaign=CustomNumbers "Payment Gateway Based Fees and Discounts for WooCommerce - Pro")**
+
+7. **[Custom Order Status for WooCommerce - Pro](https://www.tychesoftwares.com/store/premium-plugins/custom-order-status-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=CustomNumbers "Custom Order Status for WooCommerce - Pro")**
+
+8. **[Product Input Fields for WooCommerce - Pro](https://www.tychesoftwares.com/store/premium-plugins/product-input-fields-for-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=CustomNumbers "Product Input Fields for WooCommerce - Pro")**
+
+9. **[Call for Price for WooCommerce - Pro](https://www.tychesoftwares.com/store/premium-plugins/woocommerce-call-for-price-plugin/?utm_source=wprepo&utm_medium=link&utm_campaign=CustomNumbers "Call for Price for WooCommerce - Pro")**
+
+10. **[Price based on User Role for WooCommerce - Pro](https://www.tychesoftwares.com/store/premium-plugins/price-user-role-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=CustomNumbers "Price based on User Role for WooCommerce - Pro")**
+
+11. **[Currency per Product for WooCommerce - Pro](https://www.tychesoftwares.com/store/premium-plugins/currency-per-product-for-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=CustomNumbers "Currency per Product for WooCommerce - Pro")**
+
+### Some of our other free plugins
+
+1. **[Abandoned Cart for WooCommerce](https://wordpress.org/plugins/woocommerce-abandoned-cart/ "Abandoned Cart for WooCommerce")**
+
+2. **[Order Delivery Date for WooCommerce - Lite](https://wordpress.org/plugins/order-delivery-date-for-woocommerce/ "Order Delivery Date for WooCommerce - Lite")**
+
+3. **[Product Delivery Date for WooCommerce - Lite](https://wordpress.org/plugins/product-delivery-date-for-woocommerce-lite/ "Product Delivery Date for WooCommerce")**
+
+4. **[Payment Gateway Based Fees and Discounts for WooCommerce](https://wordpress.org/plugins/checkout-fees-for-woocommerce/ "Payment Gateway Based Fees and Discounts for WooCommerce")**
+
+5. **[Custom Order Status for WooCommerce](https://wordpress.org/plugins/custom-order-statuses-woocommerce/ "Custom Order Status for WooCommerce")**
+
+6. **[Product Input Fields for WooCommerce](https://wordpress.org/plugins/product-input-fields-for-woocommerce/ "Product Input Fields for WooCommerce")**
+
+7. **[Call for Price for WooCommerce](https://wordpress.org/plugins/woocommerce-call-for-price/ "Call for Price for WooCommerce")**
+
+8. **[Price based on User Role for WooCommerce](https://wordpress.org/plugins/price-by-user-role-for-woocommerce/ "Price based on User Role for WooCommerce")**
+
+9. **[Currency per Product for WooCommerce](https://wordpress.org/plugins/currency-per-product-for-woocommerce/ "Currency per Product for WooCommerce")**
 
 = Feedback =
 * We are open to your suggestions and feedback.
