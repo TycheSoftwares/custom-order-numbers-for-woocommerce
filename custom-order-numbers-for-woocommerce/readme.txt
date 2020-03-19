@@ -2,7 +2,7 @@
 Contributors: tychesoftwares
 Tags: woocommerce, custom order numbers, sequential order numbers
 Requires at least: 4.4
-Tested up to: 5.2.2
+Tested up to: 5.3.2
 Stable tag: trunk
 Requires PHP: 5.6
 License: GNU General Public License v3.0
@@ -88,6 +88,9 @@ This plugin lets you set [custom order numbers](https://www.tychesoftwares.com/s
 3. Start by visiting plugin settings at WooCommerce > Settings > Custom Order Numbers.
 
 == Changelog ==
+
+= 1.2.10 - 19/03/2020 =
+* Update compatibility with WooCommerce 4.0.0.
 
 = 1.2.9 - 22/08/2019 =
 * Fix - Incorrect next sequential order in the Plugin Settings page.
