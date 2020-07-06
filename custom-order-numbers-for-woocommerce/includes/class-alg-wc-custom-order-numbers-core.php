@@ -296,14 +296,13 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 			! isset( $query->query['s'] ) ||
 			false === is_numeric( $query->query['s'] ) ||
 			'0' === $query->query['s'] ||
-			'shop_order' !== $query->query['post_type'] ||
-			! $query->query_vars['shop_order_search']
+			'shop_order' !== $query->query['post_type']
 			) {
 				return;
 			}
 			$custom_order_id               = $query->query['s'];
 			$query->query_vars['post__in'] = array();
-			$query->query['s']             = '';
+			unset($query->query['s']);
 			$query->set( 'meta_key', '_alg_wc_custom_order_number' );
 			$query->set( 'meta_value', $custom_order_id );
 		}
