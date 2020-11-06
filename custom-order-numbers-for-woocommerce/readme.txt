@@ -90,7 +90,7 @@ This plugin lets you set [custom order numbers](https://www.tychesoftwares.com/s
 == Changelog ==
 
 = 1.2.11 - 06/11/2020 =
-* Fix :- Sequential Order sequence was getting break when the old order status is changed or the old orders are updated.
+* Fix :- Order Numbers were getting changed when the orders were updated and it was breaking the sequence. This has been fixed.
 * Update compatibility with WooCommerce 4.6
 
 = 1.2.10 - 19/03/2020 =
