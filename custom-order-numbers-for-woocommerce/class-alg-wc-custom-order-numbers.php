@@ -46,7 +46,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers' ) ) :
 		 * @var   string
 		 * @since 1.0.0
 		 */
-		public $version = '1.2.10';
+		public $version = '1.2.11';
 
 		/**
 		 * The single instance of the class
