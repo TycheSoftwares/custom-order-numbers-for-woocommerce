@@ -28,7 +28,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		 */
 		public function __construct() {
 			if ( 'yes' === get_option( 'alg_wc_custom_order_numbers_enabled', 'yes' ) ) {
-				add_action( 'wp_insert_post', array( $this, 'add_new_order_number' ), PHP_INT_MAX ); // 'woocommerce_new_order'
+				add_action( 'woocommerce_new_order', array( $this, 'add_new_order_number' ), PHP_INT_MAX );
 				add_filter( 'woocommerce_order_number', array( $this, 'display_order_number' ), PHP_INT_MAX, 2 );
 				if ( 'yes' === get_option( 'alg_wc_custom_order_numbers_order_tracking_enabled', 'yes' ) ) {
 					add_action( 'init', array( $this, 'alg_remove_tracking_filter' ) );
