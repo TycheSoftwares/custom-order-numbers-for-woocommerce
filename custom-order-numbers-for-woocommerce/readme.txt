@@ -89,6 +89,9 @@ This plugin lets you set [custom order numbers](https://www.tychesoftwares.com/s
 
 == Changelog ==
 
+= 1.2.12 - 23/01/2021 =
+* Fix :- New order number was not being made available instead will always return the Custom order number only. This has been fixed.
+
 = 1.2.11 - 06/11/2020 =
 * Fix :- Order Numbers were getting changed when the orders were updated and it was breaking the sequence. This has been fixed.
 * Update compatibility with WooCommerce 4.6
