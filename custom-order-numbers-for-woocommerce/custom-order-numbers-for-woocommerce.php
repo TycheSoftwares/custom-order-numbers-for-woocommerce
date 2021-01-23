@@ -26,7 +26,15 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers' ) ) {
 
 if ( is_admin() ) {
 	add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'action_links' );
-
+	$plugin_file = 'custom-order-numbers-for-woocommerce-pro/custom-order-numbers-for-woocommerce-pro.php';
+	if (
+		in_array( $plugin_file, apply_filters( 'active_plugins', get_option( 'active_plugins', array() ) ), true ) ||
+		( is_multisite() && array_key_exists( $plugin_file, get_site_option( 'active_sitewide_plugins', array() ) ) )
+	) {
+		if ( '1.4.1' !== get_option( 'alg_custom_order_numbers_version', '' ) ) {
+			add_action( 'admin_notices', 'alg_wc_con_admin_notice_for_contact_us' );
+		}
+	}
 	/**
 	 * Show action links on the plugin screen
 	 *
@@ -43,5 +51,23 @@ if ( is_admin() ) {
 			$custom_links[] = '<a href="https://www.tychesoftwares.com/store/premium-plugins/custom-order-numbers-woocommerce/?utm_source=conupgradetopro&utm_medium=unlockall&utm_campaign=CustomOrderNumbersLite">' . __( 'Unlock All', 'custom-order-numbers-for-woocommerce' ) . '</a>';
 		}
 		return array_merge( $custom_links, $links );
+	}
+
+	/**
+	 * Show admin notice to contact us for manual update for CON Pro when pro & lite both plugins are active.
+	 *
+	 * @version 1.2.12
+	 * @since   1.2.12
+	 */
+	function alg_wc_con_admin_notice_for_contact_us() {
+		?>
+		<div class="notice notice-info" style="position: relative;">
+			<p  style="margin: 10px 0 10px 10px; font-size: medium;">
+				<?php esc_html_e( 'There is an update to Custom Order Status Pro but cannot be updated automatically. Please contact us to manually update the plugin. Apologies for the inconvenience.', 'custom-order-numbers-for-woocommerce' ); ?></p>
+			<p class="submit" style="margin: -10px 0 10px 10px;">
+				<a class="button-primary button button-large" href="https://tychesoftwares.freshdesk.com/a/tickets/new"><?php esc_html_e( 'Contact us', 'custom-order-numbers-for-woocommerce' ); ?></a>
+			</p>
+		</div>
+		<?php
 	}
 }
