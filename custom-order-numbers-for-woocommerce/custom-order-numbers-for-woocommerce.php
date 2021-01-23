@@ -31,7 +31,7 @@ if ( is_admin() ) {
 		in_array( $plugin_file, apply_filters( 'active_plugins', get_option( 'active_plugins', array() ) ), true ) ||
 		( is_multisite() && array_key_exists( $plugin_file, get_site_option( 'active_sitewide_plugins', array() ) ) )
 	) {
-		if ( '1.4.1' !== get_option( 'alg_custom_order_numbers_version', '' ) ) {
+		if ( version_compare( get_option( 'alg_custom_order_numbers_version', '' ), '1.4.1' ) < 0 ) {
 			add_action( 'admin_notices', 'alg_wc_con_admin_notice_for_contact_us' );
 		}
 	}
