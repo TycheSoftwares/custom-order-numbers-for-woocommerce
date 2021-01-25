@@ -63,7 +63,7 @@ if ( is_admin() ) {
 		?>
 		<div class="notice notice-info" style="position: relative;">
 			<p  style="margin: 10px 0 10px 10px; font-size: medium;">
-				<?php esc_html_e( 'There is an update to Custom Order Status Pro but cannot be updated automatically. Please contact us to manually update the plugin. Apologies for the inconvenience.', 'custom-order-numbers-for-woocommerce' ); ?></p>
+				<?php esc_html_e( 'There is an update to Custom Order Numbers Pro but cannot be updated automatically. Please contact us to manually update the plugin. Apologies for the inconvenience.', 'custom-order-numbers-for-woocommerce' ); ?></p>
 			<p class="submit" style="margin: -10px 0 10px 10px;">
 				<a class="button-primary button button-large" href="https://tychesoftwares.freshdesk.com/support/tickets/new"><?php esc_html_e( 'Contact us', 'custom-order-numbers-for-woocommerce' ); ?></a>
 			</p>
