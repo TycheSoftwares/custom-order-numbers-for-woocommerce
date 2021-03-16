@@ -221,16 +221,32 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Settings_General' ) ) :
 						'custom_attributes' => apply_filters( 'alg_wc_custom_order_numbers', array( 'readonly' => 'readonly' ), 'settings' ),
 					),
 					array(
+						'title'             => __( 'Select orders to apply new settings to', 'custom-order-numbers-for-woocommerce' ),
+						'desc'              => apply_filters(
+							'alg_wc_custom_order_numbers',
+							'<br>' . sprintf(
+								'You will need <a href="%s" target="_blank">%s</a> plugin to set this option.',
+								'https://www.tychesoftwares.com/store/premium-plugins/custom-order-numbers-woocommerce/?utm_source=conupgradetopro&utm_medium=link&utm_campaign=CustomOrderNumbersLite',
+								'Custom Order Numbers for WooCommerce Pro'
+							),
+							'settings'
+						),
+						'desc_tip'          => __( 'This will add the prefix/suffix from the particular date.', 'custom-order-numbers-for-woocommerce' ),
+						'id'                => 'alg_wc_custom_order_numbers_settings_to_apply',
+						'default'           => 'all_orders',
+						'type'              => 'select',
+						'options'           => array(
+							'new_order'  => __( 'To all new orders only', 'custom-order-numbers-for-woocommerce' ),
+							'order_id'   => __( 'To orders from a certain order number', 'custom-order-numbers-for-woocommerce' ),
+							'date'       => __( 'To orders from a specific date', 'custom-order-numbers-for-woocommerce' ),
+							'all_orders' => __( 'To all orders', 'custom-order-numbers-for-woocommerce' ),
+						),
+						'custom_attributes' => apply_filters( 'alg_wc_custom_order_numbers', array( 'disabled' => 'disabled' ), 'settings' ),
+					),
+					array(
 						'title'   => __( 'Enable order tracking by custom number', 'custom-order-numbers-for-woocommerce' ),
 						'desc'    => __( 'Enable', 'custom-order-numbers-for-woocommerce' ),
 						'id'      => 'alg_wc_custom_order_numbers_order_tracking_enabled',
-						'default' => 'yes',
-						'type'    => 'checkbox',
-					),
-					array(
-						'title'   => __( 'Enable order admin search by custom number', 'custom-order-numbers-for-woocommerce' ),
-						'desc'    => __( 'Enable', 'custom-order-numbers-for-woocommerce' ),
-						'id'      => 'alg_wc_custom_order_numbers_search_by_custom_number_enabled',
 						'default' => 'yes',
 						'type'    => 'checkbox',
 					),
