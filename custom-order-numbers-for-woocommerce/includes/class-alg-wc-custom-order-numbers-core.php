@@ -30,13 +30,21 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 			if ( 'yes' === get_option( 'alg_wc_custom_order_numbers_enabled', 'yes' ) ) {
 				add_action( 'woocommerce_new_order', array( $this, 'add_new_order_number' ), 11 );
 				add_filter( 'woocommerce_order_number', array( $this, 'display_order_number' ), PHP_INT_MAX, 2 );
+				add_action( 'admin_notices', array( $this, 'alg_custom_order_numbers_update_admin_notice' ) );
+				add_action( 'admin_notices', array( $this, 'alg_custom_order_numbers_update_success_notice' ) );
+				// Add a recurring As action.
+				add_action( 'admin_init', array( $this, 'alg_custom_order_numbers_add_recurring_action' ) );
+				add_action( 'admin_init', array( $this, 'alg_custom_order_numbers_stop_recurring_action' ) );
+				add_action( 'alg_custom_order_numbers_update_old_custom_order_numbers', array( $this, 'alg_custom_order_numbers_update_old_custom_order_numbers_callback' ) );
+				// Include JS script for the notice.
+				add_action( 'admin_enqueue_scripts', array( $this, 'alg_custom_order_numbers_setting_script' ) );
+				add_action( 'wp_ajax_alg_custom_order_numbers_admin_notice_dismiss', array( $this, 'alg_custom_order_numbers_admin_notice_dismiss' ) );
+				add_action( 'woocommerce_settings_save_alg_wc_custom_order_numbers', array( $this, 'woocommerce_settings_save_alg_wc_custom_order_numbers_callback' ), PHP_INT_MAX );
 				if ( 'yes' === get_option( 'alg_wc_custom_order_numbers_order_tracking_enabled', 'yes' ) ) {
 					add_action( 'init', array( $this, 'alg_remove_tracking_filter' ) );
 					add_filter( 'woocommerce_shortcode_order_tracking_order_id', array( $this, 'add_order_number_to_tracking' ), PHP_INT_MAX );
 				}
-				if ( 'yes' === get_option( 'alg_wc_custom_order_numbers_search_by_custom_number_enabled', 'yes' ) ) {
-					add_action( 'pre_get_posts', array( $this, 'search_by_custom_number' ) );
-				}
+				add_action( 'woocommerce_shop_order_search_fields', array( $this, 'search_by_custom_number' ) );
 				add_action( 'admin_menu', array( $this, 'add_renumerate_orders_tool' ), PHP_INT_MAX );
 				if ( 'yes' === apply_filters( 'alg_wc_custom_order_numbers', 'no', 'manual_counter_value' ) ) {
 					add_action( 'add_meta_boxes', array( $this, 'add_order_number_meta_box' ) );
@@ -48,6 +56,226 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 					add_action( 'woocommerce_checkout_subscription_created', array( $this, 'update_custom_order_meta' ), PHP_INT_MAX, 1 );
 					add_filter( 'wcs_renewal_order_created', array( $this, 'remove_order_meta_renewal' ), PHP_INT_MAX, 2 );
 				}
+			}
+		}
+
+		/**
+		 * Enqueue JS script for showing fields as per the changes made in the settings.
+		 *
+		 * @version 1.3.0
+		 * @since   1.3.0
+		 */
+		public static function alg_custom_order_numbers_setting_script() {
+			$plugin_url       = plugins_url() . '/custom-order-numbers-for-woocommerce';
+			$numbers_instance = alg_wc_custom_order_numbers();
+			wp_enqueue_script(
+				'con_dismiss_notice',
+				$plugin_url . '/includes/js/con-dismiss-notice.js',
+				'',
+				$numbers_instance->version,
+				false
+			);
+			wp_localize_script(
+				'con_dismiss_notice',
+				'con_dismiss_param',
+				array(
+					'ajax_url' => admin_url( 'admin-ajax.php' ),
+				)
+			);
+		}
+
+		/**
+		 * Function to show the admin notice to update the old CON meta key in the database when the plugin is updated.
+		 *
+		 * @version 1.3.0
+		 * @since   1.3.0
+		 */
+		public static function alg_custom_order_numbers_update_admin_notice() {
+			global $current_screen;
+			$ts_current_screen = get_current_screen();
+			// Return when we're on any edit screen, as notices are distracting in there.
+			if ( ( method_exists( $ts_current_screen, 'is_block_editor' ) && $ts_current_screen->is_block_editor() ) || ( function_exists( 'is_gutenberg_page' ) && is_gutenberg_page() ) ) {
+				return;
+			}
+			if ( 'yes' === get_option( 'alg_custom_order_numbers_show_admin_notice', '' ) ) {
+				if ( '' === get_option( 'alg_custom_order_numbers_update_database', '' ) ) {
+					?>
+					<div class=''>
+						<div class="con-lite-message notice notice-info" style="position: relative;">
+							<p style="margin: 10px 0 10px 10px; font-size: medium;">
+								<?php
+									echo esc_html_e( 'From version 1.3.0, you can now search the orders by custom order numbers on the Orders page. In order to make the previous orders with custom order numbers searchable on Orders page, we need to update the database. Please click the “Update Now” button to do this. The database update process will run in the background.', 'custom-order-numbers-for-woocommerce' );
+								?>
+							</p>
+							<p class="submit" style="margin: -10px 0 10px 10px;">
+								<a class="button-primary button button-large" id="con-lite-update" href="edit.php?post_type=shop_order&action=alg_custom_order_numbers_update_old_con_in_database"><?php esc_html_e( 'Update Now', 'custom-order-numbers-for-woocommerce' ); ?></a>
+							</p>
+						</div>
+					</div>
+					<?php
+				}
+			}
+		}
+
+		/**
+		 * Function to add a scheduled action when Update now button is clicked in admin notice.AS will run every 5 mins and will run the script to update the CON meta value in old orders.
+		 *
+		 * @version 1.3.0
+		 * @since   1.3.0
+		 */
+		public function alg_custom_order_numbers_add_recurring_action() {
+			if ( isset( $_REQUEST['action'] ) && 'alg_custom_order_numbers_update_old_con_in_database' === $_REQUEST['action'] ) { // phpcs:ignore
+				update_option( 'alg_custom_order_numbers_update_database', 'yes' );
+				$current_time = current_time( 'timestamp' );
+				update_option( 'alg_custom_order_numbers_time_of_update_now', $current_time );
+				if ( function_exists( 'as_next_scheduled_action' ) ) { // Indicates that the AS library is present.
+					as_schedule_recurring_action( time(), 300, 'alg_custom_order_numbers_update_old_custom_order_numbers' );
+				}
+				wp_safe_redirect( admin_url( 'edit.php?post_type=shop_order' ) );
+				exit;
+			}
+		}
+
+		/**
+		 * Callback function for the AS to run the script to update the CON meta value for the old orders.
+		 *
+		 * @version 1.3.0
+		 * @since   1.3.0
+		 */
+		public function alg_custom_order_numbers_update_old_custom_order_numbers_callback() {
+			$args        = array(
+				'post_type'      => 'shop_order',
+				'posts_per_page' => 10000, // phpcs:ignore
+				'post_status'    => 'any',
+				'meta_query'     => array( // phpcs:ignore
+					'relation' => 'AND',
+					array(
+						'key'     => '_alg_wc_custom_order_number',
+						'compare' => 'EXISTS',
+					),
+					array(
+						'key'     => '_alg_wc_custom_order_number_updated',
+						'compare' => 'NOT EXISTS',
+					),
+				),
+			);
+			$loop_orders = new WP_Query( $args );
+			if ( ! $loop_orders->have_posts() ) {
+				update_option( 'alg_custom_order_numbers_no_old_orders_to_update', 'yes' );
+				return;
+			}
+			foreach ( $loop_orders->posts as $order_ids ) {
+				$order_id          = $order_ids->ID;
+				$order_number_meta = get_post_meta( $order_id, '_alg_wc_custom_order_number', true );
+				if ( '' === $order_number_meta ) {
+					$order_number_meta = $order_id;
+				}
+				$is_wc_version_below_3 = version_compare( get_option( 'woocommerce_version', null ), '3.0.0', '<' );
+				$order                 = wc_get_order( $order_id );
+				$order_timestamp       = strtotime( ( $is_wc_version_below_3 ? $order->order_date : $order->get_date_created() ) );
+				$time                  = get_option( 'alg_custom_order_numbers_time_of_update_now', '' );
+				if ( $order_timestamp > $time ) {
+					return;
+				}
+				$con_order_number = apply_filters(
+					'alg_wc_custom_order_numbers',
+					sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $order_number_meta ),
+					'value',
+					array(
+						'order_timestamp'   => $order_timestamp,
+						'order_number_meta' => $order_number_meta,
+					)
+				);
+				update_post_meta( $order_id, '_alg_wc_full_custom_order_number', $con_order_number );
+				update_post_meta( $order_id, '_alg_wc_custom_order_number_updated', 1 );
+			}
+			if ( 10000 > count( $loop_orders->posts ) ) {
+				update_option( 'alg_custom_order_numbers_no_old_orders_to_update', 'yes' );
+			}
+		}
+
+		/**
+		 * Stop AS when there are no old orders left to update the CON meta key.
+		 *
+		 * @version 1.3.0
+		 * @since   1.3.0
+		 */
+		public static function alg_custom_order_numbers_stop_recurring_action() {
+			if ( 'yes' === get_option( 'alg_custom_order_numbers_no_old_orders_to_update', '' ) ) {
+				as_unschedule_all_actions( 'alg_custom_order_numbers_update_old_custom_order_numbers' );
+			}
+		}
+
+		/**
+		 * Function to show the Success Notice when all the old orders CON meta value are updated.
+		 *
+		 * @version 1.3.0
+		 * @since   1.3.0
+		 */
+		public function alg_custom_order_numbers_update_success_notice() {
+			if ( 'yes' === get_option( 'alg_custom_order_numbers_no_old_orders_to_update', '' ) ) {
+				if ( 'dismissed' !== get_option( 'alg_custom_order_numbers_success_notice', '' ) ) {
+					?>
+					<div>
+						<div class="con-lite-message con-lite-success-message notice notice-success is-dismissible" style="position: relative;">
+							<p>
+								<?php
+									echo esc_html_e( 'Database updated successfully. In addition to new orders henceforth, you can now also search the old orders on Orders page with the custom order numbers.', 'custom-order-numbers-for-woocommerce' );
+								?>
+							</p>
+						</div>
+					</div>
+					<?php
+				}
+			}
+		}
+
+		/**
+		 * Function to dismiss the admin notice.
+		 *
+		 * @version 1.3.0
+		 * @since   1.3.0
+		 */
+		public function alg_custom_order_numbers_admin_notice_dismiss() {
+			$admin_choice = isset( $_POST['admin_choice'] ) ? sanitize_text_field( wp_unslash( $_POST['admin_choice'] ) ) : ''; // phpcs:ignore
+			update_option( 'alg_custom_order_numbers_success_notice', $admin_choice );
+		}
+
+		/**
+		 * Function to update the prefix in the databse when settings are saved.
+		 *
+		 * @version 1.3.0
+		 * @since   1.3.0
+		 */
+		public function woocommerce_settings_save_alg_wc_custom_order_numbers_callback() {
+			$args        = array(
+				'post_type'      => 'shop_order',
+				'post_status'    => 'any',
+				'posts_per_page' => -1,
+			);
+			$loop_orders = new WP_Query( $args );
+			if ( ! $loop_orders->have_posts() ) {
+				return;
+			}
+			foreach ( $loop_orders->posts as $order_ids ) {
+				$order_id          = $order_ids->ID;
+				$order_number_meta = get_post_meta( $order_id, '_alg_wc_custom_order_number', true );
+				if ( '' === $order_number_meta ) {
+					$order_number_meta = $order_id;
+				}
+				$is_wc_version_below_3 = version_compare( get_option( 'woocommerce_version', null ), '3.0.0', '<' );
+				$order                 = wc_get_order( $order_id );
+				$order_timestamp       = strtotime( ( $is_wc_version_below_3 ? $order->order_date : $order->get_date_created() ) );
+				$full_order_number     = apply_filters(
+					'alg_wc_custom_order_numbers',
+					sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $order_number_meta ),
+					'value',
+					array(
+						'order_timestamp'   => $order_timestamp,
+						'order_number_meta' => $order_number_meta,
+					)
+				);
+				update_post_meta( $order_id, '_alg_wc_full_custom_order_number', $full_order_number );
 			}
 		}
 
@@ -120,7 +348,24 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 			}
 
 			if ( isset( $_POST['alg_wc_custom_order_number'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
-				update_post_meta( $post_id, '_alg_wc_custom_order_number', sanitize_text_field( wp_unslash( $_POST['alg_wc_custom_order_number'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification
+				$is_wc_version_below_3 = version_compare( get_option( 'woocommerce_version', null ), '3.0.0', '<' );
+				$order                 = wc_get_order( $post_id );
+				$order_timestamp       = strtotime( ( $is_wc_version_below_3 ? $order->order_date : $order->get_date_created() ) );
+				$current_order_number  = '';
+				if ( isset( $_POST['alg_wc_custom_order_number'] ) ) { // phpcs:ignore
+					$current_order_number = sanitize_text_field( wp_unslash( $_POST['alg_wc_custom_order_number'] ) ); // phpcs:ignore
+				}
+				$full_custom_order_number = apply_filters(
+					'alg_wc_custom_order_numbers',
+					sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $current_order_number ),
+					'value',
+					array(
+						'order_timestamp'   => $order_timestamp,
+						'order_number_meta' => $current_order_number,
+					)
+				);
+				update_post_meta( $post_id, '_alg_wc_custom_order_number', $current_order_number );
+				update_post_meta( $post_id, '_alg_wc_full_custom_order_number', $full_custom_order_number );
 			}
 		}
 
@@ -281,31 +526,15 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		}
 
 		/**
-		 * Search_by_custom_number.
+		 * Function search_by_custom_number.
 		 *
-		 * @param object $query - WP_Query.
-		 *
-		 * @version 1.0.0
-		 * @since   1.0.0
-		 * @see     https://github.com/pablo-pacheco/wc-booster-search-order-by-custom-number-fix
+		 * @param array $metakeys Array of the metakeys to search order numbers on shop order page.
+		 * @version 1.3.0
+		 * @since   1.3.0
 		 */
-		public function search_by_custom_number( $query ) {
-			if (
-			! is_admin() ||
-			! isset( $query->query ) ||
-			! isset( $query->query['s'] ) ||
-			false === is_numeric( $query->query['s'] ) ||
-			'0' === $query->query['s'] ||
-			'shop_order' !== $query->query['post_type'] ||
-			! $query->query_vars['shop_order_search']
-			) {
-				return;
-			}
-			$custom_order_id               = $query->query['s'];
-			$query->query_vars['post__in'] = array();
-			$query->query['s']             = '';
-			$query->set( 'meta_key', '_alg_wc_custom_order_number' );
-			$query->set( 'meta_value', $custom_order_id );
+		public function search_by_custom_number( $metakeys ) {
+			$metakeys[] = '_alg_wc_full_custom_order_number';
+			return $metakeys;
 		}
 
 		/**
@@ -356,20 +585,38 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		public function display_order_number( $order_number, $order ) {
 			$is_wc_version_below_3 = version_compare( get_option( 'woocommerce_version', null ), '3.0.0', '<' );
 			$order_id              = ( $is_wc_version_below_3 ? $order->id : $order->get_id() );
-			$order_number_meta     = get_post_meta( $order_id, '_alg_wc_custom_order_number', true );
-			if ( '' === $order_number_meta || 'order_id' === get_option( 'alg_wc_custom_order_numbers_counter_type', 'sequential' ) ) {
-				$order_number_meta = $order_id;
+			$order_timestamp       = strtotime( ( $is_wc_version_below_3 ? $order->order_date : $order->get_date_created() ) );
+			if ( 'yes' !== get_option( 'alg_custom_order_numbers_show_admin_notice', '' ) || 'yes' === get_option( 'alg_custom_order_numbers_no_old_orders_to_update', '' ) ) {
+				$order_number_meta = get_post_meta( $order_id, '_alg_wc_full_custom_order_number', true );
+				if ( '' === $order_number_meta ) {
+					$order_number_meta = $order_id;
+					$order_number_meta = apply_filters(
+						'alg_wc_custom_order_numbers',
+						sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $order_number_meta ),
+						'value',
+						array(
+							'order_timestamp'   => $order_timestamp,
+							'order_number_meta' => $order_number_meta,
+						)
+					);
+				}
+				return $order_number_meta;
+			} else {
+				$order_number_meta = get_post_meta( $order_id, '_alg_wc_custom_order_number', true );
+				if ( '' === $order_number_meta ) {
+					$order_number_meta = $order_id;
+				}
+				$order_number = apply_filters(
+					'alg_wc_custom_order_numbers',
+					sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $order_number_meta ),
+					'value',
+					array(
+						'order_timestamp'   => $order_timestamp,
+						'order_number_meta' => $order_number_meta,
+					)
+				);
+				return $order_number;
 			}
-			$order_timestamp = strtotime( ( $is_wc_version_below_3 ? $order->order_date : $order->get_date_created() ) );
-			$order_number    = apply_filters(
-				'alg_wc_custom_order_numbers',
-				sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $order_number_meta ),
-				'value',
-				array(
-					'order_timestamp'   => $order_timestamp,
-					'order_number_meta' => $order_number_meta,
-				)
-			);
 			return $order_number;
 		}
 
@@ -398,8 +645,11 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 			if ( ! in_array( get_post_type( $order_id ), array( 'shop_order', 'shop_subscription' ), true ) ) {
 				return false;
 			}
-			if ( true === $do_overwrite || 0 == get_post_meta( $order_id, '_alg_wc_custom_order_number', true ) ) {
-				$counter_type = get_option( 'alg_wc_custom_order_numbers_counter_type', 'sequential' );
+			if ( true === $do_overwrite || 0 == get_post_meta( $order_id, '_alg_wc_custom_order_number', true ) ) { // phpcs:ignore
+				$is_wc_version_below_3 = version_compare( get_option( 'woocommerce_version', null ), '3.0.0', '<' );
+				$order                 = wc_get_order( $order_id );
+				$order_timestamp       = strtotime( ( $is_wc_version_below_3 ? $order->order_date : $order->get_date_created() ) );
+				$counter_type          = get_option( 'alg_wc_custom_order_numbers_counter_type', 'sequential' );
 				if ( 'sequential' === $counter_type ) {
 					// Using MySQL transaction, so in case of a lot of simultaneous orders in the shop - prevent duplicate sequential order numbers.
 					global $wpdb;
@@ -407,17 +657,27 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 					$wp_options_table = $wpdb->prefix . 'options';
 					$result_select    = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM `' . $wpdb->prefix . 'options` WHERE option_name = %s', 'alg_wc_custom_order_numbers_counter' ) ); //phpcs:ignore
 					if ( null !== $result_select ) {
-						$current_order_number = $this->maybe_reset_sequential_counter( $result_select->option_value, $order_id );
-						$result_update        = $wpdb->update( //phpcs:ignore
+						$current_order_number     = $this->maybe_reset_sequential_counter( $result_select->option_value, $order_id );
+						$result_update            = $wpdb->update( // phpcs:ignore
 							$wp_options_table,
 							array( 'option_value' => ( $current_order_number + 1 ) ),
 							array( 'option_name' => 'alg_wc_custom_order_numbers_counter' )
 						);
 						$current_order_number_new = $current_order_number + 1;
 						if ( null !== $result_update || $current_order_number_new === $result_select->option_value ) {
+							$full_custom_order_number = apply_filters(
+								'alg_wc_custom_order_numbers',
+								sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $current_order_number ),
+								'value',
+								array(
+									'order_timestamp'   => $order_timestamp,
+									'order_number_meta' => $current_order_number,
+								)
+							);
 							// all ok.
 							$wpdb->query( 'COMMIT' ); //phpcs:ignore
 							update_post_meta( $order_id, '_alg_wc_custom_order_number', $current_order_number );
+							update_post_meta( $order_id, '_alg_wc_full_custom_order_number', $full_custom_order_number );
 						} else {
 							// something went wrong, Rollback.
 							$wpdb->query( 'ROLLBACK' ); //phpcs:ignore
@@ -429,11 +689,31 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 						return false;
 					}
 				} elseif ( 'hash_crc32' === $counter_type ) {
-					$current_order_number = sprintf( '%u', crc32( $order_id ) );
+					$current_order_number     = sprintf( '%u', crc32( $order_id ) );
+					$full_custom_order_number = apply_filters(
+						'alg_wc_custom_order_numbers',
+						sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $current_order_number ),
+						'value',
+						array(
+							'order_timestamp'   => $order_timestamp,
+							'order_number_meta' => $current_order_number,
+						)
+					);
 					update_post_meta( $order_id, '_alg_wc_custom_order_number', $current_order_number );
+					update_post_meta( $order_id, '_alg_wc_full_custom_order_number', $full_custom_order_number );
 				} else { // 'order_id'
-					$current_order_number = '';
+					$current_order_number     = '';
+					$full_custom_order_number = apply_filters(
+						'alg_wc_custom_order_numbers',
+						sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $current_order_number ),
+						'value',
+						array(
+							'order_timestamp'   => $order_timestamp,
+							'order_number_meta' => $current_order_number,
+						)
+					);
 					update_post_meta( $order_id, '_alg_wc_custom_order_number', $current_order_number );
+					update_post_meta( $order_id, '_alg_wc_full_custom_order_number', $full_custom_order_number );
 				}
 				return $current_order_number;
 			}

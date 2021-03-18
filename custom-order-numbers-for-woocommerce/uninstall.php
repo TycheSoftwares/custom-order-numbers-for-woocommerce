@@ -57,6 +57,12 @@ if ( is_multisite() ) {
 		delete_blog_option( $con_blog_id, 'alg_wc_custom_order_numbers_hide_tab_for_roles' );
 		delete_blog_option( $con_blog_id, 'alg_wc_custom_order_numbers__reset' );
 		delete_blog_option( $con_blog_id, 'alg_wc_custom_order_numbers_counter_previous_order_date' );
+		delete_blog_option( $con_blog_id, 'alg_custom_order_numbers_update_database' );
+		delete_blog_option( $con_blog_id, 'alg_custom_order_numbers_time_of_update_now' );
+		delete_blog_option( $con_blog_id, 'alg_custom_order_numbers_no_old_orders_to_update' );
+		delete_blog_option( $con_blog_id, 'alg_custom_order_numbers_success_notice' );
+		delete_blog_option( $con_blog_id, 'alg_wc_custom_order_numbers_settings_to_apply' );
+		delete_blog_option( $con_blog_id, 'alg_custom_order_numbers_show_admin_notice' );
 		// License.
 		delete_blog_option( $con_blog_id, 'edd_license_key_con' );
 
@@ -85,6 +91,12 @@ if ( is_multisite() ) {
 	delete_option( 'alg_wc_custom_order_numbers_hide_tab_for_roles' );
 	delete_option( 'alg_wc_custom_order_numbers__reset' );
 	delete_option( 'alg_wc_custom_order_numbers_counter_previous_order_date' );
+	delete_option( 'alg_custom_order_numbers_update_database' );
+	delete_option( 'alg_custom_order_numbers_time_of_update_now' );
+	delete_option( 'alg_custom_order_numbers_no_old_orders_to_update' );
+	delete_option( 'alg_custom_order_numbers_success_notice' );
+	delete_option( 'alg_wc_custom_order_numbers_settings_to_apply' );
+	delete_option( 'alg_custom_order_numbers_show_admin_notice' );
 	// License.
 	delete_option( 'edd_license_key_con' );
 
