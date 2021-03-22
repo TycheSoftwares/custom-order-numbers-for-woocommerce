@@ -55,6 +55,8 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 				if ( in_array( 'woocommerce-subscriptions/woocommerce-subscriptions.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ), true ) ) {
 					add_action( 'woocommerce_checkout_subscription_created', array( $this, 'update_custom_order_meta' ), PHP_INT_MAX, 1 );
 					add_filter( 'wcs_renewal_order_created', array( $this, 'remove_order_meta_renewal' ), PHP_INT_MAX, 2 );
+					// To unset the CON meta key at the time of renewal of subscription, so that renewal orders don't have duplicate order numbers.
+					add_filter( 'wcs_renewal_order_meta', array( $this, 'remove_con_metakey_in_wcs_order_meta' ), 10, 3 );
 				}
 			}
 		}
@@ -104,7 +106,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 						<div class="con-lite-message notice notice-info" style="position: relative;">
 							<p style="margin: 10px 0 10px 10px; font-size: medium;">
 								<?php
-									echo esc_html_e( 'From version 1.3.0, you can now search the orders by custom order numbers on the Orders page. In order to make the previous orders with custom order numbers searchable on Orders page, we need to update the database. Please click the “Update Now” button to do this. The database update process will run in the background.', 'custom-order-numbers-for-woocommerce' );
+									echo esc_html_e( 'From version 1.3.0, you can now search the orders by custom order numbers on the Orders page. In order to make the previous orders with custom order numbers searchable on Orders page, we need to update the database. Please click the ï¿½Update Nowï¿½ button to do this. The database update process will run in the background.', 'custom-order-numbers-for-woocommerce' );
 								?>
 							</p>
 							<p class="submit" style="margin: -10px 0 10px 10px;">
@@ -757,6 +759,28 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 			remove_filter( 'woocommerce_shortcode_order_tracking_order_id', 'wc_sanitize_order_id' );
 		}
 
+		/**
+		 * Function to unset the CON meta key at the time of renewal of subscription.
+		 *
+		 * @param Array  $meta Array of a meta key present in the subscription.
+		 * @param Object $to_order  Order object.
+		 * @param Objec  $from_order Subscription object.
+		 */
+		public function remove_con_metakey_in_wcs_order_meta( $meta, $to_order, $from_order ) {
+			$to_order_id     = $to_order->get_id();
+			$from_order_type = get_post_type( $from_order->get_id() );
+			if ( 0 === $to_order_id && 'shop_subscription' === $from_order_type ) {
+				foreach ( $meta as $key => $value ) {
+					if ( '_alg_wc_custom_order_number' === $value['meta_key'] ) {
+						unset( $meta[ $key ] );
+					}
+					if ( '_alg_wc_full_custom_order_number' === $value['meta_key'] ) {
+						unset( $meta[ $key ] );
+					}
+				}
+			}
+			return $meta;
+		}
 	}
 
 endif;
