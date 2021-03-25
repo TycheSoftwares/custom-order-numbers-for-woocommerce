@@ -89,6 +89,11 @@ This plugin lets you set [custom order numbers](https://www.tychesoftwares.com/s
 
 == Changelog ==
 
+= 1.3.0 - 25/03/2021 =
+* Enhancement - You can now search by custom order numbers on the WooCommerce Orders page. This required a change in the database, which has been implemented in this release.
+* Fix - While exporting the orders to CSV, it is not showing the orders along with the prefix. This is fixed now.
+* Fix - Order numbers were coming duplicate for Subscription renewals. This is fixed now.
+
 = 1.2.12 - 25/01/2021 =
 * Fix :- New order number was not being made available instead will always return the Custom order number only. This has been fixed.
 
