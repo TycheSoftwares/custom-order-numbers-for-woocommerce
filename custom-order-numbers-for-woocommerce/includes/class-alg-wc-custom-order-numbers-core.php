@@ -58,6 +58,8 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 					// To unset the CON meta key at the time of renewal of subscription, so that renewal orders don't have duplicate order numbers.
 					add_filter( 'wcs_renewal_order_meta', array( $this, 'remove_con_metakey_in_wcs_order_meta' ), 10, 3 );
 				}
+				add_filter( 'pre_update_option_alg_wc_custom_order_numbers_prefix', array( $this, 'pre_alg_wc_custom_order_numbers_prefix' ), 10, 2 );
+
 			}
 		}
 
@@ -250,34 +252,38 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		 * @since   1.3.0
 		 */
 		public function woocommerce_settings_save_alg_wc_custom_order_numbers_callback() {
-			$args        = array(
-				'post_type'      => 'shop_order',
-				'post_status'    => 'any',
-				'posts_per_page' => -1,
-			);
-			$loop_orders = new WP_Query( $args );
-			if ( ! $loop_orders->have_posts() ) {
-				return;
-			}
-			foreach ( $loop_orders->posts as $order_ids ) {
-				$order_id          = $order_ids->ID;
-				$order_number_meta = get_post_meta( $order_id, '_alg_wc_custom_order_number', true );
-				if ( '' === $order_number_meta ) {
-					$order_number_meta = $order_id;
-				}
-				$is_wc_version_below_3 = version_compare( get_option( 'woocommerce_version', null ), '3.0.0', '<' );
-				$order                 = wc_get_order( $order_id );
-				$order_timestamp       = strtotime( ( $is_wc_version_below_3 ? $order->order_date : $order->get_date_created() ) );
-				$full_order_number     = apply_filters(
-					'alg_wc_custom_order_numbers',
-					sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $order_number_meta ),
-					'value',
-					array(
-						'order_timestamp'   => $order_timestamp,
-						'order_number_meta' => $order_number_meta,
-					)
+			if ( '1' === get_option( 'alg_wc_custom_order_numbers_prefix_suffix_changed' ) ) {
+				$args        = array(
+					'post_type'      => 'shop_order',
+					'post_status'    => 'any',
+					'posts_per_page' => -1,
 				);
-				update_post_meta( $order_id, '_alg_wc_full_custom_order_number', $full_order_number );
+				$loop_orders = new WP_Query( $args );
+				if ( ! $loop_orders->have_posts() ) {
+					update_option( 'alg_wc_custom_order_numbers_prefix_suffix_changed', '' );
+					return;
+				}
+				foreach ( $loop_orders->posts as $order_ids ) {
+					$order_id          = $order_ids->ID;
+					$order_number_meta = get_post_meta( $order_id, '_alg_wc_custom_order_number', true );
+					if ( '' === $order_number_meta ) {
+						$order_number_meta = $order_id;
+					}
+					$is_wc_version_below_3 = version_compare( get_option( 'woocommerce_version', null ), '3.0.0', '<' );
+					$order                 = wc_get_order( $order_id );
+					$order_timestamp       = strtotime( ( $is_wc_version_below_3 ? $order->order_date : $order->get_date_created() ) );
+					$full_order_number     = apply_filters(
+						'alg_wc_custom_order_numbers',
+						sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $order_number_meta ),
+						'value',
+						array(
+							'order_timestamp'   => $order_timestamp,
+							'order_number_meta' => $order_number_meta,
+						)
+					);
+					update_post_meta( $order_id, '_alg_wc_full_custom_order_number', $full_order_number );
+					update_option( 'alg_wc_custom_order_numbers_prefix_suffix_changed', '' );
+				}
 			}
 		}
 
@@ -799,6 +805,19 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 				}
 			}
 			return $meta;
+		}
+
+		/**
+		 * Function to see if prefix value is changed or not.
+		 *
+		 * @param string $new_value New setting value which is selected.
+		 * @param string $old_value Old setting value which is saved in the database.
+		 */
+		public function pre_alg_wc_custom_order_numbers_prefix( $new_value, $old_value ) {
+			if ( $new_value !== $old_value ) {
+				update_option( 'alg_wc_custom_order_numbers_prefix_suffix_changed', '1' );
+			}
+			return $new_value;
 		}
 	}
 
