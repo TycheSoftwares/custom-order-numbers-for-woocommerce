@@ -589,6 +589,27 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 			$order_id              = ( $is_wc_version_below_3 ? $order->id : $order->get_id() );
 			$order_timestamp       = strtotime( ( $is_wc_version_below_3 ? $order->order_date : $order->get_date_created() ) );
 			if ( 'yes' !== get_option( 'alg_custom_order_numbers_show_admin_notice', '' ) || 'yes' === get_option( 'alg_custom_order_numbers_no_old_orders_to_update', '' ) ) {
+				// This code of block is added to update the meta key '_alg_wc_full_custom_order_number' in the subscription orders as the order numbers were getting changed after the database update.
+				if ( 'yes' !== get_post_meta( $order_id, 'subscription_orders_updated', true ) ) {
+					if ( 'shop_subscription' === get_post_type( $order_id ) ) {
+						$order_number_meta = get_post_meta( $order_id, '_alg_wc_custom_order_number', true );
+						if ( '' === $order_number_meta ) {
+							$order_number_meta = $order_id;
+						}
+						$order_number = apply_filters(
+							'alg_wc_custom_order_numbers',
+							sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $order_number_meta ),
+							'value',
+							array(
+								'order_timestamp'   => $order_timestamp,
+								'order_number_meta' => $order_number_meta,
+							)
+						);
+						update_post_meta( $order_id, '_alg_wc_full_custom_order_number', $order_number );
+						update_post_meta( $order_id, 'subscription_orders_updated', 'yes' );
+						return $order_number;
+					}
+				}
 				$order_number_meta = get_post_meta( $order_id, '_alg_wc_full_custom_order_number', true );
 				// This code of block is added to update the meta key '_alg_wc_full_custom_order_number' in new orders which were placed after the update of v1.3.0 where counter type is set to order id.
 				if ( 'yes' !== get_post_meta( $order_id, 'new_orders_updated', true ) ) {
