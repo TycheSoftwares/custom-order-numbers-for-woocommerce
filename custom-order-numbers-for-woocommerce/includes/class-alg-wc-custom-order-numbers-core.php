@@ -59,7 +59,10 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 					add_filter( 'wcs_renewal_order_meta', array( $this, 'remove_con_metakey_in_wcs_order_meta' ), 10, 3 );
 				}
 				add_filter( 'pre_update_option_alg_wc_custom_order_numbers_prefix', array( $this, 'pre_alg_wc_custom_order_numbers_prefix' ), 10, 2 );
-
+				add_action( 'admin_init', array( $this, 'alg_custom_order_number_old_orders_without_meta_key' ) );
+				add_action( 'admin_init', array( $this, 'alg_custom_order_numbers_add_recurring_action_to_add_meta_key' ) );
+				add_action( 'alg_custom_order_numbers_update_meta_key_in_old_con', array( $this, 'alg_custom_order_numbers_update_meta_key_in_old_con_callback' ) );
+				add_action( 'wp_ajax_alg_custom_order_numbers_admin_meta_key_notice_dismiss', array( $this, 'alg_custom_order_numbers_admin_meta_key_notice_dismiss' ) );
 			}
 		}
 
@@ -119,6 +122,24 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 					<?php
 				}
 			}
+			if ( 'yes' === get_option( 'alg_custom_order_number_old_orders_to_update_meta_key', '' ) ) {
+				if ( '' === get_option( 'alg_custom_order_numbers_update_meta_key_in_database', '' ) ) {
+					?>
+					<div class=''>
+						<div class="con-lite-message notice notice-info" style="position: relative;">
+							<p style="margin: 10px 0 10px 10px; font-size: medium;">
+								<?php
+									echo esc_html_e( 'In order to make the previous orders searchable on Orders page where meta key of the custom order number is not present, we need to update the database. Please click the "Update Now" button to do this. The database update process will run in the background.', 'custom-order-numbers-for-woocommerce' );
+								?>
+							</p>
+							<p class="submit" style="margin: -10px 0 10px 10px;">
+								<a class="button-primary button button-large" id="con-lite-update" href="edit.php?post_type=shop_order&action=alg_custom_order_numbers_update_old_con_with_meta_key"><?php esc_html_e( 'Update Now', 'custom-order-numbers-for-woocommerce' ); ?></a>
+							</p>
+						</div>
+					</div>
+					<?php
+				}
+			}
 		}
 
 		/**
@@ -130,10 +151,29 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		public function alg_custom_order_numbers_add_recurring_action() {
 			if ( isset( $_REQUEST['action'] ) && 'alg_custom_order_numbers_update_old_con_in_database' === $_REQUEST['action'] ) { // phpcs:ignore
 				update_option( 'alg_custom_order_numbers_update_database', 'yes' );
-				$current_time = current_time( 'timestamp' );
+				$current_time = current_time( 'timestamp' ); // phpcs:ignore
 				update_option( 'alg_custom_order_numbers_time_of_update_now', $current_time );
 				if ( function_exists( 'as_next_scheduled_action' ) ) { // Indicates that the AS library is present.
 					as_schedule_recurring_action( time(), 300, 'alg_custom_order_numbers_update_old_custom_order_numbers' );
+				}
+				wp_safe_redirect( admin_url( 'edit.php?post_type=shop_order' ) );
+				exit;
+			}
+		}
+
+		/**
+		 * Function to add a scheduled action when Update now button is clicked in admin notice.AS will run every 5 mins and will run the script to add the meta key of CON in old orders where it is missing.
+		 *
+		 * @version 1.3.0
+		 * @since   1.3.0
+		 */
+		public function alg_custom_order_numbers_add_recurring_action_to_add_meta_key() {
+			if ( isset( $_REQUEST['action'] ) && 'alg_custom_order_numbers_update_old_con_with_meta_key' === $_REQUEST['action'] ) { // phpcs:ignore
+				update_option( 'alg_custom_order_numbers_update_meta_key_in_database', 'yes' );
+				$current_time = current_time( 'timestamp' ); // phpcs:ignore
+				update_option( 'alg_custom_order_numbers_meta_key_time_of_update_now', $current_time );
+				if ( function_exists( 'as_next_scheduled_action' ) ) { // Indicates that the AS library is present.
+					as_schedule_recurring_action( time(), 300, 'alg_custom_order_numbers_update_meta_key_in_old_con' );
 				}
 				wp_safe_redirect( admin_url( 'edit.php?post_type=shop_order' ) );
 				exit;
@@ -199,6 +239,71 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		}
 
 		/**
+		 * Callback function for the AS to run the script to add the CON meta key for the old orders where it is missing.
+		 */
+		public function alg_custom_order_numbers_update_meta_key_in_old_con_callback() {
+			$loop_orders = $this->alg_custom_order_number_old_orders_without_meta_key();
+			if ( '' === $loop_orders ) {
+				update_option( 'alg_custom_order_number_no_old_con_without_meta_key', 'yes' );
+				return;
+			}
+			foreach ( $loop_orders->posts as $order_ids ) {
+				$order_id              = $order_ids->ID;
+				$order_number_meta     = $order_id;
+				$is_wc_version_below_3 = version_compare( get_option( 'woocommerce_version', null ), '3.0.0', '<' );
+				$order                 = wc_get_order( $order_id );
+				$order_timestamp       = strtotime( ( $is_wc_version_below_3 ? $order->order_date : $order->get_date_created() ) );
+				$time                  = get_option( 'alg_custom_order_numbers_meta_key_time_of_update_now', '' );
+				if ( $order_timestamp > $time ) {
+					return;
+				}
+				$con_order_number = apply_filters(
+					'alg_wc_custom_order_numbers',
+					sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $order_number_meta ),
+					'value',
+					array(
+						'order_timestamp'   => $order_timestamp,
+						'order_number_meta' => $order_number_meta,
+					)
+				);
+				update_post_meta( $order_id, '_alg_wc_full_custom_order_number', $con_order_number );
+				update_post_meta( $order_id, '_alg_wc_custom_order_number_meta_key_updated', 1 );
+			}
+			if ( 5000 > count( $loop_orders->posts ) ) {
+				update_option( 'alg_custom_order_number_no_old_con_without_meta_key', 'yes' );
+			}
+		}
+
+		/**
+		 * Function to get the old orders where CON meta key is missing.
+		 */
+		public function alg_custom_order_number_old_orders_without_meta_key() {
+			$args        = array(
+				'post_type'      => 'shop_order',
+				'posts_per_page' => 5000, // phpcs:ignore
+				'post_status'    => 'any',
+				'meta_query'     => array( // phpcs:ignore
+					'relation' => 'AND',
+					array(
+						'key'     => '_alg_wc_custom_order_number',
+						'compare' => 'NOT EXISTS',
+					),
+					array(
+						'key'     => '_alg_wc_custom_order_number_meta_key_updated',
+						'compare' => 'NOT EXISTS',
+					),
+				),
+			);
+			$loop_orders = new WP_Query( $args );
+			if ( ! $loop_orders->have_posts() ) {
+				return '';
+			} else {
+				update_option( 'alg_custom_order_number_old_orders_to_update_meta_key', 'yes' );
+				return $loop_orders;
+			}
+		}
+
+		/**
 		 * Stop AS when there are no old orders left to update the CON meta key.
 		 *
 		 * @version 1.3.0
@@ -207,6 +312,9 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		public static function alg_custom_order_numbers_stop_recurring_action() {
 			if ( 'yes' === get_option( 'alg_custom_order_numbers_no_old_orders_to_update', '' ) ) {
 				as_unschedule_all_actions( 'alg_custom_order_numbers_update_old_custom_order_numbers' );
+			}
+			if ( 'yes' === get_option( 'alg_custom_order_number_no_old_con_without_meta_key', '' ) ) {
+				as_unschedule_all_actions( 'alg_custom_order_numbers_update_meta_key_in_old_con' );
 			}
 		}
 
@@ -232,6 +340,22 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 					<?php
 				}
 			}
+
+			if ( 'yes' === get_option( 'alg_custom_order_number_no_old_con_without_meta_key', '' ) ) {
+				if ( 'dismissed' !== get_option( 'alg_custom_order_numbers_success_notice_for_meta_key', '' ) ) {
+					?>
+					<div>
+						<div class="con-lite-message con-lite-meta-key-success-message notice notice-success is-dismissible" style="position: relative;">
+							<p>
+								<?php
+									echo esc_html_e( 'Database updated successfully. In addition to new orders henceforth, you can now also search the old orders on Orders page with the custom order numbers.', 'custom-order-numbers-for-woocommerce' );
+								?>
+							</p>
+						</div>
+					</div>
+					<?php
+				}
+			}
 		}
 
 		/**
@@ -243,6 +367,14 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		public function alg_custom_order_numbers_admin_notice_dismiss() {
 			$admin_choice = isset( $_POST['admin_choice'] ) ? sanitize_text_field( wp_unslash( $_POST['admin_choice'] ) ) : ''; // phpcs:ignore
 			update_option( 'alg_custom_order_numbers_success_notice', $admin_choice );
+		}
+
+		/**
+		 * Function to dismiss the admin notice.
+		 */
+		public function alg_custom_order_numbers_admin_meta_key_notice_dismiss() {
+			$admin_choice = isset( $_POST['alg_admin_choice'] ) ? sanitize_text_field( wp_unslash( $_POST['alg_admin_choice'] ) ) : ''; // phpcs:ignore
+			update_option( 'alg_custom_order_numbers_success_notice_for_meta_key', $admin_choice );
 		}
 
 		/**
@@ -595,6 +727,27 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 			$order_id              = ( $is_wc_version_below_3 ? $order->id : $order->get_id() );
 			$order_timestamp       = strtotime( ( $is_wc_version_below_3 ? $order->order_date : $order->get_date_created() ) );
 			if ( 'yes' !== get_option( 'alg_custom_order_numbers_show_admin_notice', '' ) || 'yes' === get_option( 'alg_custom_order_numbers_no_old_orders_to_update', '' ) ) {
+				// This code of block is added to update the meta key '_alg_wc_full_custom_order_number' in the subscription orders as the order numbers were getting changed after the database update.
+				if ( 'yes' !== get_post_meta( $order_id, 'subscription_orders_updated', true ) ) {
+					if ( 'shop_subscription' === get_post_type( $order_id ) ) {
+						$order_number_meta = get_post_meta( $order_id, '_alg_wc_custom_order_number', true );
+						if ( '' === $order_number_meta ) {
+							$order_number_meta = $order_id;
+						}
+						$order_number = apply_filters(
+							'alg_wc_custom_order_numbers',
+							sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $order_number_meta ),
+							'value',
+							array(
+								'order_timestamp'   => $order_timestamp,
+								'order_number_meta' => $order_number_meta,
+							)
+						);
+						update_post_meta( $order_id, '_alg_wc_full_custom_order_number', $order_number );
+						update_post_meta( $order_id, 'subscription_orders_updated', 'yes' );
+						return $order_number;
+					}
+				}
 				$order_number_meta = get_post_meta( $order_id, '_alg_wc_full_custom_order_number', true );
 				// This code of block is added to update the meta key '_alg_wc_full_custom_order_number' in new orders which were placed after the update of v1.3.0 where counter type is set to order id.
 				if ( 'yes' !== get_post_meta( $order_id, 'new_orders_updated', true ) ) {
@@ -672,7 +825,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 			if ( ! in_array( get_post_type( $order_id ), array( 'shop_order', 'shop_subscription' ), true ) ) {
 				return false;
 			}
-			if ( true === $do_overwrite || 0 == get_post_meta( $order_id, '_alg_wc_custom_order_number', true ) ) { // phpcs:ignore
+			if ( true === $do_overwrite || '' == get_post_meta( $order_id, '_alg_wc_custom_order_number', true ) ) { // phpcs:ignore
 				$is_wc_version_below_3 = version_compare( get_option( 'woocommerce_version', null ), '3.0.0', '<' );
 				$order                 = wc_get_order( $order_id );
 				$order_timestamp       = strtotime( ( $is_wc_version_below_3 ? $order->order_date : $order->get_date_created() ) );
