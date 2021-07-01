@@ -820,7 +820,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 			if ( ! in_array( get_post_type( $order_id ), array( 'shop_order', 'shop_subscription' ), true ) ) {
 				return false;
 			}
-			if ( true === $do_overwrite || 0 == get_post_meta( $order_id, '_alg_wc_custom_order_number', true ) ) { // phpcs:ignore
+			if ( true === $do_overwrite || '' == get_post_meta( $order_id, '_alg_wc_custom_order_number', true ) ) { // phpcs:ignore
 				$is_wc_version_below_3 = version_compare( get_option( 'woocommerce_version', null ), '3.0.0', '<' );
 				$order                 = wc_get_order( $order_id );
 				$order_timestamp       = strtotime( ( $is_wc_version_below_3 ? $order->order_date : $order->get_date_created() ) );
