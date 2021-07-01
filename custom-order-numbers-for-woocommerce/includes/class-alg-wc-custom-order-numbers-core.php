@@ -268,7 +268,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 				update_post_meta( $order_id, '_alg_wc_full_custom_order_number', $con_order_number );
 				update_post_meta( $order_id, '_alg_wc_custom_order_number_meta_key_updated', 1 );
 			}
-			if ( 10000 > count( $loop_orders->posts ) ) {
+			if ( 5000 > count( $loop_orders->posts ) ) {
 				update_option( 'alg_custom_order_number_no_old_con_without_meta_key', 'yes' );
 			}
 		}
@@ -279,7 +279,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		public function alg_custom_order_number_old_orders_without_meta_key() {
 			$args        = array(
 				'post_type'      => 'shop_order',
-				'posts_per_page' => 10000, // phpcs:ignore
+				'posts_per_page' => 5000, // phpcs:ignore
 				'post_status'    => 'any',
 				'meta_query'     => array( // phpcs:ignore
 					'relation' => 'AND',
