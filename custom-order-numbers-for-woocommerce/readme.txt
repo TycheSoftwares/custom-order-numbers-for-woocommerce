@@ -89,6 +89,12 @@ This plugin lets you set [custom order numbers](https://www.tychesoftwares.com/s
 
 == Changelog ==
 
+= 1.3.2 - 02/07/2021 =
+* Fix - Fixed the errors coming with the PHP 8.
+* Fix - Search for old order numbers were not working. This is fixed now.
+* Fix - Critical error message were coming on saving the settings page. This is partially fixed. A permanent fix will be released in the next update.
+* Fix - After updating the admin notice order numbers for the Subscription order were getting changed. This is fixed now.
+
 = 1.3.1 - 01/04/2021 =
 * Fix - Order numbers were missing and only prefix were coming in the new orders which were placed after the update of v1.3.0 where the Order numbers counter option was set to Order ID. This is fixed now.
 
