@@ -122,22 +122,24 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 					<?php
 				}
 			}
-			if ( 'yes' === get_option( 'alg_custom_order_number_old_orders_to_update_meta_key', '' ) ) {
-				if ( '' === get_option( 'alg_custom_order_numbers_update_meta_key_in_database', '' ) ) {
-					?>
-					<div class=''>
-						<div class="con-lite-message notice notice-info" style="position: relative;">
-							<p style="margin: 10px 0 10px 10px; font-size: medium;">
-								<?php
-									echo esc_html_e( 'In order to make the previous orders searchable on Orders page where meta key of the custom order number is not present, we need to update the database. Please click the "Update Now" button to do this. The database update process will run in the background.', 'custom-order-numbers-for-woocommerce' );
-								?>
-							</p>
-							<p class="submit" style="margin: -10px 0 10px 10px;">
-								<a class="button-primary button button-large" id="con-lite-update" href="edit.php?post_type=shop_order&action=alg_custom_order_numbers_update_old_con_with_meta_key"><?php esc_html_e( 'Update Now', 'custom-order-numbers-for-woocommerce' ); ?></a>
-							</p>
+			if ( 'yes' !== get_option( 'alg_custom_order_numbers_no_meta_admin_notice', '' ) ) {
+				if ( 'yes' === get_option( 'alg_custom_order_number_old_orders_to_update_meta_key', '' ) ) {
+					if ( '' === get_option( 'alg_custom_order_numbers_update_meta_key_in_database', '' ) ) {
+						?>
+						<div class=''>
+							<div class="con-lite-message notice notice-info" style="position: relative;">
+								<p style="margin: 10px 0 10px 10px; font-size: medium;">
+									<?php
+										echo esc_html_e( 'In order to make the previous orders searchable on Orders page where meta key of the custom order number is not present, we need to update the database. Please click the "Update Now" button to do this. The database update process will run in the background.', 'custom-order-numbers-for-woocommerce' );
+									?>
+								</p>
+								<p class="submit" style="margin: -10px 0 10px 10px;">
+									<a class="button-primary button button-large" id="con-lite-update" href="edit.php?post_type=shop_order&action=alg_custom_order_numbers_update_old_con_with_meta_key"><?php esc_html_e( 'Update Now', 'custom-order-numbers-for-woocommerce' ); ?></a>
+								</p>
+							</div>
 						</div>
-					</div>
-					<?php
+						<?php
+					}
 				}
 			}
 		}
@@ -233,7 +235,34 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 				update_post_meta( $order_id, '_alg_wc_full_custom_order_number', $con_order_number );
 				update_post_meta( $order_id, '_alg_wc_custom_order_number_updated', 1 );
 			}
-			if ( 10000 > count( $loop_orders->posts ) ) {
+			$loop_old_orders = $this->alg_custom_order_number_old_orders_without_meta_key();
+			if ( '' === $loop_old_orders ) {
+				update_option( 'alg_custom_order_numbers_no_old_orders_to_update', 'yes' );
+				return;
+			}
+			foreach ( $loop_old_orders->posts as $order_ids ) {
+				$order_id              = $order_ids->ID;
+				$order_number_meta     = $order_id;
+				$is_wc_version_below_3 = version_compare( get_option( 'woocommerce_version', null ), '3.0.0', '<' );
+				$order                 = wc_get_order( $order_id );
+				$order_timestamp       = strtotime( ( $is_wc_version_below_3 ? $order->order_date : $order->get_date_created() ) );
+				$time                  = get_option( 'alg_custom_order_numbers_meta_key_time_of_update_now', '' );
+				if ( $order_timestamp > $time ) {
+					return;
+				}
+				$con_order_number = apply_filters(
+					'alg_wc_custom_order_numbers',
+					sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $order_number_meta ),
+					'value',
+					array(
+						'order_timestamp'   => $order_timestamp,
+						'order_number_meta' => $order_number_meta,
+					)
+				);
+				update_post_meta( $order_id, '_alg_wc_full_custom_order_number', $con_order_number );
+				update_post_meta( $order_id, '_alg_wc_custom_order_number_meta_key_updated', 1 );
+			}
+			if ( 10000 > count( $loop_orders->posts ) && 5000 > count( $loop_old_orders->posts ) ) {
 				update_option( 'alg_custom_order_numbers_no_old_orders_to_update', 'yes' );
 			}
 		}
@@ -340,20 +369,21 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 					<?php
 				}
 			}
-
-			if ( 'yes' === get_option( 'alg_custom_order_number_no_old_con_without_meta_key', '' ) ) {
-				if ( 'dismissed' !== get_option( 'alg_custom_order_numbers_success_notice_for_meta_key', '' ) ) {
-					?>
-					<div>
-						<div class="con-lite-message con-lite-meta-key-success-message notice notice-success is-dismissible" style="position: relative;">
-							<p>
-								<?php
-									echo esc_html_e( 'Database updated successfully. In addition to new orders henceforth, you can now also search the old orders on Orders page with the custom order numbers.', 'custom-order-numbers-for-woocommerce' );
-								?>
-							</p>
+			if ( 'yes' !== get_option( 'alg_custom_order_numbers_no_meta_admin_notice', '' ) ) {
+				if ( 'yes' === get_option( 'alg_custom_order_number_no_old_con_without_meta_key', '' ) ) {
+					if ( 'dismissed' !== get_option( 'alg_custom_order_numbers_success_notice_for_meta_key', '' ) ) {
+						?>
+						<div>
+							<div class="con-lite-message con-lite-meta-key-success-message notice notice-success is-dismissible" style="position: relative;">
+								<p>
+									<?php
+										echo esc_html_e( 'Database updated successfully. In addition to new orders henceforth, you can now also search the old orders on Orders page with the custom order numbers.', 'custom-order-numbers-for-woocommerce' );
+									?>
+								</p>
+							</div>
 						</div>
-					</div>
-					<?php
+						<?php
+					}
 				}
 			}
 		}

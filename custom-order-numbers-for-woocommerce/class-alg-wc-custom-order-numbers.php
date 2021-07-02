@@ -117,6 +117,9 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers' ) ) :
 				if ( '' !== get_option( 'alg_custom_order_numbers_version', '' ) ) {
 					update_option( 'alg_custom_order_numbers_show_admin_notice', 'yes' );
 				}
+				if ( '1.3.0' > get_option( 'alg_custom_order_numbers_version', '' ) ) {
+					update_option( 'alg_custom_order_numbers_no_meta_admin_notice', 'yes' );
+				}
 				update_option( 'alg_custom_order_numbers_version', $this->version );
 			}
 			// Core file needed.
