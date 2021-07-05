@@ -89,7 +89,7 @@ This plugin lets you set [custom order numbers](https://www.tychesoftwares.com/s
 
 == Changelog ==
 
-= 1.3.2 - 02/07/2021 =
+= 1.3.2 - 05/07/2021 =
 * Fix - Fixed the errors coming with the PHP 8.
 * Fix - Search for old order numbers were not working. This is fixed now.
 * Fix - Critical error message were coming on saving the settings page. This is partially fixed. A permanent fix will be released in the next update.
