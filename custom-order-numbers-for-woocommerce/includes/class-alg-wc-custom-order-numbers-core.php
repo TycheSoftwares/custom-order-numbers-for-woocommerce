@@ -235,7 +235,23 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 				update_post_meta( $order_id, '_alg_wc_full_custom_order_number', $con_order_number );
 				update_post_meta( $order_id, '_alg_wc_custom_order_number_updated', 1 );
 			}
-			$loop_old_orders = $this->alg_custom_order_number_old_orders_without_meta_key();
+			$args        = array(
+				'post_type'      => 'shop_order',
+				'posts_per_page' => 5000, // phpcs:ignore
+				'post_status'    => 'any',
+				'meta_query'     => array( // phpcs:ignore
+					'relation' => 'AND',
+					array(
+						'key'     => '_alg_wc_custom_order_number',
+						'compare' => 'NOT EXISTS',
+					),
+					array(
+						'key'     => '_alg_wc_custom_order_number_meta_key_updated',
+						'compare' => 'NOT EXISTS',
+					),
+				),
+			);
+			$loop_old_orders = new WP_Query( $args );
 			if ( '' === $loop_old_orders ) {
 				update_option( 'alg_custom_order_numbers_no_old_orders_to_update', 'yes' );
 				return;
@@ -271,7 +287,23 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		 * Callback function for the AS to run the script to add the CON meta key for the old orders where it is missing.
 		 */
 		public function alg_custom_order_numbers_update_meta_key_in_old_con_callback() {
-			$loop_orders = $this->alg_custom_order_number_old_orders_without_meta_key();
+			$args        = array(
+				'post_type'      => 'shop_order',
+				'posts_per_page' => 5000, // phpcs:ignore
+				'post_status'    => 'any',
+				'meta_query'     => array( // phpcs:ignore
+					'relation' => 'AND',
+					array(
+						'key'     => '_alg_wc_custom_order_number',
+						'compare' => 'NOT EXISTS',
+					),
+					array(
+						'key'     => '_alg_wc_custom_order_number_meta_key_updated',
+						'compare' => 'NOT EXISTS',
+					),
+				),
+			);
+			$loop_orders = new WP_Query( $args );
 			if ( '' === $loop_orders ) {
 				update_option( 'alg_custom_order_number_no_old_con_without_meta_key', 'yes' );
 				return;
@@ -309,7 +341,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		public function alg_custom_order_number_old_orders_without_meta_key() {
 			$args        = array(
 				'post_type'      => 'shop_order',
-				'posts_per_page' => 5000, // phpcs:ignore
+				'posts_per_page' => 1, // phpcs:ignore
 				'post_status'    => 'any',
 				'meta_query'     => array( // phpcs:ignore
 					'relation' => 'AND',
