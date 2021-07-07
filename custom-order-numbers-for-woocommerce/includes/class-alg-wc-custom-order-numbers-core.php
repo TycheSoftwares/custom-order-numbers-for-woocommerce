@@ -235,7 +235,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 				update_post_meta( $order_id, '_alg_wc_full_custom_order_number', $con_order_number );
 				update_post_meta( $order_id, '_alg_wc_custom_order_number_updated', 1 );
 			}
-			$args        = array(
+			$args = array(
 				'post_type'      => 'shop_order',
 				'posts_per_page' => 500, // phpcs:ignore
 				'post_status'    => 'any',
@@ -339,28 +339,30 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		 * Function to get the old orders where CON meta key is missing.
 		 */
 		public function alg_custom_order_number_old_orders_without_meta_key() {
-			$args        = array(
-				'post_type'      => 'shop_order',
-				'posts_per_page' => 1, // phpcs:ignore
-				'post_status'    => 'any',
-				'meta_query'     => array( // phpcs:ignore
-					'relation' => 'AND',
-					array(
-						'key'     => '_alg_wc_custom_order_number',
-						'compare' => 'NOT EXISTS',
+			if ( 'yes' !== get_option( 'alg_custom_order_number_no_old_con_without_meta_key', '' ) ) {
+				$args        = array(
+					'post_type'      => 'shop_order',
+					'posts_per_page' => 1, // phpcs:ignore
+					'post_status'    => 'any',
+					'meta_query'     => array( // phpcs:ignore
+						'relation' => 'AND',
+						array(
+							'key'     => '_alg_wc_custom_order_number',
+							'compare' => 'NOT EXISTS',
+						),
+						array(
+							'key'     => '_alg_wc_custom_order_number_meta_key_updated',
+							'compare' => 'NOT EXISTS',
+						),
 					),
-					array(
-						'key'     => '_alg_wc_custom_order_number_meta_key_updated',
-						'compare' => 'NOT EXISTS',
-					),
-				),
-			);
-			$loop_orders = new WP_Query( $args );
-			if ( ! $loop_orders->have_posts() ) {
-				return '';
-			} else {
-				update_option( 'alg_custom_order_number_old_orders_to_update_meta_key', 'yes' );
-				return $loop_orders;
+				);
+				$loop_orders = new WP_Query( $args );
+				if ( ! $loop_orders->have_posts() ) {
+					return '';
+				} else {
+					update_option( 'alg_custom_order_number_old_orders_to_update_meta_key', 'yes' );
+					return $loop_orders;
+				}
 			}
 		}
 
