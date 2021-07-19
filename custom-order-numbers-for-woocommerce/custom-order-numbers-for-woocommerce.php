@@ -11,7 +11,7 @@
  * Copyright: � 2021 Tyche Softwares
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
- * WC tested up to: 5.4
+ * WC tested up to: 5.5
  *
  * @package Custom-Order-Numbers-Lite
  */
