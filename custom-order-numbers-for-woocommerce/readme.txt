@@ -32,6 +32,17 @@ This plugin lets you set [custom order numbers](https://www.tychesoftwares.com/s
 * Order number **date suffix**.
 * **Manual** order number counter.
 
+### Compatibility With Invoice Plugins:
+
+Custom Order Numbers plugin is compatible with all popular invoice plugins such that the invoices created by those plugins will have the custom order numbers and not the original order id. Some of those plugins are:
+
+* WooCommerce PDF Invoices, Packing Slips, Delivery Notes & Shipping Labels
+* Print Invoice & Delivery Notes for WooCommerce
+* Invoices for WooCommerce
+* WooCommerce PDF Invoices & Packing Slips
+* Booster for Woocommerce
+* Challan – PDF Invoice & Packing Slip for WooCommerce
+
 ### Some of our other Pro plugins
 
 1. **[Abandoned Cart Pro for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/woocommerce-abandoned-cart-pro/?utm_source=wprepo&utm_medium=link&utm_campaign=CustomNumbers "Abandoned Cart Pro for WooCommerce")**
