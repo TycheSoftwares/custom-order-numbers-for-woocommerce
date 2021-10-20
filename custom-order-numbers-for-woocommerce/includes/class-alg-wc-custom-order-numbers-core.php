@@ -307,7 +307,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		 * Function to get the old orders where CON meta key is missing.
 		 */
 		public function alg_custom_order_number_old_orders_without_meta_key() {
-			if ( 'yes' !== get_option( 'alg_custom_order_number_no_old_con_without_meta_key', '' ) ) {
+			if ( 'yes' !== get_option( 'alg_custom_order_number_no_old_con_without_meta_key', '' ) && 'yes' !== get_option( 'alg_custom_order_number_no_old_orders_to_update_meta_key', '' ) ) {
 				$args        = array(
 					'post_type'      => 'shop_order',
 					'posts_per_page' => 1, // phpcs:ignore
@@ -325,6 +325,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 					),
 				);
 				$loop_orders = new WP_Query( $args );
+				update_option( 'alg_custom_order_number_no_old_orders_to_update_meta_key', 'yes' );
 				if ( ! $loop_orders->have_posts() ) {
 					return '';
 				} else {
