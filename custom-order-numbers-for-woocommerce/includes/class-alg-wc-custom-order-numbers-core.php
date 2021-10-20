@@ -734,6 +734,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		 */
 		public function search_by_custom_number( $metakeys ) {
 			$metakeys[] = '_alg_wc_full_custom_order_number';
+			$metakeys[] = '_alg_wc_custom_order_number';
 			return $metakeys;
 		}
 
