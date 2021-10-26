@@ -98,6 +98,41 @@ Custom Order Numbers plugin is compatible with all popular invoice plugins such 
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 3. Start by visiting plugin settings at WooCommerce > Settings > Custom Order Numbers.
 
+== Frequently Asked Questions ==
+
+= How can I use custom order numbers instead of default WooCommerce order numbers in third-party plugins like Invoice plugins, Integration plugins, etc.? =
+
+When you use the Custom Order Number Lite plugin, in the Database, the original Order ID created by WooCommerce remains unchanged because that Order ID is used for many core functions and by multiple plugins and themes.
+
+To use custom order numbers in a third-party plugin, you will have to contact the Support Team of the third-party plugin & ask them to make the necessary changes. They can do this by fetching the Order ID and using the below code for Custom Order Number.
+
+This code has to be used in place of where the Order ID is fetched as shown below:
+$custom_order_number = $order->get_order_number(); //where $order is an order object
+
+= Is it possible to set random numbers for the custom order number? =
+
+Yes, it is possible to set the random numbers for the custom order number.
+
+Custom Order Numbers can be set in three different ways - Sequential, Random or by Order ID.
+
+= Is it possible to reset the custom order number counter? =
+
+Yes, it is possible to reset the counter number. You can reset the counter number in four different ways- daily, monthly and yearly basis.
+
+There is also an option to set a number for reset counter value. This would mean that on every reset, the sequence will start with that particular number.
+
+= Can I set the width for the custom order numbers, for example, I want my custom order number to be 8 characters long? =
+
+This is not possible in the Lite plugin. But using the [Pro version](https://www.tychesoftwares.com/store/premium-plugins/custom-order-numbers-woocommerce/?utm_source=wprepo&utm_medium=faqlink&utm_campaign=CustomOrderNumberLite), you can set the width of the custom order number on the settings page.
+
+= If somehow the sequential order number breaks down, what should be done to put all orders in a correct sequence? = 
+
+Custom Order Numbers plugin has a tool called ‘Renumerate Orders’. Using this tool, you can easily renumerate all the existing orders in a correct sequence.
+
+= Is it possible to add prefix/suffix based on different user roles? =
+
+This is not possible in the Lite plugin. But using the Pro version, you can add a prefix/suffix based on different user roles. For eg: guest-order for Guest user role, etc.
+
 == Changelog ==
 
 = 1.3.3 - 08/07/2021 =
