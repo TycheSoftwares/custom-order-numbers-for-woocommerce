@@ -135,6 +135,10 @@ This is not possible in the Lite plugin. But using the Pro version, you can add 
 
 == Changelog ==
 
+= 1.3.4 - 26/10/2021 =
+* Fix - Admin pages were loading slower due to the query in the plugin. This is fixed now.
+* Fix - Old orders were not searchable with the order number. This is fixed now.
+
 = 1.3.3 - 08/07/2021 =
 * Fix - After updating the plugin to the v1.3.2, it crashed the database for some sites. This is fixed now.
 * Fix - Time consumed by the admin pages to load were more in the v1.3.2. This is fixed now.
