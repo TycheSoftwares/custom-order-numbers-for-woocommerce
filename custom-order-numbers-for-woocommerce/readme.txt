@@ -133,6 +133,13 @@ Custom Order Numbers plugin has a tool called ‘Renumerate Orders’. Using thi
 
 This is not possible in the Lite plugin. But using the Pro version, you can add a prefix/suffix based on different user roles. For eg: guest-order for Guest user role, etc.
 
+= In the third-party plugin, how to use the custom order numbers instead of WooCommerce Order Number? =
+
+In Custom Order Numbers Lite plugin, in the Database, we do not change the original order id created by WooCommerce because that order id is used for many core functions and also by multiple plugins and themes.
+So what you will have to do is, you will have to contact to support team of the third-party plugin and ask them to make the necessary changes. They will have to make the changes where Order ID is been fetched and have to use the below code for Custom Order Number instead of the code used for Order ID.
+Here is the code they will need.
+$custom_order_number = $order->get_order_number(); //where $order is an order object
+
 == Changelog ==
 
 = 1.3.4 - 26/10/2021 =
