@@ -705,7 +705,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 			$block_size        = 512;
 			while ( true ) {
 				$args = array(
-					'post_type'      => 'shop_order',
+					'post_type'      => array( 'shop_order', 'shop_subscription' ),
 					'post_status'    => 'any',
 					'posts_per_page' => $block_size,
 					'orderby'        => 'date',
