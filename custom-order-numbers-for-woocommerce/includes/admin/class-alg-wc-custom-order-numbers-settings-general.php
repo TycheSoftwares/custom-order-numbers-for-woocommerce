@@ -302,6 +302,10 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Settings_General' ) ) :
 						'type'  => 'title',
 					),
 					array(
+						'desc' => __( 'With the help of this tool, you can change the custom order numbers for all the existing orders in a sequence and will maintain the sequence for the upcoming orders also.', 'custom-order-numbers-for-woocommerce' ),
+						'type' => 'title',
+					),
+					array(
 						'type' => 'sectionend',
 						'id'   => 'alg_wc_custom_order_numbers_tools',
 					),
