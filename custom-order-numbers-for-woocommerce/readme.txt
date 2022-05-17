@@ -143,10 +143,9 @@ $custom_order_number = $order->get_order_number(); //where $order is an order ob
 == Changelog ==
 
 = 1.3.5 - 17/05/2022 =
-* Fix - Renumerate tool renumber the past subscriptions.
-* Enhancement - Added some description Below the Renumerate Order Tools button.
-* Fix - Orders are not getting tracked with custom prefix.
-* Enhancement - added one question in FAQ page.
+* Fix - Subscription orders were not getting considered when using Renumerate Order Tool.
+* Info - Added description for Renumerate Order Tools button
+* Info - Added Q&A in FAQ page.
 
 = 1.3.4 - 26/10/2021 =
 * Fix - Admin pages were loading slower due to the query in the plugin. This is fixed now.
