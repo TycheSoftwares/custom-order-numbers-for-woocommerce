@@ -3,7 +3,7 @@
  * Plugin Name: Custom Order Numbers for WooCommerce
  * Plugin URI: https://www.tychesoftwares.com/store/premium-plugins/custom-order-numbers-woocommerce/
  * Description: Custom order numbers for WooCommerce.
- * Version: 1.3.4
+ * Version: 1.3.5
  * Author: Tyche Softwares
  * Author URI: https://www.tychesoftwares.com/
  * Text Domain: custom-order-numbers-for-woocommerce
