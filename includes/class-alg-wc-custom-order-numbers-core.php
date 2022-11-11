@@ -775,45 +775,24 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 			$offset            = 0;
 			$block_size        = 512;
 			while ( true ) {
-				if ( $this->con_wc_hpos_enabled() ) {
-					$args        = array(
-						'type'           => array( 'shop_order', 'shop_subscription' ),
-						'status'         => 'any',
-						'posts_per_page' => $block_size,
-						'orderby'        => 'date',
-						'order'          => 'ASC',
-						'offset'         => $offset,
-					);
-					$loop_orders = wc_get_orders( $args );
-					if ( count( $loop_orders ) <= 0 ) {
-						break;
-					}
-					foreach ( $loop_orders as $order_ids ) {
-						$order_id         = $order_ids->get_id();
-						$last_renumerated = $this->add_order_number_meta( $order_id, true );
-						$total_renumerated++;
-					}
-					$offset += $block_size;
-				} else {
-					$args = array(
-						'post_type'      => array( 'shop_order', 'shop_subscription' ),
-						'post_status'    => 'any',
-						'posts_per_page' => $block_size,
-						'orderby'        => 'date',
-						'order'          => 'ASC',
-						'offset'         => $offset,
-						'fields'         => 'ids',
-					);
-					$loop = new WP_Query( $args );
-					if ( ! $loop->have_posts() ) {
-						break;
-					}
-					foreach ( $loop->posts as $order_id ) {
-						$last_renumerated = $this->add_order_number_meta( $order_id, true );
-						$total_renumerated++;
-					}
-					$offset += $block_size;
+				$args        = array(
+					'type'    => array( 'shop_order', 'shop_subscription' ),
+					'status'  => 'any',
+					'limit'   => $block_size,
+					'orderby' => 'date',
+					'order'   => 'ASC',
+					'offset'  => $offset,
+					'return'  => 'ids',
+				);
+				$loop_orders = wc_get_orders( $args );
+				if ( count( $loop_orders ) <= 0 ) {
+					break;
 				}
+				foreach ( $loop_orders as $order_id ) {
+					$last_renumerated = $this->add_order_number_meta( $order_id, true );
+					$total_renumerated++;
+				}
+				$offset += $block_size;
 			}
 			return array( $total_renumerated, $last_renumerated );
 		}
@@ -880,16 +859,21 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 			$is_wc_version_below_3 = version_compare( get_option( 'woocommerce_version', null ), '3.0.0', '<' );
 			$order_id              = ( $is_wc_version_below_3 ? $order->id : $order->get_id() );
 			$order_timestamp       = strtotime( ( $is_wc_version_below_3 ? $order->order_date : $order->get_date_created() ) );
+			if ( $this->con_wc_hpos_enabled() ) {
+				$con_wc_hpos_enabled = true;
+			} else {
+				$con_wc_hpos_enabled = false;
+			}
 			if ( 'yes' !== get_option( 'alg_custom_order_numbers_show_admin_notice', '' ) || 'yes' === get_option( 'alg_custom_order_numbers_no_old_orders_to_update', '' ) ) {
 				// This code of block is added to update the meta key '_alg_wc_full_custom_order_number' in the subscription orders as the order numbers were getting changed after the database update.
-				if ( $this->con_wc_hpos_enabled() ) {
+				if ( true === $con_wc_hpos_enabled ) {
 					$subscription_orders_updated = $order->get_meta( 'subscription_orders_updated' );
 				} else {
 					$subscription_orders_updated = get_post_meta( $order_id, 'subscription_orders_updated', true );
 				}
 				if ( 'yes' !== $subscription_orders_updated ) {
 					if ( 'shop_subscription' === get_post_type( $order_id ) ) {
-						if ( $this->con_wc_hpos_enabled() ) {
+						if ( true === $con_wc_hpos_enabled ) {
 							$order_number_meta = $order->get_meta( '_alg_wc_custom_order_number' );
 						} else {
 							$order_number_meta = get_post_meta( $order_id, '_alg_wc_custom_order_number', true );
@@ -906,7 +890,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 								'order_number_meta' => $order_number_meta,
 							)
 						);
-						if ( $this->con_wc_hpos_enabled() ) {
+						if ( true === $con_wc_hpos_enabled ) {
 							$order->update_meta_data( '_alg_wc_full_custom_order_number', $order_number );
 							$order->update_meta_data( 'subscription_orders_updated', 'yes' );
 							$order->save();
@@ -917,13 +901,13 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 						return $order_number;
 					}
 				}
-				if ( $this->con_wc_hpos_enabled() ) {
+				if ( true === $con_wc_hpos_enabled ) {
 					$order_number_meta = $order->get_meta( '_alg_wc_full_custom_order_number' );
 				} else {
 					$order_number_meta = get_post_meta( $order_id, '_alg_wc_full_custom_order_number', true );
 				}
 				// This code of block is added to update the meta key '_alg_wc_full_custom_order_number' in new orders which were placed after the update of v1.3.0 where counter type is set to order id.
-				if ( $this->con_wc_hpos_enabled() ) {
+				if ( true === $con_wc_hpos_enabled ) {
 					$new_orders_updated = $order->get_meta( 'new_orders_updated' );
 				} else {
 					$new_orders_updated = get_post_meta( $order_id, 'new_orders_updated', true );
@@ -941,7 +925,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 								'order_number_meta' => $order_number_meta,
 							)
 						);
-						if ( $this->con_wc_hpos_enabled() ) {
+						if ( true === $con_wc_hpos_enabled ) {
 							$order->update_meta_data( '_alg_wc_full_custom_order_number', $order_number );
 							$order->update_meta_data( 'new_orders_updated', 'yes' );
 							$order->save();
@@ -966,7 +950,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 				}
 				return $order_number_meta;
 			} else {
-				if ( $this->con_wc_hpos_enabled() ) {
+				if ( true === $con_wc_hpos_enabled ) {
 					$order_number_meta = $order->get_meta( '_alg_wc_custom_order_number' );
 				} else {
 					$order_number_meta = get_post_meta( $order_id, '_alg_wc_custom_order_number', true );
@@ -1015,8 +999,10 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 			}
 			$order = wc_get_order( $order_id );
 			if ( $this->con_wc_hpos_enabled() ) {
+				$con_wc_hpos_enabled        = true;
 				$alg_wc_custom_order_number = $order->get_meta( '_alg_wc_custom_order_number' );
 			} else {
+				$con_wc_hpos_enabled        = false;
 				$alg_wc_custom_order_number = get_post_meta( $order_id, '_alg_wc_custom_order_number', true );
 			}
 			if ( true === $do_overwrite || '' == $alg_wc_custom_order_number ) { // phpcs:ignore
@@ -1049,7 +1035,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 							);
 							// all ok.
 							$wpdb->query( 'COMMIT' ); //phpcs:ignore
-							if ( $this->con_wc_hpos_enabled() ) {
+							if ( true === $con_wc_hpos_enabled ) {
 								$order->update_meta_data( '_alg_wc_custom_order_number', $current_order_number );
 								$order->update_meta_data( '_alg_wc_full_custom_order_number', $full_custom_order_number );
 								$order->save();
@@ -1078,7 +1064,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 							'order_number_meta' => $current_order_number,
 						)
 					);
-					if ( $this->con_wc_hpos_enabled() ) {
+					if ( true === $con_wc_hpos_enabled ) {
 						$order->update_meta_data( '_alg_wc_custom_order_number', $current_order_number );
 						$order->update_meta_data( '_alg_wc_full_custom_order_number', $full_custom_order_number );
 						$order->save();
@@ -1097,7 +1083,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 							'order_number_meta' => $current_order_number,
 						)
 					);
-					if ( $this->con_wc_hpos_enabled() ) {
+					if ( true === $con_wc_hpos_enabled ) {
 						$order->update_meta_data( '_alg_wc_custom_order_number', $current_order_number );
 						$order->update_meta_data( '_alg_wc_full_custom_order_number', $full_custom_order_number );
 						$order->save();
