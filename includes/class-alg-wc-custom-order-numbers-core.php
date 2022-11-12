@@ -1000,7 +1000,8 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 				if ( ! in_array( OrderUtil::get_order_type( $order_id ), array( 'shop_order', 'shop_subscription' ), true ) ) {
 					return false;
 				}
-			} else {
+			}
+			if ( ! $con_wc_hpos_enabled ) {
 				if ( ! in_array( get_post_type( $order_id ), array( 'shop_order', 'shop_subscription' ), true ) ) {
 					return false;
 				}
