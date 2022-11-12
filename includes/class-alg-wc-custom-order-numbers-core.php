@@ -1007,12 +1007,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 				}
 			}
 			$order = wc_get_order( $order_id );
-			if ( $con_wc_hpos_enabled ) {
-				$alg_wc_custom_order_number = $order->get_meta( '_alg_wc_custom_order_number' );
-			} else {
-				$alg_wc_custom_order_number = get_post_meta( $order_id, '_alg_wc_custom_order_number', true );
-			}
-			if ( true === $do_overwrite || '' == $alg_wc_custom_order_number ) { // phpcs:ignore
+			if ( true === $do_overwrite || '' ==  ( $con_wc_hpos_enabled ? $order->get_meta( '_alg_wc_custom_order_number' ) : get_post_meta( $order_id, '_alg_wc_custom_order_number', true ) ) ) { // phpcs:ignore
 				$is_wc_version_below_3 = version_compare( get_option( 'woocommerce_version', null ), '3.0.0', '<' );
 				$order_timestamp       = strtotime( ( $is_wc_version_below_3 ? $order->order_date : $order->get_date_created() ) );
 				$counter_type          = get_option( 'alg_wc_custom_order_numbers_counter_type', 'sequential' );
