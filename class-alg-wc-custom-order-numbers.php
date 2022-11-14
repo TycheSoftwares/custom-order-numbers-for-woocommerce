@@ -8,6 +8,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
+use Automattic\WooCommerce\Utilities\OrderUtil;
 
 // Check if WooCommerce is active.
 $plugin_name = 'woocommerce/woocommerce.php';
@@ -90,6 +91,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers' ) ) :
 
 			// Settings & Scripts.
 			if ( is_admin() ) {
+				add_action( 'before_woocommerce_init', array( &$this, 'con_lite_custom_order_tables_compatibility' ), 999 );
 				add_filter( 'woocommerce_get_settings_pages', array( $this, 'add_woocommerce_settings_tab' ) );
 			}
 		}
@@ -169,6 +171,18 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers' ) ) :
 		 */
 		public function plugin_path() {
 			return untrailingslashit( plugin_dir_path( __FILE__ ) );
+		}
+		/**
+		 * Sets the compatibility with Woocommerce HPOS.
+		 *
+		 * @since 1.7.0
+		 */
+		public static function con_lite_custom_order_tables_compatibility() {
+
+			if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
+				\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', 'custom-order-numbers-for-woocommerce/custom-order-numbers-for-woocommerce.php', true );
+				\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'orders_cache', 'custom-order-numbers-for-woocommerce/custom-order-numbers-for-woocommerce.php', true );
+			}
 		}
 
 	}
