@@ -2,7 +2,7 @@
 Contributors: tychesoftwares
 Tags: woocommerce, custom order numbers, sequential order numbers
 Requires at least: 4.4
-Tested up to: 5.9.3
+Tested up to: 6.1
 Stable tag: trunk
 Requires PHP: 5.6
 License: GNU General Public License v3.0
@@ -141,6 +141,10 @@ Here is the code they will need.
 $custom_order_number = $order->get_order_number(); //where $order is an order object
 
 == Changelog ==
+
+
+= 1.4.0 - 29/11/2022 =
+* Enhancement - Introduced compatibility with WooCommerce High Performance Order Storage.
 
 = 1.3.5 - 17/05/2022 =
 * Fix - Subscription orders were not getting considered when using Renumerate Order Tool.
