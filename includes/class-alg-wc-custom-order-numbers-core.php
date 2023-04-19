@@ -120,6 +120,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 			if ( ( method_exists( $ts_current_screen, 'is_block_editor' ) && $ts_current_screen->is_block_editor() ) || ( function_exists( 'is_gutenberg_page' ) && is_gutenberg_page() ) ) {
 				return;
 			}
+			wp_nonce_field('dismissed_nonce','dismissed'); 
 			if ( 'yes' === get_option( 'alg_custom_order_numbers_show_admin_notice', '' ) ) {
 				if ( '' === get_option( 'alg_custom_order_numbers_update_database', '' ) ) {
 					?>
@@ -464,7 +465,9 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		 * @since   1.3.0
 		 */
 		public function alg_custom_order_numbers_admin_notice_dismiss() {
-			$admin_choice = isset( $_POST['admin_choice'] ) ? sanitize_text_field( wp_unslash( $_POST['admin_choice'] ) ) : ''; // phpcs:ignore
+			if ( isset( $_POST['dismissed'] ) && wp_verify_nonce($_POST['dismissed'], 'dismissed_nonce') ) {
+				$admin_choice = isset( $_POST['admin_choice'] ) ? sanitize_text_field( wp_unslash( $_POST['admin_choice'] ) ) : ''; // phpcs:ignore
+			}
 			update_option( 'alg_custom_order_numbers_success_notice', $admin_choice );
 		}
 
@@ -472,7 +475,9 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		 * Function to dismiss the admin notice.
 		 */
 		public function alg_custom_order_numbers_admin_meta_key_notice_dismiss() {
-			$admin_choice = isset( $_POST['alg_admin_choice'] ) ? sanitize_text_field( wp_unslash( $_POST['alg_admin_choice'] ) ) : ''; // phpcs:ignore
+			if ( isset( $_POST['dismissed'] ) && wp_verify_nonce($_POST['dismissed'], 'dismissed_nonce') ) {
+				$admin_choice = isset( $_POST['alg_admin_choice'] ) ? sanitize_text_field( wp_unslash( $_POST['alg_admin_choice'] ) ) : ''; // phpcs:ignore
+			}
 			update_option( 'alg_custom_order_numbers_success_notice_for_meta_key', $admin_choice );
 		}
 
@@ -591,11 +596,11 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		 * @since   1.1.1
 		 */
 		public function save_order_number_meta_box( $post_id, $post ) {
-			if ( ! isset( $_POST['alg_wc_custom_order_numbers_meta_box'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+			if ( ! isset( $_POST['alg_wc_custom_order_numbers_meta_box'] ) && ! isset( $_POST['meta_box'] ) && !wp_verify_nonce($_POST['meta_box'], 'create_order_number_meta_box') ) {
 				return;
 			}
 
-			if ( isset( $_POST['alg_wc_custom_order_number'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+			if ( isset( $_POST['alg_wc_custom_order_number'] ) && isset( $_POST['meta_box'] ) && wp_verify_nonce($_POST['meta_box'], 'create_order_number_meta_box') ) {
 				$is_wc_version_below_3 = version_compare( get_option( 'woocommerce_version', null ), '3.0.0', '<' );
 				$order                 = wc_get_order( $post_id );
 				$order_timestamp       = strtotime( ( $is_wc_version_below_3 ? $order->order_date : $order->get_date_created() ) );
@@ -630,6 +635,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		 * @since   1.1.1
 		 */
 		public function add_order_number_meta_box() {
+			wp_nonce_field('create_order_number_meta_box','meta_box');
 			if ( $this->con_wc_hpos_enabled() ) {
 				add_meta_box(
 					'alg-wc-custom-order-numbers-meta-box',
@@ -710,7 +716,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 			<div class="wrap">
 			<h1><?php esc_html_e( 'Renumerate Orders', 'custom-order-numbers-for-woocommerce' ); ?></h1>
 			<?php
-			if ( isset( $_POST['alg_renumerate_orders'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+			if ( isset( $_POST['alg_renumerate_orders'] ) && isset( $_POST['renumerate_orders'] ) && wp_verify_nonce($_POST['renumerate_orders'], 'alg_renumerate_orders') ) {
 				$total_renumerated_orders = $this->renumerate_orders();
 				$last_renumerated_order   = $total_renumerated_orders[1];
 				$total_renumerated_orders = $total_renumerated_orders[0];
@@ -755,6 +761,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 			?>
 			<form method="post" action="">
 				<input class="button-primary" type="submit" name="alg_renumerate_orders" value="<?php esc_html_e( 'Renumerate orders', 'custom-order-numbers-for-woocommerce' ); ?>" onclick="return confirm('<?php echo esc_html__( 'Are you sure?', 'custom-order-numbers-for-woocommerce' ); ?>')">
+				<?php wp_nonce_field('alg_renumerate_orders','renumerate_orders'); ?>
 			</form>
 			</div>
 			<?php
