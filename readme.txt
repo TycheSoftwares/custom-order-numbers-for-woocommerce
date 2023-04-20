@@ -2,7 +2,7 @@
 Contributors: tychesoftwares
 Tags: woocommerce, custom order numbers, sequential order numbers
 Requires at least: 4.4
-Tested up to: 6.1
+Tested up to: 6.2
 Stable tag: trunk
 Requires PHP: 5.6
 License: GNU General Public License v3.0
@@ -142,6 +142,9 @@ $custom_order_number = $order->get_order_number(); //where $order is an order ob
 
 == Changelog ==
 
+
+= 1.4.1 - 20/04/2023 =
+* Fix - Cross-Site Request Forgery vulnerability in the plugin.
 
 = 1.4.0 - 29/11/2022 =
 * Enhancement - Introduced compatibility with WooCommerce High Performance Order Storage.
