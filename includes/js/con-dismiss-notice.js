@@ -11,14 +11,13 @@ jQuery(document).ready(function($) {
 		function() {
 			console.log( 'here' );
 			var data = {
-				admin_choice: 'dismissed',
 				security: con_dismiss_param.nonce,
+				admin_choice: 'dismissed',
 				action: 'alg_custom_order_numbers_admin_notice_dismiss'
 			};
 			jQuery.post( con_dismiss_param.ajax_url, data, function() {
 			});
-    	}
-	);
+    	});
 
 	jQuery( '.con-lite-meta-key-success-message' ).on(
 		'click',
@@ -31,6 +30,5 @@ jQuery(document).ready(function($) {
 			};
 			jQuery.post( con_dismiss_param.ajax_url, data, function() {
 			});
-    	}
-	);
+    	});
 });
