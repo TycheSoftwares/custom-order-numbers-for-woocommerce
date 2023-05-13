@@ -89,6 +89,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 				'con_dismiss_param',
 				array(
 					'ajax_url' => admin_url( 'admin-ajax.php' ),
+					'nonce'    => wp_create_nonce( 'dismissed' ),
 				)
 			);
 		}
@@ -465,9 +466,8 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		 * @since   1.3.0
 		 */
 		public function alg_custom_order_numbers_admin_notice_dismiss() {
-			if ( isset( $_POST['dismissed'] ) && wp_verify_nonce( $_POST['dismissed'], 'dismissed_nonce' ) ) { // phpcs:ignore WordPress.Security.NonceVerification
-				$admin_choice = isset( $_POST['admin_choice'] ) ? sanitize_text_field( wp_unslash( $_POST['admin_choice'] ) ) : ''; // phpcs:ignore
-			}
+			check_ajax_referer( 'dismissed', 'security' );
+			$admin_choice = isset( $_POST['admin_choice'] ) ? sanitize_text_field( wp_unslash( $_POST['admin_choice'] ) ) : ''; // phpcs:ignore
 			update_option( 'alg_custom_order_numbers_success_notice', $admin_choice );
 		}
 
@@ -475,9 +475,8 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		 * Function to dismiss the admin notice.
 		 */
 		public function alg_custom_order_numbers_admin_meta_key_notice_dismiss() {
-			if ( isset( $_POST['dismissed'] ) && wp_verify_nonce( $_POST['dismissed'], 'dismissed_nonce' ) ) { // phpcs:ignore WordPress.Security.NonceVerification
-				$admin_choice = isset( $_POST['alg_admin_choice'] ) ? sanitize_text_field( wp_unslash( $_POST['alg_admin_choice'] ) ) : ''; // phpcs:ignore
-			}
+			check_ajax_referer( 'dismissed', 'security' );
+			$admin_choice = isset( $_POST['alg_admin_choice'] ) ? sanitize_text_field( wp_unslash( $_POST['alg_admin_choice'] ) ) : ''; // phpcs:ignore
 			update_option( 'alg_custom_order_numbers_success_notice_for_meta_key', $admin_choice );
 		}
 
