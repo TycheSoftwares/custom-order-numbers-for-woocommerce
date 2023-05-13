@@ -17,7 +17,8 @@ jQuery(document).ready(function($) {
 			};
 			jQuery.post( con_dismiss_param.ajax_url, data, function() {
 			});
-    	});
+    	}
+	);
 
 	jQuery( '.con-lite-meta-key-success-message' ).on(
 		'click',
@@ -30,5 +31,6 @@ jQuery(document).ready(function($) {
 			};
 			jQuery.post( con_dismiss_param.ajax_url, data, function() {
 			});
-    	});
+    	}
+	);
 });
