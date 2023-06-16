@@ -493,13 +493,13 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 					'post_status'    => 'any',
 					'posts_per_page' => -1,
 				);
-				$loop_orders = new WP_Query( $args );
-				if ( ! $loop_orders->have_posts() ) {
+				$loop_orders = wc_get_orders( $args );
+				if ( count( $loop_orders ) <= 0 ) {
 					update_option( 'alg_wc_custom_order_numbers_prefix_suffix_changed', '' );
 					return;
 				}
-				foreach ( $loop_orders->posts as $order_ids ) {
-					$order_id = $order_ids->ID;
+				foreach ( $loop_orders as $order_ids ) {
+					$order_id = $order_ids->get_id();
 					$order    = wc_get_order( $order_id );
 					if ( $this->con_wc_hpos_enabled() ) {
 						$order_number_meta = $order->get_meta( '_alg_wc_custom_order_number' );
