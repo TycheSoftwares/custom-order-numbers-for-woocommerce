@@ -54,17 +54,18 @@ jQuery(document).ready(function($) {
         if ( con_apply_setting_value == 'date' ) {
             $( '[id=alg_wc_custom_order_numbers_settings_to_apply_from_date]' ).closest( 'tr' ).show();
         } else {
-            $( '[id=alg_wc_custom_order_numbers_settings_to_apply_from_date]' ).closest( 'tr' ).hide();
-        }
+            $( '[id=alg_wc_custom_order_numbers_settings_to_apply_from_date]' ).closest( 'tr' ).hide();        }
     });
     
     var today = new Date();
-    $( '#alg_wc_custom_order_numbers_settings_to_apply_from_date' ).datepicker( {
-        format: 'mm-dd-yyyy',
-        autoclose:true,
-        endDate: "today",
-        maxDate: today
-    } ).on(
+    $( '#alg_wc_custom_order_numbers_settings_to_apply_from_date' ).datepicker(
+        {
+            format: 'mm-dd-yyyy',
+            autoclose:true,
+            endDate: "today",
+            maxDate: today,
+        }
+    ).on(
         'changeDate',
         function (ev) {
             $( this ).datepicker( 'hide' );
