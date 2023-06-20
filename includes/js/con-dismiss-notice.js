@@ -33,7 +33,6 @@ jQuery(document).ready(function($) {
 			});
     	}
 	);
-
     var con_apply_setting_value = $( '#alg_wc_custom_order_numbers_settings_to_apply' ).val();
     if ( con_apply_setting_value === 'new_order' || con_apply_setting_value === 'all_orders' ) {
         $( '[id=alg_wc_custom_order_numbers_settings_to_apply_from_date]' ).closest( 'tr' ).hide();
@@ -58,25 +57,24 @@ jQuery(document).ready(function($) {
             $( '[id=alg_wc_custom_order_numbers_settings_to_apply_from_date]' ).closest( 'tr' ).hide();
         }
     });
-
+    
     var today = new Date();
-    $( '#alg_wc_custom_order_numbers_settings_to_apply_from_date' ).datepicker(
-        {
-            format: 'mm-dd-yyyy',
-            autoclose:true,
-            endDate: "today",
-            maxDate: today
-        } ).on(
+    $( '#alg_wc_custom_order_numbers_settings_to_apply_from_date' ).datepicker( {
+        format: 'mm-dd-yyyy',
+        autoclose:true,
+        endDate: "today",
+        maxDate: today
+    } ).on(
         'changeDate',
         function (ev) {
             $( this ).datepicker( 'hide' );
         }
     );
-        $( '#alg_wc_custom_order_numbers_settings_to_apply_from_date' ).keyup(
-            function () {
-                if ( this.value.match( /[^0-9]/g ) ) {
-                    this.value = this.value.replace( /[^0-9^-]/g, '' );
-                }
+    $( '#alg_wc_custom_order_numbers_settings_to_apply_from_date' ).keyup(
+        function () {
+            if ( this.value.match( /[^0-9]/g ) ) {
+                this.value = this.value.replace( /[^0-9^-]/g, '' );
             }
-        );
+        }
+    );
 });
