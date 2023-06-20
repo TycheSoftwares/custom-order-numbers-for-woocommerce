@@ -62,7 +62,7 @@ jQuery(document).ready(function($) {
         {
             format: 'mm-dd-yyyy',
             autoclose: true,
-            endDate: "today",
+            endDate: 'today',
             maxDate: today,
         }
     ).on(
