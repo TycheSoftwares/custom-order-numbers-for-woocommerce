@@ -222,15 +222,6 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Settings_General' ) ) :
 					),
 					array(
 						'title'             => __( 'Select orders to apply new settings to', 'custom-order-numbers-for-woocommerce' ),
-						'desc'              => apply_filters(
-							'alg_wc_custom_order_numbers',
-							'<br>' . sprintf(
-								'You will need <a href="%s" target="_blank">%s</a> plugin to set this option.',
-								'https://www.tychesoftwares.com/store/premium-plugins/custom-order-numbers-woocommerce/?utm_source=conupgradetopro&utm_medium=link&utm_campaign=CustomOrderNumbersLite',
-								'Custom Order Numbers for WooCommerce Pro'
-							),
-							'settings'
-						),
 						'desc_tip'          => __( 'This will add the prefix/suffix from the particular date.', 'custom-order-numbers-for-woocommerce' ),
 						'id'                => 'alg_wc_custom_order_numbers_settings_to_apply',
 						'default'           => 'all_orders',
@@ -241,7 +232,19 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Settings_General' ) ) :
 							'date'       => __( 'To orders from a specific date', 'custom-order-numbers-for-woocommerce' ),
 							'all_orders' => __( 'To all orders', 'custom-order-numbers-for-woocommerce' ),
 						),
-						'custom_attributes' => apply_filters( 'alg_wc_custom_order_numbers', array( 'disabled' => 'disabled' ), 'settings' ),
+						'custom_attributes' => apply_filters( 'alg_wc_custom_order_numbers', array(), 'settings' ),
+					),
+					array(
+						'title' => __( 'Select a Date to apply this new settings from', 'custom-order-numbers-for-woocommerce' ),
+						'desc'  => __( ' <b>Note</b> : Only applies to past dates.', 'custom-order-numbers-for-woocommerce' ),
+						'id'    => 'alg_wc_custom_order_numbers_settings_to_apply_from_date',
+						'type'  => 'text',
+					),
+					array(
+						'title' => __( 'Enter an Order Id from which you want to apply this new settings', 'custom-order-numbers-for-woocommerce' ),
+						'desc'  => __( ' <b>Note</b> : Please enter a past order number.', 'custom-order-numbers-for-woocommerce' ),
+						'id'    => 'alg_wc_custom_order_numbers_settings_to_apply_from_order_id',
+						'type'  => 'text',
 					),
 					array(
 						'title'   => __( 'Enable order tracking by custom number', 'custom-order-numbers-for-woocommerce' ),

@@ -46,6 +46,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 					add_action( 'init', array( $this, 'alg_remove_tracking_filter' ) );
 					add_filter( 'woocommerce_shortcode_order_tracking_order_id', array( $this, 'add_order_number_to_tracking' ), PHP_INT_MAX );
 				}
+				add_filter( 'pre_update_option_alg_wc_custom_order_numbers_settings_to_apply', array( &$this, 'pre_alg_wc_custom_order_numbers_settings_to_apply' ), 10, 2 );
 				add_action( 'woocommerce_shop_order_search_fields', array( $this, 'search_by_custom_number' ) );
 				add_action( 'admin_menu', array( $this, 'add_renumerate_orders_tool' ), PHP_INT_MAX );
 				if ( 'yes' === apply_filters( 'alg_wc_custom_order_numbers', 'no', 'manual_counter_value' ) ) {
@@ -106,6 +107,24 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 				}
 			}
 			return false;
+		}
+
+		/**
+		 * Function to save the time when the Apply to new order setting is saved.
+		 *
+		 * @param string $new_value New setting value which is selected.
+		 * @param string $old_value Old setting value which is saved in the database.
+		 * @version 1.5.0
+		 * @since   1.5.0
+		 */
+		public function pre_alg_wc_custom_order_numbers_settings_to_apply( $new_value, $old_value ) {
+			if ( $new_value !== $old_value ) {
+				if ( 'new_order' === $new_value ) {
+					$current_time = current_time( 'timestamp' );
+					update_option( 'alg_custom_order_numbers_new_order_time', $current_time );
+				}
+			}
+			return $new_value;
 		}
 
 		/**
@@ -520,13 +539,28 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 							'order_number_meta' => $order_number_meta,
 						)
 					);
-					if ( $this->con_wc_hpos_enabled() ) {
-						$order->update_meta_data( '_alg_wc_full_custom_order_number', $full_order_number );
-						$order->save();
+					$apply_settings        = get_option( 'alg_wc_custom_order_numbers_settings_to_apply', 'all_orders' );
+					$order_con             = false;
+					if ( 'new_order' === $apply_settings ) {
+						update_option( 'alg_wc_custom_order_numbers_prefix_suffix_changed', '' );
+						return;
+					} elseif ( 'date' === $apply_settings ) {
+						$date = strtotime( get_option( 'alg_wc_custom_order_numbers_settings_to_apply_from_date' ) );
+						if ( $order_timestamp >= $date ) {
+							$order_con = true;
+						}
+					} elseif ( 'order_id' === $apply_settings ) {
+						$saved_order_id = get_option( 'alg_wc_custom_order_numbers_settings_to_apply_from_order_id', '' );
+						if ( $order_id >= $saved_order_id ) {
+							$order_con = true;
+						}
 					} else {
-						update_post_meta( $order_id, '_alg_wc_full_custom_order_number', $full_order_number );
+						$order_con = true;
 					}
-					update_option( 'alg_wc_custom_order_numbers_prefix_suffix_changed', '' );
+					if ( $order_con ) {
+						$this->add_order_number_meta( $order_id, true );
+						update_option( 'alg_wc_custom_order_numbers_prefix_suffix_changed', '' );
+					}
 				}
 			}
 		}
@@ -864,8 +898,15 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		public function display_order_number( $order_number, $order ) {
 			$is_wc_version_below_3 = version_compare( get_option( 'woocommerce_version', null ), '3.0.0', '<' );
 			$order_id              = ( $is_wc_version_below_3 ? $order->id : $order->get_id() );
-			$order_timestamp       = strtotime( ( $is_wc_version_below_3 ? $order->order_date : $order->get_date_created() ) );
+			$order_timestamp       = ( $is_wc_version_below_3 ? $order->order_date : $order->get_date_created() );
+			$apply_settings_to     = get_option( 'alg_wc_custom_order_numbers_settings_to_apply', 'new_order' );
 			$con_wc_hpos_enabled   = $this->con_wc_hpos_enabled();
+			$custom_number_set     = true;
+			$apply_custom_numbers  = false;
+			$full_custom_number    = true;
+			if ( ! is_null( $order_timestamp ) ) {
+				$order_timestamp = strtotime( $order_timestamp );
+			}
 			if ( 'yes' !== get_option( 'alg_custom_order_numbers_show_admin_notice', '' ) || 'yes' === get_option( 'alg_custom_order_numbers_no_old_orders_to_update', '' ) ) {
 				// This code of block is added to update the meta key '_alg_wc_full_custom_order_number' in the subscription orders as the order numbers were getting changed after the database update.
 				if ( $con_wc_hpos_enabled ) {
@@ -962,18 +1003,46 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 				} else {
 					$order_number_meta = get_post_meta( $order_id, '_alg_wc_custom_order_number', true );
 				}
+				$full_custom_number = false;
 				if ( '' === $order_number_meta ) {
 					$order_number_meta = $order_id;
 				}
-				$order_number = apply_filters(
-					'alg_wc_custom_order_numbers',
-					sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $order_number_meta ),
-					'value',
-					array(
-						'order_timestamp'   => $order_timestamp,
-						'order_number_meta' => $order_number_meta,
-					)
-				);
+				switch ( $apply_settings_to ) {
+					case 'new_order':
+					default:
+					case '':
+						if ( $custom_number_set ) {
+							$apply_custom_numbers = true;
+						}
+						break;
+					case 'order_id':
+						$apply_from_order_id = get_option( 'alg_wc_custom_order_numbers_settings_to_apply_from_order_id', 0 );
+						if ( 0 === $apply_from_order_id || '' == $apply_from_order_id || $order_id >= $apply_from_order_id ) { // phpcs:ignore
+							$apply_custom_numbers = true;
+						}
+						break;
+					case 'date':
+						$apply_from_date = get_option( 'alg_wc_custom_order_numbers_settings_to_apply_from_date', '' );
+						$date_created    = $order->get_date_created()->date( 'm/d/Y' );
+						if ( '' == $apply_from_date || $date_created >= $apply_from_date ) { // phpcs:ignore
+							$apply_custom_numbers = true;
+						}
+						break;
+					case 'all_orders':
+						$apply_custom_numbers = true;
+						break;
+				}
+				if ( $apply_custom_numbers && ! $full_custom_number ) {
+					$order_number = apply_filters(
+						'alg_wc_custom_order_numbers',
+						sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $order_number_meta ),
+						'value',
+						array(
+							'order_timestamp'   => $order_timestamp,
+							'order_number_meta' => $order_number_meta,
+						)
+					);
+				}
 				return $order_number;
 			}
 			return $order_number;
