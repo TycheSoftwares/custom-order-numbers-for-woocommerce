@@ -51,7 +51,7 @@ jQuery(document).ready(function($) {
         } else {
             $( '[id=alg_wc_custom_order_numbers_settings_to_apply_from_order_id]' ).closest( 'tr' ).hide();
         }
-        if ( con_apply_setting_value == 'date' ) {
+        if ( con_apply_setting_value === 'date' ) {
             $( '[id=alg_wc_custom_order_numbers_settings_to_apply_from_date]' ).closest( 'tr' ).show();
         } else {
             $( '[id=alg_wc_custom_order_numbers_settings_to_apply_from_date]' ).closest( 'tr' ).hide();        }
@@ -61,7 +61,7 @@ jQuery(document).ready(function($) {
     $( '#alg_wc_custom_order_numbers_settings_to_apply_from_date' ).datepicker(
         {
             format: 'mm-dd-yyyy',
-            autoclose:true,
+            autoclose: true,
             endDate: "today",
             maxDate: today,
         }
