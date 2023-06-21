@@ -92,6 +92,14 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 					'nonce'    => wp_create_nonce( 'dismissed' ),
 				)
 			);
+			wp_register_script(
+				'tyche',
+				$plugin_url . '/includes/js/tyche.js',
+				array( 'jquery' ),
+				$numbers_instance->version,
+				true
+			);
+			wp_enqueue_script( 'tyche' );
 		}
 		/**
 		 * Check if HPOS is enabled or not.
