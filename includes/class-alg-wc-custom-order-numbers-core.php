@@ -78,6 +78,14 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		public static function alg_custom_order_numbers_setting_script() {
 			$plugin_url       = plugins_url() . '/custom-order-numbers-for-woocommerce';
 			$numbers_instance = alg_wc_custom_order_numbers();
+			wp_register_script(
+				'jquery-ui-datepicker',
+				WC()->plugin_url() . '/assets/js/admin/ui-datepicker.js',
+				'',
+				$numbers_instance->version,
+				false
+			);
+			wp_enqueue_script( 'jquery-ui-datepicker' );
 			wp_enqueue_script(
 				'con_dismiss_notice',
 				$plugin_url . '/includes/js/con-dismiss-notice.js',
@@ -93,6 +101,14 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 					'nonce'    => wp_create_nonce( 'dismissed' ),
 				)
 			);
+			wp_register_script(
+				'tyche',
+				$plugin_url . '/includes/js/tyche.js',
+				array( 'jquery' ),
+				$numbers_instance->version,
+				true
+			);
+			wp_enqueue_script( 'tyche' );
 		}
 		/**
 		 * Check if HPOS is enabled or not.

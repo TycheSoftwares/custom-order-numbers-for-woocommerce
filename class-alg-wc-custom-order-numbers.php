@@ -106,6 +106,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers' ) ) :
 			// Settings.
 			require_once 'includes/admin/class-alg-wc-custom-order-numbers-settings-section.php';
 			$this->settings            = array();
+			$plugin_url                = plugins_url() . '/custom-order-numbers-for-woocommerce';
 			$this->settings['general'] = require_once 'includes/admin/class-alg-wc-custom-order-numbers-settings-general.php';
 			if ( is_admin() && get_option( 'alg_custom_order_numbers_version', '' ) !== $this->version ) {
 				foreach ( $this->settings as $section ) {
@@ -126,6 +127,16 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers' ) ) :
 			}
 			// Core file needed.
 			require_once 'includes/class-alg-wc-custom-order-numbers-core.php';
+			require_once 'includes/class-tyche-plugin-deactivation.php';
+			new Tyche_Plugin_Deactivation(
+				array(
+					'plugin_name'       => 'Custom Order Numbers for WooCommerce',
+					'plugin_base'       => 'custom-order-numbers-for-woocommerce/custom-order-numbers-for-woocommerce.php',
+					'script_file'       => $plugin_url . '/includes/js/plugin-deactivation.js',
+					'plugin_short_name' => 'con_lite',
+					'version'           => $this->version,
+				)
+			);
 		}
 
 		/**
