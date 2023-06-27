@@ -142,6 +142,10 @@ $custom_order_number = $order->get_order_number(); //where $order is an order ob
 
 == Changelog ==
 
+= 1.5.0 - 27/06/2023 =
+* Enhancement – You can now choose to apply the prefix to new orders, from a past date, from a certain order ID or to all orders.
+* Enhancement - Added deactivation survey v2.
+* Fix - While Renumerating the orders, got fatal error. This is fixed now.
 
 = 1.4.1 - 20/04/2023 =
 * Fix - Cross-Site Request Forgery vulnerability in the plugin.
