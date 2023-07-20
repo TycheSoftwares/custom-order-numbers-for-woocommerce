@@ -586,7 +586,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 						$order_con = true;
 					}
 					if ( $order_con ) {
-						update_post_meta( $order_id, '_alg_wc_full_custom_order_number', $full_order_number );
+						$order->update_meta_data( '_alg_wc_full_custom_order_number', $full_order_number );
 					}
 					update_option( 'alg_wc_custom_order_numbers_prefix_suffix_changed', '' );
 				}
