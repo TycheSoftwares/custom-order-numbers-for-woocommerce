@@ -66,6 +66,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 				add_action( 'admin_init', array( $this, 'alg_custom_order_numbers_add_recurring_action_to_add_meta_key' ) );
 				add_action( 'alg_custom_order_numbers_update_meta_key_in_old_con', array( $this, 'alg_custom_order_numbers_update_meta_key_in_old_con_callback' ) );
 				add_action( 'wp_ajax_alg_custom_order_numbers_admin_meta_key_notice_dismiss', array( $this, 'alg_custom_order_numbers_admin_meta_key_notice_dismiss' ) );
+				add_action( 'alg_wc_update_orders_prefix_con', array( $this, 'alg_wc_webhook_after_cutoff_con' ) );
 			}
 		}
 
@@ -523,6 +524,17 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		 */
 		public function woocommerce_settings_save_alg_wc_custom_order_numbers_callback() {
 			if ( '1' === get_option( 'alg_wc_custom_order_numbers_prefix_suffix_changed' ) ) {
+				as_schedule_single_action( time() + 10, 'alg_wc_update_orders_prefix_con' );
+			}
+		}
+
+		/**
+		 * Function to update the prefix in the databse when settings are saved.
+		 *
+		 * @version 1.5.1
+		 * @since   1.5.1
+		 */
+		public function alg_wc_webhook_after_cutoff_con() {
 				$args        = array(
 					'post_type'      => 'shop_order',
 					'post_status'    => 'any',
@@ -574,11 +586,11 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 						$order_con = true;
 					}
 					if ( $order_con ) {
-						$this->add_order_number_meta( $order_id, true );
-						update_option( 'alg_wc_custom_order_numbers_prefix_suffix_changed', '' );
+						$order->update_meta_data( '_alg_wc_full_custom_order_number', $full_order_number );
+						$order->save();
 					}
+					update_option( 'alg_wc_custom_order_numbers_prefix_suffix_changed', '' );
 				}
-			}
 		}
 
 		/**
@@ -915,7 +927,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 			$is_wc_version_below_3 = version_compare( get_option( 'woocommerce_version', null ), '3.0.0', '<' );
 			$order_id              = ( $is_wc_version_below_3 ? $order->id : $order->get_id() );
 			$order_timestamp       = ( $is_wc_version_below_3 ? $order->order_date : $order->get_date_created() );
-			$apply_settings_to     = get_option( 'alg_wc_custom_order_numbers_settings_to_apply', 'new_order' );
+			$apply_settings_to     = get_option( 'alg_wc_custom_order_numbers_settings_to_apply', 'all_orders' );
 			$con_wc_hpos_enabled   = $this->con_wc_hpos_enabled();
 			$custom_number_set     = true;
 			$apply_custom_numbers  = false;
@@ -1015,13 +1027,14 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 				return $order_number_meta;
 			} else {
 				if ( $con_wc_hpos_enabled ) {
-					$order_number_meta = $order->get_meta( '_alg_wc_custom_order_number' );
+					$order_number_meta = $order->get_meta( '_alg_wc_full_custom_order_number' );
 				} else {
-					$order_number_meta = get_post_meta( $order_id, '_alg_wc_custom_order_number', true );
+					$order_number_meta = get_post_meta( $order_id, '_alg_wc_full_custom_order_number', true );
 				}
-				$full_custom_number = false;
 				if ( '' === $order_number_meta ) {
-					$order_number_meta = $order_id;
+					$order_number_meta  = $order_id;
+					$full_custom_number = false;
+					$custom_number_set  = false;
 				}
 				switch ( $apply_settings_to ) {
 					case 'new_order':
@@ -1049,7 +1062,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 						break;
 				}
 				if ( $apply_custom_numbers && ! $full_custom_number ) {
-					$order_number = apply_filters(
+					$order_number_meta = apply_filters(
 						'alg_wc_custom_order_numbers',
 						sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $order_number_meta ),
 						'value',
@@ -1059,9 +1072,8 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 						)
 					);
 				}
-				return $order_number;
 			}
-			return $order_number;
+			return $order_number_meta;
 		}
 
 		/**
