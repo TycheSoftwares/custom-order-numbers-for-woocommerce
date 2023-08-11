@@ -59,6 +59,11 @@ if ( ! class_exists( 'Alg_WC_Settings_Custom_Order_Numbers' ) ) :
 					}
 				}
 			}
+			if ( 'yes' === get_option( $this->id . '_' . $current_section . '_reset_usage_tracking', '' ) ) {
+				delete_option( 'con_lite_allow_tracking' );
+				delete_option( $this->id . '_' . $current_section . '_reset_usage_tracking' );
+				Tyche_Plugin_Tracking::reset_tracker_setting( 'con_lite' );
+			}
 		}
 
 		/**
