@@ -137,6 +137,17 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers' ) ) :
 					'version'           => $this->version,
 				)
 			);
+			require_once 'includes/class-con-lite-data-tracking.php';
+			require_once 'includes/component/plugin-tracking/class-tyche-plugin-tracking.php';
+			new Tyche_Plugin_Tracking(
+				array(
+					'plugin_name'       => 'Custom Order Numbers for WooCommerce',
+					'plugin_locale'     => 'custom-order-numbers-for-woocommerce',
+					'plugin_short_name' => 'con_lite',
+					'version'           => $this->version,
+					'blog_link'         => 'https://www.tychesoftwares.com/docs/woocommerce-custom-order-numbers/usage-tracking-order-numbers/',
+				)
+			);
 		}
 
 		/**

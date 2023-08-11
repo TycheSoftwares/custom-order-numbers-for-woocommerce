@@ -64,6 +64,13 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Settings_Section' ) ) :
 						'type'    => 'checkbox',
 					),
 					array(
+						'title'   => __( 'Reset Usage Tracking', 'custom-order-numbers-for-woocommerce' ),
+						'desc'    => __( 'This will reset your usage tracking settings, causing it to show the opt-in banner again and not sending any data.', 'custom-order-numbers-for-woocommerce' ),
+						'id'      => 'alg_wc_custom_order_numbers_' . $this->id . '_reset_usage_tracking',
+						'default' => 'no',
+						'type'    => 'checkbox',
+					),
+					array(
 						'type' => 'sectionend',
 						'id'   => 'alg_wc_custom_order_numbers_' . $this->id . '_reset_options',
 					),
