@@ -127,7 +127,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers' ) ) :
 			}
 			// Core file needed.
 			require_once 'includes/class-alg-wc-custom-order-numbers-core.php';
-			require_once 'includes/component/plugin-deacivation/class-tyche-plugin-deactivation.php';
+			require_once 'includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php';
 			new Tyche_Plugin_Deactivation(
 				array(
 					'plugin_name'       => 'Custom Order Numbers for WooCommerce',
