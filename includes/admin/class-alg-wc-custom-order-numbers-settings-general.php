@@ -20,6 +20,21 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Settings_General' ) ) :
 	class Alg_WC_Custom_Order_Numbers_Settings_General extends Alg_WC_Custom_Order_Numbers_Settings_Section {
 
 		/**
+		 * Settings id.
+		 *
+		 * @var   string
+		 * @since 1.6.0
+		 */
+		public $id = '';
+
+		/**
+		 * Settings description.
+		 *
+		 * @var   string
+		 * @since 1.6.0
+		 */
+		public $desc = '';
+		/**
 		 * Constructor.
 		 *
 		 * @version 1.0.0

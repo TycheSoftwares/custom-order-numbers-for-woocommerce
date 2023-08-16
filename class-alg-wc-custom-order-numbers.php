@@ -50,6 +50,14 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers' ) ) :
 		public $version = '1.5.0';
 
 		/**
+		 * Plugin setting.
+		 *
+		 * @var   string
+		 * @since 1.6.0
+		 */
+		public $settings = '';
+
+		/**
 		 * The single instance of the class
 		 *
 		 * @var   Alg_WC_Custom_Order_Numbers The single instance of the class
