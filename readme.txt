@@ -2,7 +2,7 @@
 Contributors: tychesoftwares
 Tags: woocommerce, custom order numbers, sequential order numbers
 Requires at least: 4.4
-Tested up to: 6.2
+Tested up to: 6.3
 Stable tag: trunk
 Requires PHP: 5.6
 License: GNU General Public License v3.0
@@ -141,6 +141,11 @@ Here is the code they will need.
 $custom_order_number = $order->get_order_number(); //where $order is an order object
 
 == Changelog ==
+
+= 1.6.0 - 22/08/2023 =
+* Fix – Fixed Compatibility with PHP 8.2.
+* Fix - Fixed fatal error when users have a large number orders & the plugin tries to update them.
+* Fix - The order number is not in sequence while we create new order manually, This is fixed now.
 
 = 1.5.0 - 27/06/2023 =
 * Enhancement – You can now choose to apply the prefix to new orders, from a past date, from a certain order ID or to all orders.
