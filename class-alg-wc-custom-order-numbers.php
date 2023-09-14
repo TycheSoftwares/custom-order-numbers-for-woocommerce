@@ -143,6 +143,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers' ) ) :
 					'script_file'       => $plugin_url . '/includes/js/plugin-deactivation.js',
 					'plugin_short_name' => 'con_lite',
 					'version'           => $this->version,
+					'plugin_locale'     => 'custom-order-numbers-for-woocommerce',
 				)
 			);
 			require_once 'includes/class-con-lite-data-tracking.php';
