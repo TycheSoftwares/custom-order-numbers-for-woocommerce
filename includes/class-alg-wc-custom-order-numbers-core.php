@@ -245,7 +245,8 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		public function alg_custom_order_numbers_update_old_custom_order_numbers_callback() {
 			$args        = array(
 				'post_type'      => 'shop_order',
-				'posts_per_page' => 10000, // phpcs:ignore
+				'return'         => 'ids',
+				'posts_per_page' => -1, // phpcs:ignore
 				'post_status'    => 'any',
 				'meta_query'     => array( // phpcs:ignore
 					'relation' => 'AND',
@@ -259,8 +260,8 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 					),
 				),
 			);
-			$loop_orders = new WP_Query( $args );
-			if ( ! $loop_orders->have_posts() ) {
+			$loop_orders = wc_get_orders( $args );
+			if ( count( $loop_orders ) <= 0 ) {
 				update_option( 'alg_custom_order_numbers_no_old_orders_to_update', 'yes' );
 				return;
 			}
