@@ -48,6 +48,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 				}
 				add_filter( 'pre_update_option_alg_wc_custom_order_numbers_settings_to_apply', array( &$this, 'pre_alg_wc_custom_order_numbers_settings_to_apply' ), 10, 2 );
 				add_action( 'woocommerce_shop_order_search_fields', array( $this, 'search_by_custom_number' ) );
+				add_filter( 'woocommerce_order_table_search_query_meta_keys', array( $this, 'search_by_custom_number' ) );
 				add_action( 'admin_menu', array( $this, 'add_renumerate_orders_tool' ), PHP_INT_MAX );
 				if ( 'yes' === apply_filters( 'alg_wc_custom_order_numbers', 'no', 'manual_counter_value' ) ) {
 					add_action( 'add_meta_boxes', array( $this, 'add_order_number_meta_box' ) );
