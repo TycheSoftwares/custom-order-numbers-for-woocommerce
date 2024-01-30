@@ -1,7 +1,7 @@
 === Custom Order Numbers for WooCommerce ===
 Contributors: tychesoftwares
 Tags: woocommerce, custom order numbers, sequential order numbers
-Requires at least: 4.4
+Requires at least: 6.3
 Tested up to: 6.4.2
 Stable tag: trunk
 Requires PHP: 7.4
