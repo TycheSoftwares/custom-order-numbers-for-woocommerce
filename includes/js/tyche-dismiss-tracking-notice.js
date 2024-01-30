@@ -30,7 +30,8 @@ jQuery(document).ready( function() {
 					jQuery.post(
 						con_ts_dismiss_notice.ts_admin_url,
 						{
-							action: con_ts_dismiss_notice.ts_prefix_of_plugin + "_tracker_dismiss_notice"
+							action: con_ts_dismiss_notice.ts_prefix_of_plugin + "_tracker_dismiss_notice",
+							tracking_notice : con_ts_dismiss_notice.tracking_notice
 						},
 						function( response ) {}
 					);

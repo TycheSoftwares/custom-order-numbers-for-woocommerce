@@ -64,6 +64,7 @@ if ( ! class_exists( 'Con_Lite_Data_Tracking' ) ) :
 		 * @since 1.3.0
 		 */
 		public static function ts_admin_notices_scripts() {
+			$nonce            = wp_create_nonce( 'tracking_notice' );
 			$plugin_url       = plugins_url() . '/custom-order-numbers-for-woocommerce';
 			$numbers_instance = alg_wc_custom_order_numbers();
 			wp_enqueue_script(
@@ -80,6 +81,7 @@ if ( ! class_exists( 'Con_Lite_Data_Tracking' ) ) :
 				array(
 					'ts_prefix_of_plugin' => 'con_lite',
 					'ts_admin_url'        => admin_url( 'admin-ajax.php' ),
+					'tracking_notice'     => $nonce,
 				)
 			);
 		}
