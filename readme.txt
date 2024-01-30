@@ -2,7 +2,7 @@
 Contributors: tychesoftwares
 Tags: woocommerce, custom order numbers, sequential order numbers
 Requires at least: 4.4
-Tested up to: 6.3
+Tested up to: 6.4.2
 Stable tag: trunk
 Requires PHP: 5.6
 License: GNU General Public License v3.0
@@ -141,6 +141,12 @@ Here is the code they will need.
 $custom_order_number = $order->get_order_number(); //where $order is an order object
 
 == Changelog ==
+
+= 1.7.0 - 30/01/2024 =
+* Fix - Fixed duplicate sequential order numbers.
+* Fix - Fixed Search by Order Number in Admin dashboard when HPOS is enabled.
+* Fix - Triggered the error on huge orders of websites.
+* Fix - Fixed Cross Site Request Forgery (CSRF) vulnerability.
 
 = 1.6.0 - 22/08/2023 =
 * Fix – Fixed Compatibility with PHP 8.2.

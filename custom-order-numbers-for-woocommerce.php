@@ -3,7 +3,7 @@
  * Plugin Name: Custom Order Numbers for WooCommerce
  * Plugin URI: https://www.tychesoftwares.com/store/premium-plugins/custom-order-numbers-woocommerce/
  * Description: Custom order numbers for WooCommerce.
- * Version: 1.6.0
+ * Version: 1.7.0
  * Author: Tyche Softwares
  * Author URI: https://www.tychesoftwares.com/
  * Text Domain: custom-order-numbers-for-woocommerce
@@ -11,7 +11,7 @@
  * Copyright: � 2021 Tyche Softwares
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
- * WC tested up to: 8.0.2
+ * WC tested up to: 8.5.2
  *
  * @package Custom-Order-Numbers-Lite
  */
@@ -65,7 +65,7 @@ if ( is_admin() ) {
 			<p  style="margin: 10px 0 10px 10px; font-size: medium;">
 				<?php esc_html_e( 'There is an update to Custom Order Numbers Pro but cannot be updated automatically. Please contact us to manually update the plugin. Apologies for the inconvenience.', 'custom-order-numbers-for-woocommerce' ); ?></p>
 			<p class="submit" style="margin: -10px 0 10px 10px;">
-				<a class="button-primary button button-large" href="https://tychesoftwares.freshdesk.com/support/tickets/new"><?php esc_html_e( 'Contact us', 'custom-order-numbers-for-woocommerce' ); ?></a>
+				<a class="button-primary button button-large" href="https://support.tychesoftwares.com/help/2285384554"><?php esc_html_e( 'Contact us', 'custom-order-numbers-for-woocommerce' ); ?></a>
 			</p>
 		</div>
 		<?php
