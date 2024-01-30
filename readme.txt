@@ -4,7 +4,7 @@ Tags: woocommerce, custom order numbers, sequential order numbers
 Requires at least: 4.4
 Tested up to: 6.4.2
 Stable tag: trunk
-Requires PHP: 5.6
+Requires PHP: 7.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
