@@ -30,6 +30,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		 */
 		public function __construct() {
 			if ( 'yes' === get_option( 'alg_wc_custom_order_numbers_enabled', 'yes' ) ) {
+				add_filter( 'woocommerce_update_order', array( $this, 'add_new_order_number' ), PHP_INT_MAX, 2 );
 				add_action( 'woocommerce_new_order', array( $this, 'add_new_order_number' ), 11 );
 				add_filter( 'woocommerce_order_number', array( $this, 'display_order_number' ), PHP_INT_MAX, 2 );
 				add_action( 'admin_notices', array( $this, 'alg_custom_order_numbers_update_admin_notice' ) );
