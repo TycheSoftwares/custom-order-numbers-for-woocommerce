@@ -2,7 +2,7 @@
 Contributors: tychesoftwares
 Tags: woocommerce, custom order numbers, sequential order numbers
 Requires at least: 6.3
-Tested up to: 6.4.2
+Tested up to: 6.5.0
 Stable tag: trunk
 Requires PHP: 7.4
 License: GNU General Public License v3.0
@@ -141,6 +141,12 @@ Here is the code they will need.
 $custom_order_number = $order->get_order_number(); //where $order is an order object
 
 == Changelog ==
+
+= 1.7.1 - 03/04/2024 =
+* Fix - Cross Site Request Forgery (CSRF) vulnerability.
+* Fix - New Custom Order Email has WooCommerce Order number if the order is created from backend.
+* Tweak - Update compatibility with WordPress 6.5
+* Tweak - Update compatibility with WooCommerce 8.7
 
 = 1.7.0 - 30/01/2024 =
 * Fix - Fixed duplicate sequential order numbers.
