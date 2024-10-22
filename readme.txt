@@ -149,6 +149,8 @@ Here is the code they will need.
 $custom_order_number = $order->get_order_number(); //where $order is an order object
 
 == Changelog ==
+= 1.8.0 - 22/10/2024 =
+* Fix - Deactivation survey request was being sent even though 'Skip & deactivate' was selected while deactivating the plugin.
 
 = 1.7.1 - 03/04/2024 =
 * Fix - Cross Site Request Forgery (CSRF) vulnerability.
