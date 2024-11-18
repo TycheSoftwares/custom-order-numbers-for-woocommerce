@@ -92,7 +92,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers' ) ) :
 		public function __construct() {
 
 			// Set up localisation.
-			load_plugin_textdomain( 'custom-order-numbers-for-woocommerce', false, dirname( plugin_basename( __FILE__ ) ) . '/langs/' );
+			add_action( 'init', array( &$this, 'con_load_textdomain' ) );
 
 			// Include required files.
 			$this->includes();
@@ -219,6 +219,25 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers' ) ) :
 			if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
 				\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', 'custom-order-numbers-for-woocommerce/custom-order-numbers-for-woocommerce.php', true );
 				\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'orders_cache', 'custom-order-numbers-for-woocommerce/custom-order-numbers-for-woocommerce.php', true );
+			}
+		}
+
+		/**
+		 * Load the textdomain.
+		 *
+		 * @version 1.0.0
+		 * @since   1.0.0
+		 * @return  string
+		 */
+		public function con_load_textdomain() {
+			$domain = 'custom-order-numbers-for-woocommerce';
+			$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
+			$loaded = load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '-' . $locale . '.mo' );
+
+			if ( $loaded ) {
+				return $loaded;
+			} else {
+				load_plugin_textdomain( $domain, false, __DIR__ . '/langs/' );
 			}
 		}
 
