@@ -243,6 +243,8 @@ if ( ! class_exists( 'Tyche_Plugin_Deactivation' ) ) {
 								</div>
 							</div>',
 			);
+			wp_enqueue_script( 'tyche_plugin_deactivation_' . $this->plugin_short_name );
+		}
 
 		/**
 		 * Called after the user has submitted his reason for deactivating the plugin.
