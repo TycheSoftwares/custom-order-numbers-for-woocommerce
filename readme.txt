@@ -167,10 +167,13 @@ When you enable the usage tracking feature, the following information is sent to
 * WordPress memory limit
 * Webserver software & version
 * PHP version
-* PHP settings (e.g., maximum post size, maximum input vars, cURL, SOAP)
+* Some PHP Settings like maximum post size, maximum input vars, if suhosin is enabled, if you have cURL, SOAP and fSock enabled
 * MySQL version
 * WooCommerce version
-* Settings related to printing invoices, delivery notes, receipts, etc.
+* List of activate plugins
+* List of inactive plugins
+* Plugin settings
+* Total count of orders renumbered.
 
 This data helps Tyche Softwares understand how the plugin is being used, which features are popular, and identify areas for improvement.
 
