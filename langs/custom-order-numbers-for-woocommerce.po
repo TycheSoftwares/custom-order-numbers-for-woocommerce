@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-27 10:31+0530\n"
-"PO-Revision-Date: 2023-06-27 10:32+0500\n"
+"POT-Creation-Date: 2024-11-19 15:08+0530\n"
+"PO-Revision-Date: 2024-11-19 15:08+0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -18,26 +18,26 @@ msgstr ""
 "Plural-Forms: \n"
 "X-Generator: Eazy Po 1.0.0.0\n"
 
-#: custom-order-numbers-for-woocommerce.php:49
+#: custom-order-numbers-for-woocommerce.php:53
 msgid "Settings"
 msgstr ""
 
-#: custom-order-numbers-for-woocommerce.php:51
+#: custom-order-numbers-for-woocommerce.php:55
 msgid "Unlock All"
 msgstr ""
 
-#: custom-order-numbers-for-woocommerce.php:66
+#: custom-order-numbers-for-woocommerce.php:70
 msgid ""
 "There is an update to Custom Order Numbers Pro but cannot be updated "
 "automatically. Please contact us to manually update the plugin. Apologies "
 "for the inconvenience."
 msgstr ""
 
-#: custom-order-numbers-for-woocommerce.php:68
+#: custom-order-numbers-for-woocommerce.php:72
 msgid "Contact us"
 msgstr ""
 
-#: includes/class-alg-wc-custom-order-numbers-core.php:167
+#: includes/class-alg-wc-custom-order-numbers-core.php:170
 msgid ""
 "From version 1.3.0, you can now search the orders by custom order numbers on "
 "the Orders page. In order to make the previous orders with custom order "
@@ -46,12 +46,12 @@ msgid ""
 "run in the background."
 msgstr ""
 
-#: includes/class-alg-wc-custom-order-numbers-core.php:171
-#: includes/class-alg-wc-custom-order-numbers-core.php:190
+#: includes/class-alg-wc-custom-order-numbers-core.php:174
+#: includes/class-alg-wc-custom-order-numbers-core.php:193
 msgid "Update Now"
 msgstr ""
 
-#: includes/class-alg-wc-custom-order-numbers-core.php:186
+#: includes/class-alg-wc-custom-order-numbers-core.php:189
 msgid ""
 "In order to make the previous orders searchable on Orders page where meta "
 "key of the custom order number is not present, we need to update the "
@@ -59,161 +59,161 @@ msgid ""
 "update process will run in the background."
 msgstr ""
 
-#: includes/class-alg-wc-custom-order-numbers-core.php:470
-#: includes/class-alg-wc-custom-order-numbers-core.php:486
+#: includes/class-alg-wc-custom-order-numbers-core.php:474
+#: includes/class-alg-wc-custom-order-numbers-core.php:490
 msgid ""
 "Database updated successfully. In addition to new orders henceforth, you can "
 "now also search the old orders on Orders page with the custom order numbers."
 msgstr ""
 
-#: includes/class-alg-wc-custom-order-numbers-core.php:691
-#: includes/class-alg-wc-custom-order-numbers-core.php:701
+#: includes/class-alg-wc-custom-order-numbers-core.php:706
+#: includes/class-alg-wc-custom-order-numbers-core.php:716
 msgid "Order Number"
 msgstr ""
 
-#: includes/class-alg-wc-custom-order-numbers-core.php:747
-#: includes/class-alg-wc-custom-order-numbers-core.php:748
-#: includes/class-alg-wc-custom-order-numbers-core.php:766
+#: includes/class-alg-wc-custom-order-numbers-core.php:762
+#: includes/class-alg-wc-custom-order-numbers-core.php:763
+#: includes/class-alg-wc-custom-order-numbers-core.php:781
 msgid "Renumerate Orders"
 msgstr ""
 
-#: includes/class-alg-wc-custom-order-numbers-core.php:778
+#: includes/class-alg-wc-custom-order-numbers-core.php:793
 #, php-format
 msgid "%d orders successfully renumerated!"
 msgstr ""
 
-#: includes/class-alg-wc-custom-order-numbers-core.php:790
+#: includes/class-alg-wc-custom-order-numbers-core.php:805
 #, php-format
 msgid ""
 "Plugin settings: <a href=\"%s\">WooCommerce > Settings > Custom Order "
 "Numbers</a>."
 msgstr ""
 
-#: includes/class-alg-wc-custom-order-numbers-core.php:798
+#: includes/class-alg-wc-custom-order-numbers-core.php:813
 msgid "Press the button below to renumerate all existing orders."
 msgstr ""
 
-#: includes/class-alg-wc-custom-order-numbers-core.php:805
+#: includes/class-alg-wc-custom-order-numbers-core.php:820
 #, php-format
 msgid "First order number will be <strong>%d</strong>."
 msgstr ""
 
-#: includes/class-alg-wc-custom-order-numbers-core.php:812
+#: includes/class-alg-wc-custom-order-numbers-core.php:827
 msgid "Renumerate orders"
 msgstr ""
 
-#: includes/class-alg-wc-custom-order-numbers-core.php:812
+#: includes/class-alg-wc-custom-order-numbers-core.php:827
 msgid "Are you sure?"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:30
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:45
 msgid "General"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:73
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:88
 msgid "Custom Order Numbers Options"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:75
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:90
 msgid ""
 "Enable sequential order numbering, set custom number prefix, suffix and "
 "number width."
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:79
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:94
 msgid "WooCommerce Custom Order Numbers"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:80
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:95
 msgid "Enable plugin"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:81
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:96
 msgid "Custom Order Numbers for WooCommerce."
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:87
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:102
 msgid "Order numbers counter"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:92
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:107
 msgid "Sequential"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:93
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:108
 msgid "Order ID"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:94
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:109
 msgid "Pseudorandom - crc32 Hash (max 10 digits)"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:98
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:113
 msgid "Sequential: Next order number"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:99
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:114
 msgid "Next new order will be given this number."
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:100
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:115
 msgid "Use \"Renumerate Orders tool\" for existing orders."
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:101
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:108
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:116
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:123
 msgid "This will be ignored if sequential order numbering is disabled."
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:107
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:122
 msgid "Sequential: Reset counter"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:113
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:128
 msgid "Disabled"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:114
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:129
 msgid "Daily"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:115
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:130
 msgid "Monthly"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:116
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:131
 msgid "Yearly"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:120
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:135
 msgid "Reset counter value."
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:121
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:136
 msgid "Counter value to reset to."
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:122
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:137
 msgid ""
 "This will be ignored if \"Sequential: Reset counter\" option is set to "
 "\"Disabled\"."
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:128
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:143
 msgid "Order number custom prefix"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:129
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:144
 msgid ""
 "Prefix before order number (optional). This will change the prefixes for all "
 "existing orders."
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:135
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:150
 msgid "Order number date prefix"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:145
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:160
 msgid ""
 "Date prefix before order number (optional). This will change the prefixes "
 "for all existing orders. Value is passed directly to PHP `date` function, so "
@@ -222,11 +222,11 @@ msgid ""
 "d- or mdy."
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:152
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:167
 msgid "Order number width"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:162
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:177
 msgid ""
 "Minimum width of number without prefix (zeros will be added to the left "
 "side). This will change the minimum width of order number for all existing "
@@ -234,21 +234,21 @@ msgid ""
 "Leave zero to disable."
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:169
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:184
 msgid "Order number custom suffix"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:179
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:194
 msgid ""
 "Suffix after order number (optional). This will change the suffixes for all "
 "existing orders."
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:186
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:201
 msgid "Order number date suffix"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:196
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:211
 msgid ""
 "Date suffix after order number (optional). This will change the suffixes for "
 "all existing orders. Value is passed directly to PHP `date` function, so "
@@ -257,120 +257,120 @@ msgid ""
 "d- or mdy."
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:203
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:218
 msgid "Order number template"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:206
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:221
 #, php-format
 msgid "Replaced values: %s."
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:224
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:239
 msgid "Select orders to apply new settings to"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:225
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:240
 msgid "This will add the prefix/suffix from the particular date."
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:230
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:245
 msgid "To all new orders only"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:231
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:246
 msgid "To orders from a certain order number"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:232
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:247
 msgid "To orders from a specific date"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:233
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:248
 msgid "To all orders"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:238
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:253
 msgid "Select a Date to apply this new settings from"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:239
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:254
 msgid " <b>Note</b> : Only applies to past dates."
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:244
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:259
 msgid "Enter an Order Id from which you want to apply this new settings"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:245
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:260
 msgid " <b>Note</b> : Please enter a past order number."
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:250
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:265
 msgid "Enable order tracking by custom number"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:251
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:258
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:266
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:273
 msgid "Enable"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:257
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:272
 msgid "Manual order number counter"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:259
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:274
 msgid ""
 "This will add \"Order Number\" meta box to each order's edit page. \"Order "
 "Numbers Counter\" must be set to \"Sequential\"."
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:275
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:290
 msgid "Hide \"Renumerate Orders\" admin menu for roles"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:276
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:291
 msgid "Hide \"Renumerate Orders\" admin menu for selected user roles."
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:277
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:292
 msgid ""
 "All user roles are listed here - even those which do not see the menu by "
 "default."
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:285
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:300
 msgid "Hide \"Custom Order Numbers\" admin settings tab for roles"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:286
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:301
 msgid ""
 "Hide \"Custom Order Numbers\" admin settings tab for selected user roles."
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:287
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:302
 msgid "Tab can not be hidden for administrators."
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:288
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:303
 msgid ""
 "All user roles are listed here - even those which do not see the tab by "
 "default."
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:300
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:315
 msgid "Tools"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:301
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:316
 msgid "Tool for existing orders."
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:302
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:317
 msgid "Renumerate Orders tool"
 msgstr ""
 
-#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:308
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-general.php:323
 msgid ""
 "With the help of this tool, you can change the custom order numbers for all "
 "the existing orders in a sequence and will maintain the sequence for the "
@@ -389,6 +389,119 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-section.php:67
+msgid "Reset Usage Tracking"
+msgstr ""
+
+#: includes/admin/class-alg-wc-custom-order-numbers-settings-section.php:68
+msgid ""
+"This will reset your usage tracking settings, causing it to show the opt-in "
+"banner again and not sending any data."
+msgstr ""
+
 #: includes/admin/class-alg-wc-settings-custom-order-numbers.php:30
 msgid "Custom Order Numbers"
+msgstr ""
+
+#: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:172
+msgid "I only needed the plugin for a short period."
+msgstr ""
+
+#: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:178
+msgid "I found a better plugin."
+msgstr ""
+
+#: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:180
+msgid "Please let us have the plugin's name so that we can make improvements"
+msgstr ""
+
+#: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:184
+msgid "The plugin is not working."
+msgstr ""
+
+#: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:186
+msgid ""
+"Please share what was faulty with the plugin so that we may get the issue "
+"fixed."
+msgstr ""
+
+#: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:190
+msgid "The plugin is causing issues on my site"
+msgstr ""
+
+#: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:192
+msgid ""
+"We’re sorry! Please tell us about the issues so that we can get them fixed."
+msgstr ""
+
+#: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:196
+msgid "Some features I need are not working as per my expectations"
+msgstr ""
+
+#: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:198
+msgid "Please tell us about these features."
+msgstr ""
+
+#: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:202
+msgid "The plugin is not compatible with another plugin/theme"
+msgstr ""
+
+#: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:204
+msgid ""
+"We’re sorry! We would like you to tell us the plugin/theme so that we can "
+"work on the compatibility."
+msgstr ""
+
+#: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:208
+msgid ""
+"I can't differentiate between Invoice, Delivery Notes & Receipt. The "
+"templates are the same."
+msgstr ""
+
+#: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:214
+msgid "The invoice sent through mail can't be downloaded as PDF directly."
+msgstr ""
+
+#: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:220
+msgid "This plugin is not useful to me."
+msgstr ""
+
+#: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:226
+msgid "Other"
+msgstr ""
+
+#: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:240
+msgid "If you have a moment, please let us know why you are deactivating:"
+msgstr ""
+
+#: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:251
+msgid "Skip & Deactivate"
+msgstr ""
+
+#: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:252
+msgid "Submit & Deactivate"
+msgstr ""
+
+#: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:253
+msgid "Cancel"
+msgstr ""
+
+#: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:266
+msgid "Please select a reason for deactivation!"
+msgstr ""
+
+#: includes/component/plugin-tracking/class-tyche-plugin-tracking.php:121
+msgid "Once in a Week"
+msgstr ""
+
+#: includes/component/plugin-tracking/class-tyche-plugin-tracking.php:255
+msgid "Want to help make "
+msgstr ""
+
+#: includes/component/plugin-tracking/class-tyche-plugin-tracking.php:258
+msgid "Allow"
+msgstr ""
+
+#: includes/component/plugin-tracking/class-tyche-plugin-tracking.php:259
+msgid "No thanks"
 msgstr ""
