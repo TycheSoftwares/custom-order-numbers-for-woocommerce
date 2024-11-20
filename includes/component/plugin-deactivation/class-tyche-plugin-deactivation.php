@@ -205,19 +205,7 @@ if ( ! class_exists( 'Tyche_Plugin_Deactivation' ) ) {
 					),
 					array(
 						'id'                => 11,
-						'text'              => __( 'I can\'t differentiate between Invoice, Delivery Notes & Receipt. The templates are the same.', 'custom-order-numbers-for-woocommerce' ),
-						'input_type'        => '',
-						'input_placeholder' => '',
-					),
-					array(
-						'id'                => 12,
-						'text'              => __( 'The invoice sent through mail can\'t be downloaded as PDF directly.', 'custom-order-numbers-for-woocommerce' ),
-						'input_type'        => '',
-						'input_placeholder' => '',
-					),
-					array(
-						'id'                => 12,
-						'text'              => __( 'This plugin is not useful to me.', 'custom-order-numbers-for-woocommerce' ),
+						'text'              => __( 'Order Numbers are not properly generated.', 'custom-order-numbers-for-woocommerce' ),
 						'input_type'        => '',
 						'input_placeholder' => '',
 					),
@@ -255,20 +243,6 @@ if ( ! class_exists( 'Tyche_Plugin_Deactivation' ) ) {
 								</div>
 							</div>',
 			);
-
-			wp_localize_script(
-				'tyche_plugin_deactivation_' . $this->plugin_short_name,
-				'tyche_plugin_deactivation_' . $this->plugin_short_name . '_js',
-				array(
-					'deactivation_data'    => $data,
-					'ajax_url'             => admin_url( 'admin-ajax.php' ),
-					'nonce'                => wp_create_nonce( 'tyche_plugin_deactivation_submit_action' ),
-					'deactivation_req_msg' => __( 'Please select a reason for deactivation!', 'custom-order-numbers-for-woocommerce' ),
-				)
-			);
-
-			wp_enqueue_script( 'tyche_plugin_deactivation_' . $this->plugin_short_name );
-		}
 
 		/**
 		 * Called after the user has submitted his reason for deactivating the plugin.
