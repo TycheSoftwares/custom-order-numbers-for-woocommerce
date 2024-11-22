@@ -42,7 +42,6 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Settings_General' ) ) :
 		 */
 		public function __construct() {
 			$this->id   = '';
-			$this->desc = __( 'General', 'custom-order-numbers-for-woocommerce' );
 			parent::__construct();
 			add_action( 'admin_head', array( $this, 'add_tool_button_class_style' ) );
 		}

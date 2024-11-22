@@ -230,15 +230,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers' ) ) :
 		 * @return  string
 		 */
 		public function con_load_textdomain() {
-			$domain = 'custom-order-numbers-for-woocommerce';
-			$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
-			$loaded = load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '-' . $locale . '.mo' );
-
-			if ( $loaded ) {
-				return $loaded;
-			} else {
-				load_plugin_textdomain( $domain, false, __DIR__ . '/langs/' );
-			}
+			load_plugin_textdomain( 'custom-order-numbers-for-woocommerce', false, dirname( plugin_basename( __FILE__ ) ) . '/langs/' );
 		}
 
 	}
