@@ -1,9 +1,9 @@
 === Custom Order Numbers for WooCommerce ===
 Contributors: tychesoftwares
 Tags: woocommerce, custom order numbers, sequential order numbers
-Requires at least: 7.3
-Tested up to: 6.6.2
-Stable tag: 1.8.0
+Requires at least: 4.4
+Tested up to: 6.7.1
+Stable tag: 1.9.0
 Requires PHP: 7.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -149,63 +149,13 @@ Here is the code they will need.
 $custom_order_number = $order->get_order_number(); //where $order is an order object
 
 == External Services ==
-
-=== Usage Tracking in Custom Order Numbers ===
-
-This plugin includes a feature that sends non-sensitive usage tracking data to Tyche Softwares. The data is used solely for improving the plugin and its features based on how it is being used across different stores. The tracking is **optional**, and you can choose to opt-out at any time.
-
-=== What is Tracked: ===
-
-When you enable the usage tracking feature, the following information is sent to Tyche Softwares:
-
-* Site URL
-* WordPress admin email
-* Theme
-* WordPress version
-* WordPress locale
-* WordPress debug mode
-* WordPress memory limit
-* Webserver software & version
-* PHP version
-* Some PHP Settings like maximum post size, maximum input vars, if suhosin is enabled, if you have cURL, SOAP and fSock enabled
-* MySQL version
-* WooCommerce version
-* List of activate plugins
-* List of inactive plugins
-* Plugin settings
-* Total count of orders renumbered.
-
-This data helps Tyche Softwares understand how the plugin is being used, which features are popular, and identify areas for improvement.
-
-=== How the Data is Used: ===
-
-The data collected is used to:
-
-* Improve the plugin’s functionality and performance.
-* Gain insights into which features are most commonly used.
-* Ensure compatibility with different versions of WordPress, WooCommerce, and PHP.
-
-=== Sensitive Data: ===
-
-The only sensitive information that is stored is the **admin email address**, which is kept to contact you regarding important updates or bug fixes related to the plugin. **No personal or business-critical data** is tracked or stored.
-
-=== How and When Data is Sent: ===
-
-The tracking data is sent automatically to our servers once you opt-in, and it will continue to be sent once a week thereafter.
-
-=== Opt-In and Opt-Out: ===
-
-* By default, usage tracking is enabled in the plugin settings.
-* You can **opt-out** at any time by resetting the usage tracking option, which is located under the **Settings** tab of the plugin.
-
-=== Link to Full Details: ===
-
-For more information about the usage tracking, please visit our documentation:
-[Custom Order Numbers Usage Tracking](https://www.tychesoftwares.com/docs/woocommerce-custom-order-numbers/usage-tracking-order-numbers/)
-
-By using this plugin, you consent to the collection of the data mentioned above for the purpose of improving the plugin. If you do not wish to share this data, you can easily opt-out via the plugin settings.
+This plugin communicates with our tracking server to send usage data **only** if the user has explicitly opted in to usage tracking. For detailed information about what is tracked, please refer to our [usage tracking documentation](https://www.tychesoftwares.com/docs/woocommerce-custom-order-numbers/usage-tracking-order-numbers/).
 
 == Changelog ==
+= 1.9.0 - 22/11/2024 =
+* Fix - Translation loading was triggered too early, causing errors when changing the site language in WordPress 6.7.
+* Tweak - Removed the call to our tracking server to fetch the deactivation reasons and added them in the plugin itself.
+
 = 1.8.0 - 22/10/2024 =
 * Fix - Deactivation survey request was being sent even though 'Skip & deactivate' was selected while deactivating the plugin.
 
