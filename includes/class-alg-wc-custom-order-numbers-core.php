@@ -139,7 +139,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		public function pre_alg_wc_custom_order_numbers_settings_to_apply( $new_value, $old_value ) {
 			if ( $new_value !== $old_value ) {
 				if ( 'new_order' === $new_value ) {
-					$current_time = current_time( 'timestamp' );
+					$current_time = current_time( 'timestamp' ); // phpcs:ignore
 					update_option( 'alg_custom_order_numbers_new_order_time', $current_time );
 				}
 			}
@@ -617,11 +617,11 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 				$current_order_date    = strtotime( $order_date );
 
 				if ( ! $current_order_date || '' === $current_order_date ) {
-					$current_order_date = current_time( 'timestamp' );
+					$current_order_date = current_time( 'timestamp' ); // phpcs:ignore
 				}
 
 				update_option( 'alg_wc_custom_order_numbers_counter_previous_order_date', $current_order_date );
-				if ( 0 != $previous_order_date ) {
+				if ( 0 != $previous_order_date ) { // phpcs:ignore
 					$do_reset = false;
 					switch ( $reset_period ) {
 						case 'daily':
@@ -659,12 +659,12 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		 * @version 1.1.1
 		 * @since   1.1.1
 		 */
-		public function save_order_number_meta_box( $post_id, $post ) {
-			if ( ! isset( $_POST['alg_wc_custom_order_numbers_meta_box'] ) && ! isset( $_POST['meta_box'] ) && !wp_verify_nonce( $_POST['meta_box'], 'create_order_number_meta_box' ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+		public function save_order_number_meta_box( $post_id, $post ) { // phpcs:ignore
+			if ( ! isset( $_POST['alg_wc_custom_order_numbers_meta_box'] ) && ! isset( $_POST['meta_box'] ) && ! wp_verify_nonce( $_POST['meta_box'], 'create_order_number_meta_box' ) ) { // phpcs:ignore
 				return;
 			}
 
-			if ( isset( $_POST['alg_wc_custom_order_number'] ) && isset( $_POST['meta_box'] ) && wp_verify_nonce( $_POST['meta_box'], 'create_order_number_meta_box' ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+			if ( isset( $_POST['alg_wc_custom_order_number'] ) && isset( $_POST['meta_box'] ) && wp_verify_nonce( $_POST['meta_box'], 'create_order_number_meta_box' ) ) { // phpcs:ignore
 				$is_wc_version_below_3 = version_compare( get_option( 'woocommerce_version', null ), '3.0.0', '<' );
 				$order                 = wc_get_order( $post_id );
 				$order_timestamp       = strtotime( ( $is_wc_version_below_3 ? $order->order_date : $order->get_date_created() ) );
@@ -761,7 +761,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 				'woocommerce',
 				__( 'Renumerate Orders', 'custom-order-numbers-for-woocommerce' ),
 				__( 'Renumerate Orders', 'custom-order-numbers-for-woocommerce' ),
-				'manage_woocommerce',
+				'manage_woocommerce', // phpcs:ignore
 				'alg-wc-renumerate-orders-tools',
 				array( $this, 'create_renumerate_orders_tool' )
 			);
@@ -780,7 +780,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 			<div class="wrap">
 			<h1><?php esc_html_e( 'Renumerate Orders', 'custom-order-numbers-for-woocommerce' ); ?></h1>
 			<?php
-			if ( isset( $_POST['alg_renumerate_orders'] ) && isset( $_POST['renumerate_orders'] ) && wp_verify_nonce( $_POST['renumerate_orders'], 'alg_renumerate_orders' ) ) {  // phpcs:ignore WordPress.Security.NonceVerification
+			if ( isset( $_POST['alg_renumerate_orders'] ) && isset( $_POST['renumerate_orders'] ) && wp_verify_nonce( $_POST['renumerate_orders'], 'alg_renumerate_orders' ) ) {  // phpcs:ignore
 				$total_renumerated_orders = $this->renumerate_orders();
 				$last_renumerated_order   = $total_renumerated_orders[1];
 				$total_renumerated_orders = $total_renumerated_orders[0];
@@ -790,7 +790,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 						<p><strong>
 						<?php
 						// translators: <number of orders> orders successfully renumerated.
-						echo sprintf( esc_html__( '%d orders successfully renumerated!', 'custom-order-numbers-for-woocommerce' ), esc_attr( $total_renumerated_orders ) );
+						printf( esc_html__( '%d orders successfully renumerated!', 'custom-order-numbers-for-woocommerce' ), esc_attr( $total_renumerated_orders ) );
 						?>
 						</strong></p>
 					</div>
@@ -800,7 +800,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 			?>
 			<p>
 				<?php
-				echo sprintf(
+				printf(
 					// translators: Settings Link.
 					__( 'Plugin settings: <a href="%s">WooCommerce > Settings > Custom Order Numbers</a>.', 'custom-order-numbers-for-woocommerce' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					esc_url( admin_url( 'admin.php?page=wc-settings&tab=alg_wc_custom_order_numbers' ) )
@@ -816,8 +816,11 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 				?>
 				<p>
 				<?php
-				// translators: First Order Number.
-				echo sprintf( __( 'First order number will be <strong>%d</strong>.', 'custom-order-numbers-for-woocommerce' ), esc_attr( $next_order_number ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				printf(
+					// translators: First Order Number.
+					__( 'First order number will be <strong>%d</strong>.', 'custom-order-numbers-for-woocommerce' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					esc_attr( $next_order_number )
+				);
 				?>
 				</p>
 				<?php
@@ -861,7 +864,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 				}
 				foreach ( $loop_orders as $order_id ) {
 					$last_renumerated = $this->add_order_number_meta( $order_id, true );
-					$total_renumerated++;
+					++$total_renumerated;
 				}
 				$offset += $block_size;
 			}
@@ -1218,7 +1221,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		 * @return WC_Order $renewal_order
 		 * @since 1.2.6
 		 */
-		public function remove_order_meta_renewal( $renewal_order, $subscription ) {
+		public function remove_order_meta_renewal( $renewal_order, $subscription ) { // phpcs:ignore
 			$new_order_id = $renewal_order->get_id();
 			// update the custom order number.
 			$this->add_order_number_meta( $new_order_id, true );
@@ -1236,7 +1239,6 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 			$subscription_id = $subscription->get_id();
 			// update the custom order number.
 			$this->add_order_number_meta( $subscription_id, true );
-
 		}
 
 		/**

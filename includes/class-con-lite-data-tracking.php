@@ -32,7 +32,6 @@ if ( ! class_exists( 'Con_Lite_Data_Tracking' ) ) :
 			// Send Tracker Data.
 			add_action( 'con_lite_init_tracker_completed', array( __CLASS__, 'init_tracker_completed' ), 10, 2 );
 			add_filter( 'con_lite_ts_tracker_display_notice', array( __CLASS__, 'con_lite_ts_tracker_display_notice' ), 10, 1 );
-
 		}
 
 		/**
@@ -152,7 +151,6 @@ if ( ! class_exists( 'Con_Lite_Data_Tracking' ) ) :
 			);
 
 			return wp_json_encode( $global_settings );
-
 		}
 
 		/**
@@ -167,7 +165,6 @@ if ( ! class_exists( 'Con_Lite_Data_Tracking' ) ) :
 			$orders_count = $wpdb->get_var( $wpdb->prepare( 'SELECT count(post_id) FROM ' . $wpdb->prefix . 'postmeta where meta_key = %s', '_alg_wc_custom_order_number' ) ); //phpcs:ignore
 			return $orders_count;
 		}
-
 	}
 
 endif;
