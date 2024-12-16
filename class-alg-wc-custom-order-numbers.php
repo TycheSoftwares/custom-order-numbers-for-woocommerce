@@ -227,12 +227,10 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers' ) ) :
 		 *
 		 * @version 1.0.0
 		 * @since   1.0.0
-		 * @return  string
 		 */
 		public function con_load_textdomain() {
 			load_plugin_textdomain( 'custom-order-numbers-for-woocommerce', false, dirname( plugin_basename( __FILE__ ) ) . '/langs/' );
 		}
-
 	}
 
 endif;
@@ -245,7 +243,7 @@ if ( ! function_exists( 'alg_wc_custom_order_numbers' ) ) {
 	 * @since   1.0.0
 	 * @return  Alg_WC_Custom_Order_Numbers
 	 */
-	function alg_wc_custom_order_numbers() {
+	function alg_wc_custom_order_numbers() { //phpcs:ignore
 		return Alg_WC_Custom_Order_Numbers::instance();
 	}
 }

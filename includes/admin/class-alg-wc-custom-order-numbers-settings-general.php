@@ -41,7 +41,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Settings_General' ) ) :
 		 * @since   1.0.0
 		 */
 		public function __construct() {
-			$this->id   = '';
+			$this->id = '';
 			parent::__construct();
 			add_action( 'admin_head', array( $this, 'add_tool_button_class_style' ) );
 		}
@@ -331,7 +331,6 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Settings_General' ) ) :
 			);
 			return $settings;
 		}
-
 	}
 
 endif;

@@ -77,7 +77,6 @@ if ( ! class_exists( 'Alg_WC_Settings_Custom_Order_Numbers' ) ) :
 			parent::save();
 			$this->maybe_reset_settings();
 		}
-
 	}
 
 endif;
