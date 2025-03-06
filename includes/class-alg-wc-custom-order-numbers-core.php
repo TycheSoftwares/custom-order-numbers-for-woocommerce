@@ -896,23 +896,21 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 			$block_size = 512;
 			while ( true ) {
 				$args = array(
-					'post_type'      => 'shop_order',
-					'post_status'    => 'any',
-					'posts_per_page' => $block_size,
-					'orderby'        => 'date',
-					'order'          => 'DESC',
-					'offset'         => $offset,
-					'fields'         => 'ids',
+					'type'    => 'shop_order',
+					'status'  => array_keys( wc_get_order_statuses() ),
+					'limit'   => $block_size,
+					'orderby' => 'date',
+					'order'   => 'DESC',
+					'page'    => ( $offset / $block_size ) + 1, // Pagination starts at 1.
 				);
-				$loop = new WP_Query( $args );
-				if ( ! $loop->have_posts() ) {
+				$orders = wc_get_orders( $args );
+				if ( empty( $orders ) ) {
 					break;
 				}
-				foreach ( $loop->posts as $order_id ) {
-					$_order        = wc_get_order( $order_id );
-					$_order_number = $this->display_order_number( $order_id, $_order );
+				foreach ( $orders as $order ) {
+					$_order_number = $this->display_order_number( $order->get_id(), $order );
 					if ( $_order_number === $order_number ) {
-						return $order_id;
+						return $order->get_id();
 					}
 				}
 				$offset += $block_size;
