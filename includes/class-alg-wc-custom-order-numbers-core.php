@@ -1129,7 +1129,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 					$wp_options_table = $wpdb->prefix . 'options';
 					$result_select    = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM `' . $wpdb->prefix . 'options` WHERE option_name = %s FOR UPDATE', 'alg_wc_custom_order_numbers_counter' ) ); //phpcs:ignore
 					if ( null !== $result_select ) {
-						$current_order_number     = $this->maybe_reset_sequential_counter( $result_select->option_value, $order_id );
+						$current_order_number     = (int) $this->maybe_reset_sequential_counter( $result_select->option_value, $order_id );
 						$result_update            = $wpdb->update( // phpcs:ignore
 							$wp_options_table,
 							array( 'option_value' => ( $current_order_number + 1 ) ),
