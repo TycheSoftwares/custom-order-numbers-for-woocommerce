@@ -1,4 +1,9 @@
 *** Custom Order Numbers for WooCommerce ***
+2025-06-04 - version 1.11.0
+* Fix - Uncaught TypeError: Unsupported operand types: string + int on the checkout page.
+* Tweak - Update for compatibility with WordPress 6.8.1.
+* Tweak - Update for compatibility with WooCommerce 9.9.0.
+
 2025-03-11 - version 1.10.0
 * Fix - The "Page Not Found" error was appearing when tracking an order using a custom order number on the order tracking page.
 * Fix - All PHPCS warnings and aligned the code with WordPress Coding Standards to enhance quality and maintainability.
