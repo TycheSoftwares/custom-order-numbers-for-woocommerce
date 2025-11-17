@@ -171,7 +171,17 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 								?>
 							</p>
 							<p class="submit" style="margin: -10px 0 10px 10px;">
-								<a class="button-primary button button-large" id="con-lite-update" href="edit.php?post_type=shop_order&action=alg_custom_order_numbers_update_old_con_in_database"><?php esc_html_e( 'Update Now', 'custom-order-numbers-for-woocommerce' ); ?></a>
+								<!-- <a class="button-primary button button-large" id="con-lite-update" href="edit.php?post_type=shop_order&action=alg_custom_order_numbers_update_old_con_in_database"><?php esc_html_e( 'Update Now', 'custom-order-numbers-for-woocommerce' ); ?></a> -->
+							<?php $nonce = wp_create_nonce( 'alg_con_update_database_nonce' ); ?>
+								<a class="button-primary button button-large" id="con-lite-update" href="<?php
+									echo esc_url(
+										admin_url(
+											'edit.php?post_type=shop_order&action=alg_custom_order_numbers_update_old_con_in_database&_wpnonce=' . $nonce
+										)
+									);
+								?>">
+								<?php esc_html_e( 'Update Now', 'custom-order-numbers-for-woocommerce' ); ?>
+								</a>
 							</p>
 						</div>
 					</div>
@@ -190,7 +200,15 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 									?>
 								</p>
 								<p class="submit" style="margin: -10px 0 10px 10px;">
-									<a class="button-primary button button-large" id="con-lite-update" href="edit.php?post_type=shop_order&action=alg_custom_order_numbers_update_old_con_with_meta_key"><?php esc_html_e( 'Update Now', 'custom-order-numbers-for-woocommerce' ); ?></a>
+									<!-- <a class="button-primary button button-large" id="con-lite-update" href="edit.php?post_type=shop_order&action=alg_custom_order_numbers_update_old_con_with_meta_key"><?php esc_html_e( 'Update Now', 'custom-order-numbers-for-woocommerce' ); ?></a> -->
+								<?php $nonce2 = wp_create_nonce( 'alg_con_update_meta_key_nonce' ); ?>
+									<a class="button-primary button button-large" id="con-lite-update" href="<?php 
+									echo esc_url(
+										admin_url(
+											'edit.php?post_type=shop_order&action=alg_custom_order_numbers_update_old_con_with_meta_key&_wpnonce=' . $nonce2
+										) ); ?>">
+									<?php esc_html_e( 'Update Now', 'custom-order-numbers-for-woocommerce' ); ?>
+									</a>
 								</p>
 							</div>
 						</div>
@@ -208,6 +226,16 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		 */
 		public function alg_custom_order_numbers_add_recurring_action() {
 			if ( isset( $_REQUEST['action'] ) && 'alg_custom_order_numbers_update_old_con_in_database' === $_REQUEST['action'] ) { // phpcs:ignore
+				if ( ! is_user_logged_in() ) {
+					wp_die( 'Unauthorized request.' );
+				}
+				if ( ! current_user_can( 'manage_woocommerce' ) ) {
+					error_log( 'CON DEBUG: Blocked — insufficient permissions' );
+					wp_die( 'Unauthorized request.' );
+				}
+				if ( ! isset( $_REQUEST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) ), 'alg_con_update_database_nonce' ) ) {
+					wp_die( 'Security check failed.' );
+				}
 				update_option( 'alg_custom_order_numbers_update_database', 'yes' );
 				$current_time = current_time( 'timestamp' ); // phpcs:ignore
 				update_option( 'alg_custom_order_numbers_time_of_update_now', $current_time );
@@ -227,6 +255,15 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 		 */
 		public function alg_custom_order_numbers_add_recurring_action_to_add_meta_key() {
 			if ( isset( $_REQUEST['action'] ) && 'alg_custom_order_numbers_update_old_con_with_meta_key' === $_REQUEST['action'] ) { // phpcs:ignore
+				if ( ! is_user_logged_in() ) {
+					wp_die( 'Unauthorized request.' );
+				}
+				if ( ! current_user_can( 'manage_woocommerce' ) ) {
+					wp_die( 'Unauthorized request.' );
+				}
+				if ( ! isset( $_REQUEST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) ), 'alg_con_update_meta_key_nonce' ) ) {
+					wp_die( 'Security check failed.' );
+				}
 				update_option( 'alg_custom_order_numbers_update_meta_key_in_database', 'yes' );
 				$current_time = current_time( 'timestamp' ); // phpcs:ignore
 				update_option( 'alg_custom_order_numbers_meta_key_time_of_update_now', $current_time );
