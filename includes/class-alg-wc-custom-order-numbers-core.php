@@ -171,7 +171,6 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 								?>
 							</p>
 							<p class="submit" style="margin: -10px 0 10px 10px;">
-								<!-- <a class="button-primary button button-large" id="con-lite-update" href="edit.php?post_type=shop_order&action=alg_custom_order_numbers_update_old_con_in_database"><?php esc_html_e( 'Update Now', 'custom-order-numbers-for-woocommerce' ); ?></a> -->
 							<?php $nonce = wp_create_nonce( 'alg_con_update_database_nonce' ); ?>
 								<a class="button-primary button button-large" id="con-lite-update" href="<?php
 									echo esc_url(
@@ -200,7 +199,6 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 									?>
 								</p>
 								<p class="submit" style="margin: -10px 0 10px 10px;">
-									<!-- <a class="button-primary button button-large" id="con-lite-update" href="edit.php?post_type=shop_order&action=alg_custom_order_numbers_update_old_con_with_meta_key"><?php esc_html_e( 'Update Now', 'custom-order-numbers-for-woocommerce' ); ?></a> -->
 								<?php $nonce2 = wp_create_nonce( 'alg_con_update_meta_key_nonce' ); ?>
 									<a class="button-primary button button-large" id="con-lite-update" href="<?php 
 									echo esc_url(
