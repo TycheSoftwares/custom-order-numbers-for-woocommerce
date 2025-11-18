@@ -2,8 +2,8 @@
 Contributors: tychesoftwares
 Tags: woocommerce, custom order numbers, sequential order numbers
 Requires at least: 4.4
-Tested up to: 6.8.1
-Stable tag: 1.11.0
+Tested up to: 6.8.3
+Stable tag: 1.11.1
 Requires PHP: 7.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -152,6 +152,11 @@ $custom_order_number = $order->get_order_number(); //where $order is an order ob
 This plugin communicates with our tracking server to send usage data **only** if the user has explicitly opted in to usage tracking. For detailed information about what is tracked, please refer to our [usage tracking documentation](https://www.tychesoftwares.com/docs/woocommerce-custom-order-numbers/usage-tracking-order-numbers/).
 
 == Changelog ==
+= 1.11.1 - 18/11/2025 =
+* Fix - Cross Site Request Forgery (CSRF) vulnerability.
+* Tweak - Update compatibility with WordPress 6.8.3
+* Tweak - Update compatibility with WooCommerce 10.3.5
+
 = 1.11.0 - 04/06/2025 =
 * Fix - Uncaught TypeError: Unsupported operand types: string + int on the checkout page.
 * Tweak - Update for compatibility with WordPress 6.8.1.
