@@ -146,21 +146,11 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Settings_General' ) ) :
 						'type'     => 'text',
 					),
 					array(
-						'title'             => __( 'Order number date prefix', 'custom-order-numbers-for-woocommerce' ),
-						'desc'              => apply_filters(
-							'alg_wc_custom_order_numbers',
-							'<br>' . sprintf(
-								'You will need <a href="%s" target="_blank">%s</a> plugin to set this option.',
-								'https://www.tychesoftwares.com/store/premium-plugins/custom-order-numbers-woocommerce/?utm_source=conupgradetopro&utm_medium=link&utm_campaign=CustomOrderNumbersLite',
-								'Custom Order Numbers for WooCommerce Pro'
-							),
-							'settings'
-						),
-						'desc_tip'          => __( 'Date prefix before order number (optional). This will change the prefixes for all existing orders. Value is passed directly to PHP `date` function, so most of PHP date formats can be used. The only exception is using `\` symbol in date format, as this symbol will be excluded from date. Try: Y-m-d- or mdy.', 'custom-order-numbers-for-woocommerce' ),
-						'id'                => 'alg_wc_custom_order_numbers_date_prefix',
-						'default'           => '',
-						'type'              => 'text',
-						'custom_attributes' => apply_filters( 'alg_wc_custom_order_numbers', array( 'readonly' => 'readonly' ), 'settings' ),
+						'title'    => __( 'Order number date prefix', 'custom-order-numbers-for-woocommerce' ),
+						'desc_tip' => __( 'Date prefix before order number (optional). This will change the prefixes for all existing orders. Value is passed directly to PHP `date` function, so most of PHP date formats can be used. The only exception is using `\` symbol in date format, as this symbol will be excluded from date. Try: Y-m-d- or mdy.', 'custom-order-numbers-for-woocommerce' ),
+						'id'       => 'alg_wc_custom_order_numbers_date_prefix',
+						'default'  => '',
+						'type'     => 'text',
 					),
 					array(
 						'title'             => __( 'Order number width', 'custom-order-numbers-for-woocommerce' ),

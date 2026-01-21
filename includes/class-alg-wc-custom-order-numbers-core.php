@@ -64,6 +64,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 					add_filter( 'wcs_renewal_order_meta', array( $this, 'remove_con_metakey_in_wcs_order_meta' ), 10, 3 );
 				}
 				add_filter( 'pre_update_option_alg_wc_custom_order_numbers_prefix', array( $this, 'pre_alg_wc_custom_order_numbers_prefix' ), 10, 2 );
+				add_filter( 'pre_update_option_alg_wc_custom_order_numbers_date_prefix', array( $this, 'pre_alg_wc_custom_order_numbers_prefix' ), 10, 2 );
 				add_action( 'admin_init', array( $this, 'alg_custom_order_number_old_orders_without_meta_key' ) );
 				add_action( 'admin_init', array( $this, 'alg_custom_order_numbers_add_recurring_action_to_add_meta_key' ) );
 				add_action( 'alg_custom_order_numbers_update_meta_key_in_old_con', array( $this, 'alg_custom_order_numbers_update_meta_key_in_old_con_callback' ) );
@@ -302,6 +303,9 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 				update_option( 'alg_custom_order_numbers_no_old_orders_to_update', 'yes' );
 				return;
 			}
+
+			$alg_wc_custom_order_numbers_prefix      = get_option( 'alg_wc_custom_order_numbers_prefix', '' );
+			$alg_wc_custom_order_numbers_date_prefix = get_option( 'alg_wc_custom_order_numbers_date_prefix', '' );
 			foreach ( $loop_orders->posts as $order_ids ) {
 				$order_id = $order_ids->ID;
 				if ( $this->con_wc_hpos_enabled() ) {
@@ -319,9 +323,14 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 				if ( $order_timestamp > $time ) {
 					return;
 				}
+
+				$order_date_prefix = '';
+				if ( '' !== $alg_wc_custom_order_numbers_date_prefix ) {
+					$order_date_prefix = date_i18n( $alg_wc_custom_order_numbers_date_prefix, $order_timestamp );
+				}
 				$con_order_number = apply_filters(
 					'alg_wc_custom_order_numbers',
-					sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $order_number_meta ),
+					sprintf( '%s%s', do_shortcode( $alg_wc_custom_order_numbers_prefix . $order_date_prefix ), $order_number_meta ),
 					'value',
 					array(
 						'order_timestamp'   => $order_timestamp,
@@ -342,6 +351,8 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 				update_option( 'alg_custom_order_numbers_no_old_orders_to_update', 'yes' );
 				return;
 			}
+
+			$alg_wc_custom_order_numbers_prefix = get_option( 'alg_wc_custom_order_numbers_prefix', '' );
 			foreach ( $loop_old_orders->posts as $order_ids ) {
 				$order_id              = $order_ids->ID;
 				$order_number_meta     = $order_id;
@@ -354,7 +365,7 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 				}
 				$con_order_number = apply_filters(
 					'alg_wc_custom_order_numbers',
-					sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $order_number_meta ),
+					sprintf( '%s%s', do_shortcode( $alg_wc_custom_order_numbers_prefix ), $order_number_meta ),
 					'value',
 					array(
 						'order_timestamp'   => $order_timestamp,
@@ -384,6 +395,8 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 				update_option( 'alg_custom_order_number_no_old_con_without_meta_key', 'yes' );
 				return;
 			}
+			$alg_wc_custom_order_numbers_prefix      = get_option( 'alg_wc_custom_order_numbers_prefix', '' );
+			$alg_wc_custom_order_numbers_date_prefix = get_option( 'alg_wc_custom_order_numbers_date_prefix', '' );
 			foreach ( $loop_orders->posts as $order_ids ) {
 				$order_id              = $order_ids->ID;
 				$order_number_meta     = $order_id;
@@ -394,9 +407,14 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 				if ( $order_timestamp > $time ) {
 					return;
 				}
+
+				$order_date_prefix = '';
+				if ( '' !== $alg_wc_custom_order_numbers_date_prefix ) {
+					$order_date_prefix = date_i18n( $alg_wc_custom_order_numbers_date_prefix, $order_timestamp );
+				}
 				$con_order_number = apply_filters(
 					'alg_wc_custom_order_numbers',
-					sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $order_number_meta ),
+					sprintf( '%s%s', do_shortcode( $alg_wc_custom_order_numbers_prefix . $order_date_prefix ), $order_number_meta ),
 					'value',
 					array(
 						'order_timestamp'   => $order_timestamp,
@@ -583,6 +601,9 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 					update_option( 'alg_wc_custom_order_numbers_prefix_suffix_changed', '' );
 					return;
 				}
+
+				$alg_wc_custom_order_numbers_prefix      = get_option( 'alg_wc_custom_order_numbers_prefix', '' );
+				$alg_wc_custom_order_numbers_date_prefix = get_option( 'alg_wc_custom_order_numbers_date_prefix', '' );
 				foreach ( $loop_orders as $order_ids ) {
 					$order_id = $order_ids->get_id();
 					$order    = wc_get_order( $order_id );
@@ -596,9 +617,14 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 					}
 					$is_wc_version_below_3 = version_compare( get_option( 'woocommerce_version', null ), '3.0.0', '<' );
 					$order_timestamp       = strtotime( ( $is_wc_version_below_3 ? $order->order_date : $order->get_date_created() ) );
+
+					$order_date_prefix = '';
+					if ( '' !== $alg_wc_custom_order_numbers_date_prefix ) {
+						$order_date_prefix = date_i18n( $alg_wc_custom_order_numbers_date_prefix, $order_timestamp );
+					}
 					$full_order_number     = apply_filters(
 						'alg_wc_custom_order_numbers',
-						sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $order_number_meta ),
+						sprintf( '%s%s', do_shortcode( $alg_wc_custom_order_numbers_prefix . $order_date_prefix ), $order_number_meta ),
 						'value',
 						array(
 							'order_timestamp'   => $order_timestamp,
@@ -707,9 +733,17 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 				if ( isset( $_POST['alg_wc_custom_order_number'] ) ) { // phpcs:ignore
 					$current_order_number = sanitize_text_field( wp_unslash( $_POST['alg_wc_custom_order_number'] ) ); // phpcs:ignore
 				}
+
+				$alg_wc_custom_order_numbers_prefix = get_option( 'alg_wc_custom_order_numbers_prefix', '' );
+				$alg_wc_custom_order_numbers_date_prefix = get_option( 'alg_wc_custom_order_numbers_date_prefix', '' );
+
+				$order_date_prefix = '';
+				if ( '' !== $alg_wc_custom_order_numbers_date_prefix ) {
+					$order_date_prefix = date_i18n( $alg_wc_custom_order_numbers_date_prefix, $order_timestamp );
+				}
 				$full_custom_order_number = apply_filters(
 					'alg_wc_custom_order_numbers',
-					sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $current_order_number ),
+					sprintf( '%s%s', do_shortcode( $alg_wc_custom_order_numbers_prefix . $order_date_prefix ), $current_order_number ),
 					'value',
 					array(
 						'order_timestamp'   => $order_timestamp,
@@ -996,9 +1030,16 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 						if ( '' === $order_number_meta ) {
 							$order_number_meta = $order_id;
 						}
+						$alg_wc_custom_order_numbers_prefix = get_option( 'alg_wc_custom_order_numbers_prefix', '' );
+						$alg_wc_custom_order_numbers_date_prefix = get_option( 'alg_wc_custom_order_numbers_date_prefix', '' );
+
+						$order_date_prefix = '';
+						if ( '' !== $alg_wc_custom_order_numbers_date_prefix ) {
+							$order_date_prefix = date_i18n( $alg_wc_custom_order_numbers_date_prefix, $order_timestamp );
+						}
 						$order_number = apply_filters(
 							'alg_wc_custom_order_numbers',
-							sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $order_number_meta ),
+							sprintf( '%s%s', do_shortcode( $alg_wc_custom_order_numbers_prefix . $order_date_prefix ), $order_number_meta ),
 							'value',
 							array(
 								'order_timestamp'   => $order_timestamp,
@@ -1031,9 +1072,16 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 					$counter_type = get_option( 'alg_wc_custom_order_numbers_counter_type', 'sequential' );
 					if ( 'order_id' === $counter_type ) {
 						$order_number_meta = $order_id;
+						$alg_wc_custom_order_numbers_prefix = get_option( 'alg_wc_custom_order_numbers_prefix', '' );
+						$alg_wc_custom_order_numbers_date_prefix = get_option( 'alg_wc_custom_order_numbers_date_prefix', '' );
+
+						$order_date_prefix = '';
+						if ( '' !== $alg_wc_custom_order_numbers_date_prefix ) {
+							$order_date_prefix = date_i18n( $alg_wc_custom_order_numbers_date_prefix, $order_timestamp );
+						}
 						$order_number      = apply_filters(
 							'alg_wc_custom_order_numbers',
-							sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $order_number_meta ),
+							sprintf( '%s%s', do_shortcode( $alg_wc_custom_order_numbers_prefix . $order_date_prefix ), $order_number_meta ),
 							'value',
 							array(
 								'order_timestamp'   => $order_timestamp,
@@ -1053,9 +1101,16 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 				}
 				if ( '' === $order_number_meta ) {
 					$order_number_meta = $order_id;
+					$alg_wc_custom_order_numbers_prefix = get_option( 'alg_wc_custom_order_numbers_prefix', '' );
+					$alg_wc_custom_order_numbers_date_prefix = get_option( 'alg_wc_custom_order_numbers_date_prefix', '' );
+
+					$order_date_prefix = '';
+					if ( '' !== $alg_wc_custom_order_numbers_date_prefix ) {
+						$order_date_prefix = date_i18n( $alg_wc_custom_order_numbers_date_prefix, $order_timestamp );
+					}
 					$order_number_meta = apply_filters(
 						'alg_wc_custom_order_numbers',
-						sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $order_number_meta ),
+						sprintf( '%s%s', do_shortcode( $alg_wc_custom_order_numbers_prefix . $order_date_prefix ), $order_number_meta ),
 						'value',
 						array(
 							'order_timestamp'   => $order_timestamp,
@@ -1101,9 +1156,15 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 						break;
 				}
 				if ( $apply_custom_numbers && ! $full_custom_number ) {
+					$alg_wc_custom_order_numbers_prefix = get_option( 'alg_wc_custom_order_numbers_prefix', '' );
+					$alg_wc_custom_order_numbers_date_prefix = get_option( 'alg_wc_custom_order_numbers_date_prefix', '' );
+					$order_date_prefix = '';
+					if ( '' !== $alg_wc_custom_order_numbers_date_prefix ) {
+						$order_date_prefix = date_i18n( $alg_wc_custom_order_numbers_date_prefix, $order_timestamp );
+					}
 					$order_number_meta = apply_filters(
 						'alg_wc_custom_order_numbers',
-						sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $order_number_meta ),
+						sprintf( '%s%s', do_shortcode( $alg_wc_custom_order_numbers_prefix . $order_date_prefix ), $order_number_meta ),
 						'value',
 						array(
 							'order_timestamp'   => $order_timestamp,
@@ -1172,9 +1233,16 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 						);
 						$current_order_number_new = $current_order_number + 1;
 						if ( null !== $result_update || $current_order_number_new === $result_select->option_value ) {
+							$alg_wc_custom_order_numbers_prefix = get_option( 'alg_wc_custom_order_numbers_prefix', '' );
+							$alg_wc_custom_order_numbers_date_prefix = get_option( 'alg_wc_custom_order_numbers_date_prefix', '' );
+
+							$order_date_prefix = '';
+							if ( '' !== $alg_wc_custom_order_numbers_date_prefix ) {
+								$order_date_prefix = date_i18n( $alg_wc_custom_order_numbers_date_prefix, $order_timestamp );
+							}
 							$full_custom_order_number = apply_filters(
 								'alg_wc_custom_order_numbers',
-								sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $current_order_number ),
+								sprintf( '%s%s', do_shortcode( $alg_wc_custom_order_numbers_prefix . $order_date_prefix ), $current_order_number ),
 								'value',
 								array(
 									'order_timestamp'   => $order_timestamp,
@@ -1203,9 +1271,16 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 					}
 				} elseif ( 'hash_crc32' === $counter_type ) {
 					$current_order_number     = sprintf( '%u', crc32( $order_id ) );
+					$alg_wc_custom_order_numbers_prefix = get_option( 'alg_wc_custom_order_numbers_prefix', '' );
+					$alg_wc_custom_order_numbers_date_prefix = get_option( 'alg_wc_custom_order_numbers_date_prefix', '' );
+
+					$order_date_prefix = '';
+					if ( '' !== $alg_wc_custom_order_numbers_date_prefix ) {
+						$order_date_prefix = date_i18n( $alg_wc_custom_order_numbers_date_prefix, $order_timestamp );
+					}
 					$full_custom_order_number = apply_filters(
 						'alg_wc_custom_order_numbers',
-						sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $current_order_number ),
+						sprintf( '%s%s', do_shortcode( $alg_wc_custom_order_numbers_prefix . $order_date_prefix ), $current_order_number ),
 						'value',
 						array(
 							'order_timestamp'   => $order_timestamp,
@@ -1222,9 +1297,16 @@ if ( ! class_exists( 'Alg_WC_Custom_Order_Numbers_Core' ) ) :
 					}
 				} else { // 'order_id'
 					$current_order_number     = $order_id;
+					$alg_wc_custom_order_numbers_prefix = get_option( 'alg_wc_custom_order_numbers_prefix', '' );
+					$alg_wc_custom_order_numbers_date_prefix = get_option( 'alg_wc_custom_order_numbers_date_prefix', '' );
+
+					$order_date_prefix = '';
+					if ( '' !== $alg_wc_custom_order_numbers_date_prefix ) {
+						$order_date_prefix = date_i18n( $alg_wc_custom_order_numbers_date_prefix, $order_timestamp );
+					}
 					$full_custom_order_number = apply_filters(
 						'alg_wc_custom_order_numbers',
-						sprintf( '%s%s', do_shortcode( get_option( 'alg_wc_custom_order_numbers_prefix', '' ) ), $current_order_number ),
+						sprintf( '%s%s', do_shortcode( $alg_wc_custom_order_numbers_prefix . $order_date_prefix ), $current_order_number ),
 						'value',
 						array(
 							'order_timestamp'   => $order_timestamp,
