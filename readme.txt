@@ -3,7 +3,7 @@ Contributors: tychesoftwares
 Tags: woocommerce, custom order numbers, sequential order numbers
 Requires at least: 4.4
 Tested up to: 6.9.0
-Stable tag: 1.12.0
+Stable tag: 1.13.0
 Requires PHP: 7.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -152,6 +152,9 @@ $custom_order_number = $order->get_order_number(); //where $order is an order ob
 This plugin communicates with our tracking server to send usage data **only** if the user has explicitly opted in to usage tracking. For detailed information about what is tracked, please refer to our [usage tracking documentation](https://www.tychesoftwares.com/docs/woocommerce-custom-order-numbers/usage-tracking-order-numbers/).
 
 == Changelog ==
+= 1.13.0 - 29/01/2026 =
+* Enhancement - Added an Order Number Date Prefix setting to prepend the order date to custom order numbers.
+
 = 1.12.0 - 07/01/2026 =
 * Tweak - Updated for compatibility with WordPress 6.9.
 * Tweak - Updated for compatibility with WooCommerce 10.4.3.
