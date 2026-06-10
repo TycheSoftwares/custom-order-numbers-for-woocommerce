@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const archiver = require("archiver");
 
-const PLUGIN_SLUG = "custom-order-numbers-for-woocommerce-pro";
+const PLUGIN_SLUG = "custom-order-numbers-for-woocommerce";
 const variant = process.argv.includes("--variant=wc") ? "wc" : "standard";
 const DEST_BASE = path.join("dist", variant === "wc" ? "wc-version" : "standard-version");
 const DEST = path.join(DEST_BASE, PLUGIN_SLUG);
@@ -67,8 +67,6 @@ output.on("close", () => {
 function patchWcVersion(dest) {
     // Remove Tyche class files.
     const filesToRemove = [
-        "includes/class-tyche-con-license.php",
-        "includes/class-tyche-con-updater.php",
         "includes/class-tyche-con-tracking.php",
         "includes/class-tyche-con-deactivation.php",
     ];
