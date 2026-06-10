@@ -2,8 +2,8 @@
 Contributors: tychesoftwares
 Tags: woocommerce, custom order numbers, sequential order numbers
 Requires at least: 4.4
-Tested up to: 6.9.0
-Stable tag: 1.13.0
+Tested up to: 7.0.0
+Stable tag: 2.0.0
 Requires PHP: 7.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
