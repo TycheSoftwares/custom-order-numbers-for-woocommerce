@@ -102,7 +102,7 @@ final class Custom_Order_Numbers {
 	 * @since 1.0.0
 	 */
 	public function __clone() {
-		_doing_it_wrong( __FUNCTION__, esc_html__( 'Not allowed.', 'product-input-fields-for-woocommerce' ), '1.0' );
+		_doing_it_wrong( __FUNCTION__, esc_html__( 'Not allowed.', 'custom-order-numbers-for-woocommerce' ), '1.0' );
 	}
 
 	/**
@@ -111,7 +111,7 @@ final class Custom_Order_Numbers {
 	 * @since 1.0.0
 	 */
 	public function __wakeup() {
-		_doing_it_wrong( __FUNCTION__, esc_html__( 'Not allowed.', 'product-input-fields-for-woocommerce' ), '1.0' );
+		_doing_it_wrong( __FUNCTION__, esc_html__( 'Not allowed.', 'custom-order-numbers-for-woocommerce' ), '1.0' );
 	}
 
     private function setup() {
@@ -423,7 +423,7 @@ final class Custom_Order_Numbers {
 		$custom_links   = array();
 		$custom_links[] = '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=custom-order-numbers-for-woocommerce' ) . '">' . __( 'Settings', 'woocommerce' ) . '</a>';
 
-		$custom_links[] = '<a href="https://www.tychesoftwares.com/products/woocommerce-custom-order-numbers-plugin/?utm_source=conupgradetopro&utm_medium=link&utm_campaign=CustomOrderNumbersLite">' . __( 'Unlock All', 'product-input-fields-for-woocommerce' ) . '</a>';
+		$custom_links[] = '<a href="https://www.tychesoftwares.com/products/woocommerce-custom-order-numbers-plugin/?utm_source=conupgradetopro&utm_medium=link&utm_campaign=CustomOrderNumbersLite">' . __( 'Unlock All', 'custom-order-numbers-for-woocommerce' ) . '</a>';
 
 		return array_merge( $custom_links, $links );
 	}

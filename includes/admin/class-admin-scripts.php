@@ -41,7 +41,7 @@ class Admin_Scripts extends Admin {
 
 		if ( self::is_on_con_page() ) {
 			wp_enqueue_style(
-				'product-input-fields-for-woocommerce-admin',
+				'custom-order-numbers-for-woocommerce-admin',
 				plugins_url( 'build/admin.css', CON_FILE ),
 				array(),
 				CON_VERSION

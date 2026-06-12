@@ -596,7 +596,19 @@ if ( ! class_exists( 'Tyche\CON\Core' ) ) :
 					$matched_sequential_rule = null;
 					$current_order_number    = 0;
 
-					// Fallback: Global sequential.						
+					// Fallback: Global sequential.
+					// Acquire a named MySQL lock to prevent race conditions when two checkout
+					// processes read the same counter value and assign duplicate order numbers.
+					global $wpdb;
+					$lock_name    = 'con_sequential_counter_lock';
+					$lock_timeout = 10; // seconds to wait for the lock.
+					$lock_result  = $wpdb->get_var( $wpdb->prepare( 'SELECT GET_LOCK(%s, %d)', $lock_name, $lock_timeout ) );//phpcs:ignore
+
+					if ( '1' !== (string) $lock_result ) {
+						// Could not acquire the lock within the timeout — bail out safely.
+						return false;
+					}
+
 					$current_counter = CON_Functions::get_setting( 'counter', null );
 
 					if ( NULL != $current_counter ) {//phpcs:ignore
@@ -628,11 +640,15 @@ if ( ! class_exists( 'Tyche\CON\Core' ) ) :
 								update_post_meta( $order_id, '_alg_wc_full_custom_order_number', $full_custom_order_number );
 							}
 						} else {
+							$wpdb->query( $wpdb->prepare( 'SELECT RELEASE_LOCK(%s)', $lock_name ) );//phpcs:ignore
 							return false;
 						}
 					} else {
+						$wpdb->query( $wpdb->prepare( 'SELECT RELEASE_LOCK(%s)', $lock_name ) );//phpcs:ignore
 						return false;
 					}
+
+					$wpdb->query( $wpdb->prepare( 'SELECT RELEASE_LOCK(%s)', $lock_name ) );//phpcs:ignore
 				} elseif ( 'hash_crc32' === $counter_type ) {
 					if ( CON_Functions::get_setting( 'include_character_enabled', false ) ) {
 						$current_order_number = sprintf( '%x', crc32( $order_id ) );
@@ -781,8 +797,8 @@ if ( ! class_exists( 'Tyche\CON\Core' ) ) :
 						'{prefix}'      => $prefix_data['custom'],
 						'{date_prefix}' => ( $prefix_data['date'] ? date_i18n( $prefix_data['date'], $custom_order_timestamp ) : '' ),
 						'{number}'      => sprintf( '%0' . $order_number_width . 's', $custom_order_number_by_width ),
-						'{suffix}'      => $suffix_data['custom'],
-						'{date_suffix}' => ( $suffix_data['date'] ? date_i18n( $suffix_data['date'], $custom_order_timestamp ) : '' ),
+						'{suffix}'      => '',
+						'{date_suffix}' => '',
 					);
 
 					$final = str_replace( array_keys( $data ), $data, $template );
@@ -828,6 +844,18 @@ if ( ! class_exists( 'Tyche\CON\Core' ) ) :
 				}
 
 				if ( 'sequential' === $counter_type ) {
+					// Acquire a named MySQL lock to prevent race conditions when two checkout
+					// processes read the same counter value and assign duplicate order numbers.
+					global $wpdb;
+					$lock_name    = 'con_sequential_counter_lock';
+					$lock_timeout = 10; // seconds to wait for the lock.
+					$lock_result  = $wpdb->get_var( $wpdb->prepare( 'SELECT GET_LOCK(%s, %d)', $lock_name, $lock_timeout ) );//phpcs:ignore
+
+					if ( '1' !== (string) $lock_result ) {
+						// Could not acquire the lock within the timeout — bail out safely.
+						return false;
+					}
+
 					$current_counter = CON_Functions::get_setting( 'counter', null );
 
 					if ( NULL != $current_counter ) {//phpcs:ignore
@@ -859,11 +887,15 @@ if ( ! class_exists( 'Tyche\CON\Core' ) ) :
 								update_post_meta( $order_id, '_alg_wc_full_custom_order_number', $full_custom_order_number );
 							}
 						} else {
+							$wpdb->query( $wpdb->prepare( 'SELECT RELEASE_LOCK(%s)', $lock_name ) );//phpcs:ignore
 							return false;
 						}
 					} else {
+						$wpdb->query( $wpdb->prepare( 'SELECT RELEASE_LOCK(%s)', $lock_name ) );//phpcs:ignore
 						return false;
 					}
+
+					$wpdb->query( $wpdb->prepare( 'SELECT RELEASE_LOCK(%s)', $lock_name ) );//phpcs:ignore
 				} elseif ( 'hash_crc32' === $counter_type ) {
 					if ( CON_Functions::get_setting( 'include_character_enabled', false ) ) {
 						$current_order_number = sprintf( '%x', crc32( $order_id ) );
@@ -910,6 +942,7 @@ if ( ! class_exists( 'Tyche\CON\Core' ) ) :
 					if ( $this->con_wc_hpos_enabled() ) {
 						$order->update_meta_data( '_alg_wc_custom_order_number', $current_order_number );
 						$order->update_meta_data( '_alg_wc_full_custom_order_number', $full_custom_order_number );
+						$order->save();
 					} else {
 						update_post_meta( $order_id, '_alg_wc_custom_order_number', $current_order_number );
 						update_post_meta( $order_id, '_alg_wc_full_custom_order_number', $full_custom_order_number );

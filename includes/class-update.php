@@ -26,7 +26,7 @@ class Update {
 	}
 
 	public static function migrate_settings() {
-		$settings = array();
+		$general_settings = array();
 
 		$settings_keys = array(
 			'enabled',
@@ -104,7 +104,7 @@ class Update {
 	}
 
 	/**
-	 * Converts a date string from d/m/Y (old format) to Y-m-d (new format).
+	 * Converts a date string from m/d/Y (old format) to Y-m-d (new format).
 	 * Passes through values already in Y-m-d format unchanged.
 	 */
 	public static function normalize_date_format( $value ) {

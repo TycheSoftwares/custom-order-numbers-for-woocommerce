@@ -577,7 +577,7 @@ function General({ noticeOperations, noticeUI, parentRef, settingsData, onSettin
 
                     { ! isWcVariant && (
                         <SettingsCardSection
-                            heading={ __( 'Usage Data', 'product-input-fields-for-woocommerce' ) }
+                            heading={ __( 'Usage Data', 'custom-order-numbers-for-woocommerce' ) }
                             control={ control }
                             fields={ [
                                 {
