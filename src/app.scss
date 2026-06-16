@@ -1,0 +1,380 @@
+body {
+  background: #f6f5fb;
+}
+
+:root {
+  --bfw-purple-color: #58419c;
+  --bfw-green-color: #1a8d34;
+  --bfw-red-color: #d72c0d;
+  --pif-blue-color: #2271b1;
+}
+
+#custom-order-numbers-for-woocommerce {
+  margin-inline-start: -30px;
+  margin-inline-end: -30px;
+}
+
+.woocommerce-save-button.components-button.is-primary {
+  display: none;
+}
+
+.con-plugin-header {
+  width: 100%;
+  background: white;
+  padding: 20px 30px 0;
+}
+
+.con-plugin-header__title-wrap {
+  padding-bottom: 12px;
+}
+
+.con-plugin-header__title.components-heading {
+  font-weight: 600;
+  margin: 0;
+  color: #1d2327;
+}
+
+.con-plugin-header__description {
+  font-size: 13px;
+  color: #50575e;
+  margin: 0;
+}
+
+.con-plugin-header__tabs-row {
+  border-bottom: 1px solid #e5e5e5;
+  margin: 0 -24px;
+  padding: 0 24px;
+}
+
+.con-dashboard-tabs .components-tab-panel__tabs {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.con-header-dashboard-tabs {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.con-dashboard-tab__icon {
+  vertical-align: middle;
+  margin-right: 6px;
+  flex-shrink: 0;
+}
+
+.con-dashboard-tab {
+  align-items: center;
+  text-decoration: none;
+  margin-right: 10px;
+  padding: 15px;
+  color: inherit;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.con-dashboard-tab.is-active {
+  border-bottom: 2px solid var(--wp-components-color-accent,var(--wp-admin-theme-color,#3858e9));
+  box-shadow: none;
+  background: #f0f6fc;
+}
+
+.con-general-actions {
+  padding: 12px 0;
+}
+
+.con-general-actions.is-sticky {
+  position: fixed;
+  bottom: 0;
+  left: 160px; /* default WP admin sidebar width */
+  right: 0;
+  background: #fff;
+  border-top: 1px solid #dcdcde;
+  padding: 12px 30px;
+  z-index: 999;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Collapsed WP admin sidebar */
+.folded .con-general-actions.is-sticky {
+  left: 36px;
+}
+
+.con_setting_section {
+
+  .components-input-control__input,
+  .components-select-control__input,
+  .components-form-token-field__input-container>.components-flex {
+    min-height: 38px !important;
+    height: 100% !important;
+  }
+
+  .components-input-control__backdrop,
+  .components-form-token-field__input-container {
+    border-radius: 4px !important;
+  }
+
+  .set_head_bar {
+    padding-top: calc(10px) !important;
+    padding-bottom: calc(10px) !important;
+  }
+
+  .pif-token-field {
+
+    &>div>div {
+      padding-top: 0px;
+      padding-bottom: 0px;
+    }
+
+    &div:first-of-type {
+      border-color: #8c8f94;
+    }
+
+    &div:first-of-type:hover {
+      border-color: #8c8f94;
+      border-width: 1px;
+    }
+
+    input {
+      box-shadow: none;
+    }
+  }
+}
+
+#custom-order-numbers-for-woocommerce .con-settings-label {
+  font-weight: 500;
+}
+
+.con_template_section table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.con-button-add-option {
+  width: 100%;
+  justify-content: center;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid #c9c9c9;
+  font-weight: 500;
+}
+
+.con-button-add-option:hover {
+  background-color: #e9ebef;
+  color: inherit;
+}
+
+.con-renumerate-card {
+  border-radius: 8px;
+}
+
+.con-renumerate-card .components-card__header {
+  padding: 16px 20px;
+}
+
+.con-renumerate-content {
+  padding: 18px 20px 16px;
+}
+
+.con-renumerate-warning {
+  margin: 0;
+  border-left-width: 4px;
+  padding: 14px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.con-renumerate-warning.components-notice {
+  background: #fcf9e8;
+  color: #5a4f2b;
+  box-shadow: inset 0 0 0 1px #f3ebc6;
+}
+
+.con-renumerate-divider {
+  width: 100%;
+  height: 1px;
+  background: #e0e0e0;
+  margin: 2px 0 18px;
+}
+
+.con-renumerate-button.components-button.is-primary {
+  background: #d63638;
+  border-color: #d63638;
+  min-height: 36px;
+  padding: 0 14px;
+  font-weight: 500;
+}
+
+.con-renumerate-button.components-button.is-primary:hover {
+  background: #b32d2e;
+  border-color: #b32d2e;
+}
+
+.con-license-card {
+  border-radius: 8px;
+}
+
+.con-license-card .components-card__header {
+  padding: 20px 24px;
+}
+
+.con-license-heading {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 4px;
+  color: #1d2327;
+}
+
+.con-license-subtext {
+  font-size: 13px;
+  color: #50575e;
+}
+
+.con-license-body {
+  padding: 24px;
+}
+
+/* Two-column layout */
+.con-license-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.con-license-row-left {
+  flex: 0 0 280px;
+  max-width: 280px;
+}
+
+.con-license-row-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.con-license-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1d2327;
+  margin-bottom: 6px;
+}
+
+.con-license-help {
+  font-size: 13px;
+  color: #757575;
+  line-height: 1.5;
+}
+
+.con-license-input {
+  width: 100%;
+}
+
+/* Active status box */
+.con-license-active-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #f0faf2;
+  border: 1px solid #a8d5b0;
+  border-radius: 6px;
+  padding: 14px 16px;
+}
+
+.con-license-active-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  margin-top: 2px;
+}
+
+.con-license-active-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a6b2a;
+  margin-bottom: 2px;
+}
+
+.con-license-active-desc {
+  font-size: 13px;
+  color: #1a6b2a;
+}
+
+/* Deactivate button — outlined red */
+.con-license-button.components-button.is-primary {
+  min-width: 140px;
+  align-self: flex-start;
+}
+
+.con-license-button.is-deactivate.components-button.is-secondary {
+  color: #d63638;
+  border-color: #d63638;
+  background: transparent;
+  box-shadow: inset 0 0 0 1px #d63638;
+  align-self: flex-start;
+  min-width: 140px;
+
+  &:hover {
+    color: #b32d2e;
+    border-color: #b32d2e;
+    box-shadow: inset 0 0 0 1px #b32d2e;
+    background: #fff5f5;
+  }
+}
+
+/* License Benefits card */
+.con-license-benefits-card {
+  margin-top: 20px;
+}
+
+.con-license-benefits-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.con-license-benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border: 1px solid #dcdcde;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.con-license-benefit-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  margin-top: 2px;
+}
+
+.con-license-benefit-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1d2327;
+  margin-bottom: 4px;
+}
+
+.con-license-benefit-desc {
+  font-size: 13px;
+  color: #50575e;
+  line-height: 1.5;
+}
+
+.con-token-field span.components-form-token-field__token {
+  font-size: 85% !important;
+}
+
+.con_loader {
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 0px;
+  left: 20px;
+  z-index: 1000;
+  background: #00000052;
+}

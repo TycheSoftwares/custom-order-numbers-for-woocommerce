@@ -1,0 +1,1014 @@
+# Copyright (C) 2026 Tyche Softwares
+# This file is distributed under the GNU General Public License v3.0.
+msgid ""
+msgstr ""
+"Project-Id-Version: Custom Order Numbers for WooCommerce Pro 2.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/custom-order-numbers-for-woocommerce-pro\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-05-07T07:02:08+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: custom-order-numbers-for-woocommerce\n"
+
+#. Plugin Name of the plugin
+#: custom-order-numbers-for-woocommerce-pro.php
+msgid "Custom Order Numbers for WooCommerce Pro"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: custom-order-numbers-for-woocommerce-pro.php
+msgid "https://www.tychesoftwares.com/store/premium-plugins/custom-order-numbers-woocommerce/"
+msgstr ""
+
+#. Description of the plugin
+#: custom-order-numbers-for-woocommerce-pro.php
+msgid "Create custom WooCommerce order numbers with flexible rules, prefixes, suffixes, and numbering formats."
+msgstr ""
+
+#. Author of the plugin
+#: custom-order-numbers-for-woocommerce-pro.php
+msgid "Tyche Softwares"
+msgstr ""
+
+#. Author URI of the plugin
+#: custom-order-numbers-for-woocommerce-pro.php
+msgid "https://www.tychesoftwares.com/"
+msgstr ""
+
+#: includes/admin/class-admin-functions.php:59
+msgid "Order Number"
+msgstr ""
+
+#: includes/admin/class-admin-scripts.php:78
+msgid "Guest"
+msgstr ""
+
+#: includes/class-core.php:87
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:41
+#: src/screens/general.js:40
+msgid "Custom order numbers are being updated in the background."
+msgstr ""
+
+#: includes/class-custom-order-numbers.php:186
+msgid "Custom Order Numbers"
+msgstr ""
+
+#. translators: 1. Plugin Name, 2. WordPress Version
+#: includes/class-custom-order-numbers.php:281
+#, php-format
+msgid "You are using an outdated version of WordPress. %1$s requires WP version %2$s or higher."
+msgstr ""
+
+#. translators: 1. Plugin Name, 2. PHP Version
+#: includes/class-custom-order-numbers.php:287
+#, php-format
+msgid "%1$s requires PHP version %2$s or above. Please update PHP to run this plugin."
+msgstr ""
+
+#. translators: Plugin Name
+#: includes/class-custom-order-numbers.php:293
+#, php-format
+msgid "WooCommerce not found. %s requires a minimum of WooCommerce v3.3.0."
+msgstr ""
+
+#: includes/tyche/components/plugin-tracking/class-con-data-tracking.php:51
+#: build/admin.js:1
+#: src/screens/general.js:589
+msgid "Reset Usage Tracking"
+msgstr ""
+
+#: includes/tyche/components/plugin-tracking/class-con-data-tracking.php:52
+#: build/admin.js:1
+#: src/screens/general.js:588
+msgid "This will reset your usage tracking settings, causing it to show the opt-in banner again and not sending any data."
+msgstr ""
+
+#: includes/tyche/components/plugin-tracking/class-tyche-plugin-tracking.php:257
+#, php-format
+msgid "Want to help make %1$s even more awesome? Allow %1$s to collect non-sensitive diagnostic data and usage information and get 20%% off on your next purchase. <a href=\"%2$s\">Find out more</a>."
+msgstr ""
+
+#: build/admin.js:1
+#: src/components/placeholders.js:54
+msgid "Available Placeholders"
+msgstr ""
+
+#: build/admin.js:1
+#: src/components/placeholders.js:58
+msgid "Click any placeholder to insert it at cursor position"
+msgstr ""
+
+#: build/admin.js:1
+#: src/components/optionsTable.js:105
+msgid "+ Add Rule"
+msgstr ""
+
+#: build/admin.js:1
+#: src/components/conditionalValueField.js:155
+msgid "(no condition value needed)"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:268
+msgid "Tracking has been successfully reset."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:275
+msgid "Error resetting tracking."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:291
+msgid "Custom Order Numbers Options"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:292
+msgid "Enable sequential order numbering, set custom number prefix, suffix and number width."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:298
+msgid "WooCommerce Custom Order Numbers"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:301
+msgid "Enable Custom Order Numbers"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:302
+msgid "Turn this on to start using custom order numbering for your store."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:311
+msgid "Order Numbers Counter"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:317
+msgid "Sequential"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:318
+msgid "Order ID"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:319
+msgid "Pseudorandom - crc32 Hash (max 10 digits)"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:324
+msgid "Choose how order numbers are generated: Sequential (1, 2, 3…), Order ID, or Random (a unique scrambled number, max 10 digits)."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:333
+msgid "Include Characters"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:336
+msgid "Enable to include charaters in order number"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:346
+msgid "Next Order Number"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:349
+msgid "The next order placed will be assigned this number. To renumber existing orders, use the Renumber Orders tab."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:361
+msgid "Auto-Reset Order Count"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:367
+msgid "Disabled"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:368
+msgid "Daily"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:369
+msgid "Weekly"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:370
+msgid "Monthly"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:371
+msgid "Yearly"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:377
+msgid "Automatically reset the order number counter at the start of each day, week, month, or year. Useful if you want numbers to restart periodically."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:386
+msgid "Weekly Counter Reset Day"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:392
+msgid "Monday"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:393
+msgid "Tuesday"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:394
+msgid "Wednesday"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:395
+msgid "Thursday"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:396
+msgid "Friday"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:397
+msgid "Saturday"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:398
+msgid "Sunday"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:403
+msgid "Select the day of the week on which the order number counter will automatically reset."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:412
+msgid "Reset Counter Value"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:415
+msgid "Counter value to reset to. This will be ignored if \"Auto-Reset Order Count\" option is set to \"Disabled\"."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:426
+msgid "Minimum Digits in Order Number"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:429
+msgid "Pad order numbers with leading zeros to reach this length. For example, set to 5 to show \"00001\" instead of \"1\". Set to 0 to disable padding."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:440
+msgid "Apply These Settings To"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:446
+msgid "To all new orders only"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:447
+msgid "To orders from a certain order number"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:448
+msgid "To orders from a specific date"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:449
+msgid "To all orders"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:455
+msgid "Choose which orders should use your new numbering settings."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:463
+msgid "Starting Order ID"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:466
+msgid "New numbering settings will be applied to all orders from this order ID onwards."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:477
+msgid "Starting Order Date"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:480
+msgid "New numbering settings will be applied to all orders from this date onwards. Note : Only applies to past dates."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:490
+msgid "Order Tracking by Custom Number"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:493
+#: src/screens/general.js:506
+msgid "Enable"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:496
+msgid "This will allow customers to track their orders using custom order numbers on the \"Track your order\" page. This page must be created using [woocommerce_order_tracking] shortcode."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:503
+msgid "Set Order Number Manually"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:507
+msgid "Adds an \"Order Number\" field on each order's edit page, so you can enter the number yourself. Requires the Order Number Format to be set to Sequential."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:516
+msgid "Hide Renumber Orders tab for User Roles"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:537
+#: src/screens/general.js:567
+msgid "Search for a user role..."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:538
+msgid "Hide \"Renumber Orders\" admin menu for selected user roles. All user roles are listed here - even those which do not see the menu by default."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:546
+msgid "Hide Plugin Settings for User Roles"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:568
+msgid "Hide \"Custom Order Numbers\" admin settings tab for selected user roles. Tab can not be hidden for administrators. All user roles are listed here - even those which do not see the tab by default."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:421
+#: src/screens/general.js:601
+msgid "Save Changes"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:605
+msgid "Reset plugin settings to default values."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:426
+#: src/screens/general.js:607
+msgid "Reset Settings"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:431
+#: src/screens/general.js:612
+msgid "Cancel"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:432
+#: src/screens/general.js:613
+msgid "Reset"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:246
+msgid "Settings have been successfully reset to default values."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:162
+#: src/screens/general.js:253
+msgid "Error resetting the settings."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:617
+msgid "Are you sure you want to reset all settings to their default values? This will also clear all prefix/suffix rules."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:239
+msgid "Conditional Prefix/Suffix Rules"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:240
+msgid "Enable custom prefix and suffix rules for order numbers based on various conditions."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:246
+msgid "Enable Prefix & Suffix Rules"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:249
+msgid "Turn on to add custom prefixes or suffixes to order numbers based on conditions you set below."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:259
+msgid "Order Number Template"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:260
+msgid "Configure the template for order numbers using available placeholders to create custom numbering formats."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:284
+msgid "Build your order number format using the placeholders below. For example: {prefix}{number}{suffix} or {date_prefix}-{number}."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:300
+msgid "Prefix & Suffix Rules"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:302
+msgid "Set up rules to apply different prefixes or suffixes based on product, category, Payment Method, or other conditions."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:313
+msgid "Condition Type"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:314
+msgid "Select what the condition should be based on (e.g., product, category, user role, etc.)."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:317
+msgid "Condition Value"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:318
+msgid "Select the specific value that matches the selected condition type (e.g., a specific product, category, etc.)."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:321
+msgid "Prefix"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:322
+msgid "Set a custom prefix using static text or placeholders. For example, using {product_name} will add the full product name of the ordered item as a prefix. Available placeholders: {product_name}, {category_name}, {user_role_name}, {payment_method_name}, {country_name}."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:325
+msgid "Suffix"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:326
+msgid "Set a custom suffix using static text or placeholders. For example, using {product_name} will add the full product name of the ordered item as a suffix. Available placeholders: {product_name}, {category_name}, {user_role_name}, {payment_method_name}, {country_name}."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:329
+msgid "Separate Counter"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:330
+msgid "Use a separate order number counter for orders that match this rule."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:333
+msgid "Action"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:334
+msgid "Remove this rule row."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:347
+msgid "Product"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:348
+msgid "Category"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:349
+msgid "Payment Method"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:350
+msgid "Country"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:351
+msgid "User Role"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:352
+msgid "Date"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:353
+msgid "Custom"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:354
+msgid "Free Orders"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:155
+msgid "Rules settings have been successfully reset to default values."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:436
+msgid "Are you sure you want to reset all rules settings to their default values? This will clear all prefix/suffix rules and reset the order number template."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/renumerateOrders.js:35
+msgid "Error renumbering orders."
+msgstr ""
+
+#: build/admin.js:1
+#: src/app.js:86
+#: src/screens/renumerateOrders.js:59
+#: src/screens/renumerateOrders.js:82
+msgid "Renumber Orders"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/renumerateOrders.js:61
+msgid "Use this tool to reassign order numbers to all your existing orders in sequence."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/renumerateOrders.js:68
+msgid "Important:"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/renumerateOrders.js:69
+msgid "Before proceeding, please ensure you have created a complete backup of your database. This tool will modify existing order numbers and cannot be easily undone."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/renumerateOrders.js:74
+msgid "With the help of this tool, you can change the custom order numbers for all the existing orders in a sequence and will maintain the sequence for the upcoming orders also."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/renumerateOrders.js:76
+msgid "The starting order number will always be 1, and all orders will be numbered sequentially from there."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:35
+msgid "Automatic Updates"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:36
+msgid "Get the latest features and security patches automatically"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:39
+msgid "Premium Support"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:40
+msgid "Access to priority support from our expert team"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:43
+msgid "All Premium Features"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:44
+msgid "Unlock advanced pricing rules and customization options"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:47
+msgid "Documentation Access"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:48
+msgid "Complete guides and tutorials for all features"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:128
+msgid "Invalid license key."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:129
+msgid "Your license key has expired."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:130
+msgid "Your license key has reached its activation limit."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:131
+msgid "Your license key has been disabled."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:134
+msgid "An unknown error occurred."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:102
+msgid "License updated successfully."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:119
+msgid "Please enter a valid license key."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:153
+#: src/screens/license.js:164
+msgid "License Key"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:156
+msgid "Enter your license key to activate the plugin"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:167
+msgid "You can find your license key in your purchase confirmation email or account dashboard"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:173
+msgid "Enter your license key"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:185
+msgid "License is active"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:188
+msgid "You have access to all premium features, updates, and support"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:197
+msgid "License has expired"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:198
+msgid "Renew your license to continue receiving updates and support"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:201
+msgid "License has been disabled"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:202
+msgid "Please contact support for assistance"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:205
+msgid "License key not found"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:206
+msgid "The license key entered does not exist"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:209
+msgid "Activation limit reached"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:210
+msgid "Your license key has reached its maximum number of activations"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:213
+msgid "License not active on this site"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:214
+msgid "Activate your license to enable updates and support for this site"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:218
+msgid "License is inactive"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:219
+msgid "Activate your license to receive automatic updates and premium support"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:245
+msgid "Deactivate License"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:246
+msgid "Activate License"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:258
+msgid "License Benefits"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/license.js:261
+msgid "What you get with an active license"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:15
+msgid "I just enabled the plugin — why do my existing orders still show old numbers?"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:16
+msgid "Existing orders are not modified automatically. The plugin applies custom order numbering only to new orders created after the settings are saved. To apply the same numbering format to existing orders, use the Renumerate Orders tool. This will reassign order numbers based on the current configuration."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:19
+msgid " I added a prefix or suffix, but it is not showing. What should I check?"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:21
+msgid "Verify the following settings:"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:22
+msgid "1. Prefix/Suffix option is enabled in the Prefix/Suffix Rules tab"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:23
+msgid "2. The format includes {number} (for example: ORD-{number})"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:24
+msgid "A static value without {number} will not generate a valid order number. After saving changes, create a test order to confirm the updated format."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:28
+msgid "What happens when I click “Renumber All Orders”? Can it be undone?"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:30
+msgid "This action reassigns order numbers for all existing orders based on the current configuration."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:31
+msgid "There is no built-in option to undo this operation."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:32
+msgid "After execution:"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:33
+msgid "1. All existing order numbers are replaced"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:34
+msgid "2. Order references in emails and invoices may no longer match"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:35
+msgid "3. External systems relying on order numbers may lose synchronization"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:39
+msgid "I changed the Next Order Number and now see duplicate order numbers. How can this be fixed?"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:41
+msgid "This occurs when the configured value overlaps with existing order numbers."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:42
+msgid "To resolve this:"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:43
+msgid "1. Identify the latest order number in the store"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:44
+msgid "2. Set “Next Order Number” to a value higher than the latest order"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:45
+msgid "3. Save changes"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:46
+msgid "New orders will follow the corrected sequence."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:50
+msgid "My license shows inactive even after entering the key. What should I check?"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:52
+msgid "Check the following conditions:"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:53
+msgid "1. No extra spaces are present in the license key"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:54
+msgid "2. The license has not exceeded its activation limit"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:55
+msgid "3. The server allows outbound requests for license validation"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:56
+msgid "If the issue persists, contact support with the purchase order number and domain details."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:60
+msgid " What happens if I disable or uninstall the plugin?"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:62
+msgid "Existing order numbers remain unchanged"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:63
+msgid "1. If disabled — New orders will use WooCommerce default numbering"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:64
+msgid "2. If uninstalled — Plugin settings are removed, but existing order numbers remain stored on orders"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:76
+msgid "Frequently Asked Questions"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:79
+msgid "Find answers to the most common questions about Custom Order Numbers for WooCommerce."
+msgstr ""
+
+#: build/admin.js:1
+#: src/app.js:74
+msgid "General"
+msgstr ""
+
+#: build/admin.js:1
+#: src/app.js:80
+msgid "Prefix/Suffix Rules"
+msgstr ""
+
+#: build/admin.js:1
+#: src/app.js:92
+msgid "License"
+msgstr ""
+
+#: build/admin.js:1
+#: src/app.js:98
+msgid "FAQ"
+msgstr ""
+
+#: build/admin.js:1
+#: src/app.js:111
+msgid "Custom Order Numbers for WooCommerce"
+msgstr ""
+
+#: build/admin.js:1
+#: src/app.js:112
+msgid "Customize your WooCommerce order numbers with prefixes, suffixes, and sequential numbering."
+msgstr ""
