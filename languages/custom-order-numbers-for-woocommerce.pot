@@ -2,45 +2,43 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Custom Order Numbers for WooCommerce Pro 2.0.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/custom-order-numbers-for-woocommerce-pro\n"
+"Project-Id-Version: Custom Order Numbers for WooCommerce 2.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/custom-order-numbers-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-05-07T07:02:08+00:00\n"
+"POT-Creation-Date: 2026-06-16T04:57:43+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: custom-order-numbers-for-woocommerce\n"
 
 #. Plugin Name of the plugin
-#: custom-order-numbers-for-woocommerce-pro.php
-msgid "Custom Order Numbers for WooCommerce Pro"
+#: custom-order-numbers-for-woocommerce.php
+#: build/admin.js:1
+#: src/app.js:92
+msgid "Custom Order Numbers for WooCommerce"
 msgstr ""
 
 #. Plugin URI of the plugin
-#: custom-order-numbers-for-woocommerce-pro.php
+#: custom-order-numbers-for-woocommerce.php
 msgid "https://www.tychesoftwares.com/store/premium-plugins/custom-order-numbers-woocommerce/"
 msgstr ""
 
 #. Description of the plugin
-#: custom-order-numbers-for-woocommerce-pro.php
-msgid "Create custom WooCommerce order numbers with flexible rules, prefixes, suffixes, and numbering formats."
+#: custom-order-numbers-for-woocommerce.php
+msgid "Create custom WooCommerce order numbers with prefix and numbering formats."
 msgstr ""
 
 #. Author of the plugin
-#: custom-order-numbers-for-woocommerce-pro.php
+#: custom-order-numbers-for-woocommerce.php
 msgid "Tyche Softwares"
 msgstr ""
 
 #. Author URI of the plugin
-#: custom-order-numbers-for-woocommerce-pro.php
+#: custom-order-numbers-for-woocommerce.php
 msgid "https://www.tychesoftwares.com/"
-msgstr ""
-
-#: includes/admin/class-admin-functions.php:59
-msgid "Order Number"
 msgstr ""
 
 #: includes/admin/class-admin-scripts.php:78
@@ -49,42 +47,51 @@ msgstr ""
 
 #: includes/class-core.php:87
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:41
+#: src/screens/conditionalRules.js:42
 #: src/screens/general.js:40
 msgid "Custom order numbers are being updated in the background."
 msgstr ""
 
-#: includes/class-custom-order-numbers.php:186
+#: includes/class-custom-order-numbers.php:105
+#: includes/class-custom-order-numbers.php:114
+msgid "Not allowed."
+msgstr ""
+
+#: includes/class-custom-order-numbers.php:183
 msgid "Custom Order Numbers"
 msgstr ""
 
 #. translators: 1. Plugin Name, 2. WordPress Version
-#: includes/class-custom-order-numbers.php:281
+#: includes/class-custom-order-numbers.php:276
 #, php-format
 msgid "You are using an outdated version of WordPress. %1$s requires WP version %2$s or higher."
 msgstr ""
 
 #. translators: 1. Plugin Name, 2. PHP Version
-#: includes/class-custom-order-numbers.php:287
+#: includes/class-custom-order-numbers.php:282
 #, php-format
 msgid "%1$s requires PHP version %2$s or above. Please update PHP to run this plugin."
 msgstr ""
 
 #. translators: Plugin Name
-#: includes/class-custom-order-numbers.php:293
+#: includes/class-custom-order-numbers.php:288
 #, php-format
 msgid "WooCommerce not found. %s requires a minimum of WooCommerce v3.3.0."
 msgstr ""
 
+#: includes/class-custom-order-numbers.php:426
+msgid "Unlock All"
+msgstr ""
+
 #: includes/tyche/components/plugin-tracking/class-con-data-tracking.php:51
 #: build/admin.js:1
-#: src/screens/general.js:589
+#: src/screens/general.js:591
 msgid "Reset Usage Tracking"
 msgstr ""
 
 #: includes/tyche/components/plugin-tracking/class-con-data-tracking.php:52
 #: build/admin.js:1
-#: src/screens/general.js:588
+#: src/screens/general.js:590
 msgid "This will reset your usage tracking settings, causing it to show the opt-in banner again and not sending any data."
 msgstr ""
 
@@ -104,13 +111,8 @@ msgid "Click any placeholder to insert it at cursor position"
 msgstr ""
 
 #: build/admin.js:1
-#: src/components/optionsTable.js:105
+#: src/components/optionsTable.js:117
 msgid "+ Add Rule"
-msgstr ""
-
-#: build/admin.js:1
-#: src/components/conditionalValueField.js:155
-msgid "(no condition value needed)"
 msgstr ""
 
 #: build/admin.js:1
@@ -290,137 +292,142 @@ msgstr ""
 
 #: build/admin.js:1
 #: src/screens/general.js:429
-msgid "Pad order numbers with leading zeros to reach this length. For example, set to 5 to show \"00001\" instead of \"1\". Set to 0 to disable padding."
+msgid "Pad order numbers with leading zeros to reach this length. For example, set to 5 to show \"00001\" instead of \"1\". Set to 0 to disable padding. Upgrade to Pro"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:440
+#: src/screens/general.js:441
 msgid "Apply These Settings To"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:446
+#: src/screens/general.js:447
 msgid "To all new orders only"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:447
+#: src/screens/general.js:448
 msgid "To orders from a certain order number"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:448
+#: src/screens/general.js:449
 msgid "To orders from a specific date"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:449
+#: src/screens/general.js:450
 msgid "To all orders"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:455
+#: src/screens/general.js:456
 msgid "Choose which orders should use your new numbering settings."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:463
+#: src/screens/general.js:464
 msgid "Starting Order ID"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:466
+#: src/screens/general.js:467
 msgid "New numbering settings will be applied to all orders from this order ID onwards."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:477
+#: src/screens/general.js:478
 msgid "Starting Order Date"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:480
+#: src/screens/general.js:481
 msgid "New numbering settings will be applied to all orders from this date onwards. Note : Only applies to past dates."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:490
+#: src/screens/general.js:491
 msgid "Order Tracking by Custom Number"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:493
-#: src/screens/general.js:506
+#: src/screens/general.js:494
+#: src/screens/general.js:507
 msgid "Enable"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:496
+#: src/screens/general.js:497
 msgid "This will allow customers to track their orders using custom order numbers on the \"Track your order\" page. This page must be created using [woocommerce_order_tracking] shortcode."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:503
+#: src/screens/general.js:504
 msgid "Set Order Number Manually"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:507
+#: src/screens/general.js:508
 msgid "Adds an \"Order Number\" field on each order's edit page, so you can enter the number yourself. Requires the Order Number Format to be set to Sequential."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:516
+#: src/screens/general.js:518
 msgid "Hide Renumber Orders tab for User Roles"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:537
-#: src/screens/general.js:567
+#: src/screens/general.js:539
+#: src/screens/general.js:569
 msgid "Search for a user role..."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:538
+#: src/screens/general.js:540
 msgid "Hide \"Renumber Orders\" admin menu for selected user roles. All user roles are listed here - even those which do not see the menu by default."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:546
+#: src/screens/general.js:548
 msgid "Hide Plugin Settings for User Roles"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:568
+#: src/screens/general.js:570
 msgid "Hide \"Custom Order Numbers\" admin settings tab for selected user roles. Tab can not be hidden for administrators. All user roles are listed here - even those which do not see the tab by default."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:421
-#: src/screens/general.js:601
+#: src/screens/general.js:580
+msgid "Usage Data"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:435
+#: src/screens/general.js:603
 msgid "Save Changes"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:605
+#: src/screens/general.js:607
 msgid "Reset plugin settings to default values."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:426
-#: src/screens/general.js:607
+#: src/screens/conditionalRules.js:440
+#: src/screens/general.js:609
 msgid "Reset Settings"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:431
-#: src/screens/general.js:612
+#: src/screens/conditionalRules.js:445
+#: src/screens/general.js:614
 msgid "Cancel"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:432
-#: src/screens/general.js:613
+#: src/screens/conditionalRules.js:446
+#: src/screens/general.js:615
 msgid "Reset"
 msgstr ""
 
@@ -430,392 +437,197 @@ msgid "Settings have been successfully reset to default values."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:162
+#: src/screens/conditionalRules.js:163
 #: src/screens/general.js:253
 msgid "Error resetting the settings."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:617
+#: src/screens/general.js:619
 msgid "Are you sure you want to reset all settings to their default values? This will also clear all prefix/suffix rules."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:239
-msgid "Conditional Prefix/Suffix Rules"
-msgstr ""
-
-#: build/admin.js:1
 #: src/screens/conditionalRules.js:240
-msgid "Enable custom prefix and suffix rules for order numbers based on various conditions."
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/conditionalRules.js:246
-msgid "Enable Prefix & Suffix Rules"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/conditionalRules.js:249
-msgid "Turn on to add custom prefixes or suffixes to order numbers based on conditions you set below."
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/conditionalRules.js:259
 msgid "Order Number Template"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:260
+#: src/screens/conditionalRules.js:241
 msgid "Configure the template for order numbers using available placeholders to create custom numbering formats."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:284
-msgid "Build your order number format using the placeholders below. For example: {prefix}{number}{suffix} or {date_prefix}-{number}."
+#: src/screens/conditionalRules.js:266
+msgid "Replaced values: {prefix}, {date_prefix}, {number}, {suffix}, {date_suffix}."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:300
+#: src/screens/conditionalRules.js:270
+msgid "Upgrade to Pro to customize the order number template"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:307
 msgid "Prefix & Suffix Rules"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:302
-msgid "Set up rules to apply different prefixes or suffixes based on product, category, Payment Method, or other conditions."
+#: src/screens/conditionalRules.js:309
+msgid "Set a custom or date-based prefix for your order numbers. Upgrade to Pro to unlock suffix rules and conditional rules based on product, category, payment method, and more."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:313
+#: src/screens/conditionalRules.js:320
 msgid "Condition Type"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:314
+#: src/screens/conditionalRules.js:321
 msgid "Select what the condition should be based on (e.g., product, category, user role, etc.)."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:317
+#: src/screens/conditionalRules.js:324
 msgid "Condition Value"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:318
+#: src/screens/conditionalRules.js:325
 msgid "Select the specific value that matches the selected condition type (e.g., a specific product, category, etc.)."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:321
+#: src/screens/conditionalRules.js:329
 msgid "Prefix"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:322
+#: src/screens/conditionalRules.js:330
 msgid "Set a custom prefix using static text or placeholders. For example, using {product_name} will add the full product name of the ordered item as a prefix. Available placeholders: {product_name}, {category_name}, {user_role_name}, {payment_method_name}, {country_name}."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:325
+#: src/screens/conditionalRules.js:333
 msgid "Suffix"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:326
+#: src/screens/conditionalRules.js:334
 msgid "Set a custom suffix using static text or placeholders. For example, using {product_name} will add the full product name of the ordered item as a suffix. Available placeholders: {product_name}, {category_name}, {user_role_name}, {payment_method_name}, {country_name}."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:329
+#: src/screens/conditionalRules.js:338
 msgid "Separate Counter"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:330
+#: src/screens/conditionalRules.js:339
 msgid "Use a separate order number counter for orders that match this rule."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:333
+#: src/screens/conditionalRules.js:343
 msgid "Action"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:334
+#: src/screens/conditionalRules.js:344
 msgid "Remove this rule row."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:347
-msgid "Product"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/conditionalRules.js:348
-msgid "Category"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/conditionalRules.js:349
-msgid "Payment Method"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/conditionalRules.js:350
-msgid "Country"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/conditionalRules.js:351
-msgid "User Role"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/conditionalRules.js:352
-msgid "Date"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/conditionalRules.js:353
+#: src/screens/conditionalRules.js:357
 msgid "Custom"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:354
-msgid "Free Orders"
+#: src/screens/conditionalRules.js:358
+msgid "Date"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:155
+#: src/screens/conditionalRules.js:359
+msgid "Product (PRO)"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:360
+msgid "Category (PRO)"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:361
+msgid "Payment Method (PRO)"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:362
+msgid "Country (PRO)"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:363
+msgid "User Role (PRO)"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:364
+msgid "Free Orders (PRO)"
+msgstr ""
+
+#: build/admin.js:1
+#: src/components/conditionalValueField.js:155
+#: src/screens/conditionalRules.js:378
+msgid "(no condition value needed)"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/conditionalRules.js:156
 msgid "Rules settings have been successfully reset to default values."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:436
+#: src/screens/conditionalRules.js:450
 msgid "Are you sure you want to reset all rules settings to their default values? This will clear all prefix/suffix rules and reset the order number template."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/renumerateOrders.js:35
+#: src/screens/renumerateOrders.js:36
 msgid "Error renumbering orders."
 msgstr ""
 
 #: build/admin.js:1
-#: src/app.js:86
-#: src/screens/renumerateOrders.js:59
-#: src/screens/renumerateOrders.js:82
+#: src/app.js:74
+#: src/screens/renumerateOrders.js:60
+#: src/screens/renumerateOrders.js:83
 msgid "Renumber Orders"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/renumerateOrders.js:61
+#: src/screens/renumerateOrders.js:62
 msgid "Use this tool to reassign order numbers to all your existing orders in sequence."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/renumerateOrders.js:68
+#: src/screens/renumerateOrders.js:69
 msgid "Important:"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/renumerateOrders.js:69
+#: src/screens/renumerateOrders.js:70
 msgid "Before proceeding, please ensure you have created a complete backup of your database. This tool will modify existing order numbers and cannot be easily undone."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/renumerateOrders.js:74
+#: src/screens/renumerateOrders.js:75
 msgid "With the help of this tool, you can change the custom order numbers for all the existing orders in a sequence and will maintain the sequence for the upcoming orders also."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/renumerateOrders.js:76
+#: src/screens/renumerateOrders.js:77
 msgid "The starting order number will always be 1, and all orders will be numbered sequentially from there."
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:35
-msgid "Automatic Updates"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:36
-msgid "Get the latest features and security patches automatically"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:39
-msgid "Premium Support"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:40
-msgid "Access to priority support from our expert team"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:43
-msgid "All Premium Features"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:44
-msgid "Unlock advanced pricing rules and customization options"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:47
-msgid "Documentation Access"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:48
-msgid "Complete guides and tutorials for all features"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:128
-msgid "Invalid license key."
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:129
-msgid "Your license key has expired."
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:130
-msgid "Your license key has reached its activation limit."
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:131
-msgid "Your license key has been disabled."
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:134
-msgid "An unknown error occurred."
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:102
-msgid "License updated successfully."
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:119
-msgid "Please enter a valid license key."
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:153
-#: src/screens/license.js:164
-msgid "License Key"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:156
-msgid "Enter your license key to activate the plugin"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:167
-msgid "You can find your license key in your purchase confirmation email or account dashboard"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:173
-msgid "Enter your license key"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:185
-msgid "License is active"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:188
-msgid "You have access to all premium features, updates, and support"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:197
-msgid "License has expired"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:198
-msgid "Renew your license to continue receiving updates and support"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:201
-msgid "License has been disabled"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:202
-msgid "Please contact support for assistance"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:205
-msgid "License key not found"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:206
-msgid "The license key entered does not exist"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:209
-msgid "Activation limit reached"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:210
-msgid "Your license key has reached its maximum number of activations"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:213
-msgid "License not active on this site"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:214
-msgid "Activate your license to enable updates and support for this site"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:218
-msgid "License is inactive"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:219
-msgid "Activate your license to receive automatic updates and premium support"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:245
-msgid "Deactivate License"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:246
-msgid "Activate License"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:258
-msgid "License Benefits"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/license.js:261
-msgid "What you get with an active license"
 msgstr ""
 
 #: build/admin.js:1
@@ -984,31 +796,21 @@ msgid "Find answers to the most common questions about Custom Order Numbers for 
 msgstr ""
 
 #: build/admin.js:1
-#: src/app.js:74
+#: src/app.js:62
 msgid "General"
 msgstr ""
 
 #: build/admin.js:1
-#: src/app.js:80
+#: src/app.js:68
 msgid "Prefix/Suffix Rules"
 msgstr ""
 
 #: build/admin.js:1
-#: src/app.js:92
-msgid "License"
-msgstr ""
-
-#: build/admin.js:1
-#: src/app.js:98
+#: src/app.js:80
 msgid "FAQ"
 msgstr ""
 
 #: build/admin.js:1
-#: src/app.js:111
-msgid "Custom Order Numbers for WooCommerce"
-msgstr ""
-
-#: build/admin.js:1
-#: src/app.js:112
+#: src/app.js:93
 msgid "Customize your WooCommerce order numbers with prefixes, suffixes, and sequential numbering."
 msgstr ""
