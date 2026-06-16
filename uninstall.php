@@ -15,7 +15,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 }
 
 // check if the Lite version file is present. If yes, do not delete any settings irrespective of whether the plugin is active or no.
-if ( file_exists( WP_PLUGIN_DIR . '/custom-order-numbers-for-woocommerce/custom-order-numbers-for-woocommerce.php' ) ) {
+if ( file_exists( WP_PLUGIN_DIR . '/custom-order-numbers-for-woocommerce-pro/custom-order-numbers-for-woocommerce-pro.php' ) ) {
 	return;
 }
 
