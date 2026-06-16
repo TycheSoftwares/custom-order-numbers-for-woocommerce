@@ -1,20 +1,20 @@
 <?php
 /**
- * Custom Order Numbers for WooCommerce - Lite
+ * Custom Order Numbers for WooCommerce - Pro
  *
  * Uninstalling Custom Order Numbers for WooCommerce Plugin delete settings.
  *
  * @author      Tyche Softwares
  * @category    Core
- * @version     1.2.6
- * @package     Custom-Order-Numbers-Lite
+ * @version     1.2.5
+ * @package Custom-order-numbers-for-WooCommerce
  */
 
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
-// check if the Pro version file is present. If yes, do not delete any settings irrespective of whether the plugin is active or no.
+// check if the Lite version file is present. If yes, do not delete any settings irrespective of whether the plugin is active or no.
 if ( file_exists( WP_PLUGIN_DIR . '/custom-order-numbers-for-woocommerce-pro/custom-order-numbers-for-woocommerce-pro.php' ) ) {
 	return;
 }
@@ -25,7 +25,6 @@ require_once ABSPATH . 'wp-admin/includes/upgrade.php';
  * Delete the data for the WordPress Multisite.
  */
 if ( is_multisite() ) {
-
 	$con_blog_list = get_sites();
 
 	foreach ( $con_blog_list as $con_blog_list_key => $con_blog_list_value ) {
@@ -37,7 +36,6 @@ if ( is_multisite() ) {
 		 * It indicates the sub site id.
 		 */
 		$con_multisite_prefix = $con_blog_id > 1 ? $wpdb->prefix . "$con_blog_id_" : $wpdb->prefix;
-
 		// General Settings.
 		delete_blog_option( $con_blog_id, 'alg_wc_custom_order_numbers_enabled' );
 		delete_blog_option( $con_blog_id, 'alg_wc_custom_order_numbers_counter_type' );
@@ -61,8 +59,11 @@ if ( is_multisite() ) {
 		delete_blog_option( $con_blog_id, 'alg_custom_order_numbers_time_of_update_now' );
 		delete_blog_option( $con_blog_id, 'alg_custom_order_numbers_no_old_orders_to_update' );
 		delete_blog_option( $con_blog_id, 'alg_custom_order_numbers_success_notice' );
-		delete_blog_option( $con_blog_id, 'alg_wc_custom_order_numbers_settings_to_apply' );
+		delete_blog_option( $con_blog_id, 'alg_custom_order_numbers_new_order_time' );
 		delete_blog_option( $con_blog_id, 'alg_custom_order_numbers_show_admin_notice' );
+		delete_blog_option( $con_blog_id, 'alg_wc_custom_order_numbers_settings_to_apply' );
+		delete_blog_option( $con_blog_id, 'alg_wc_custom_order_numbers_settings_to_apply_from_date' );
+		delete_blog_option( $con_blog_id, 'alg_wc_custom_order_numbers_settings_to_apply_from_order_id' );
 		// License.
 		delete_blog_option( $con_blog_id, 'edd_license_key_con' );
 
@@ -95,13 +96,19 @@ if ( is_multisite() ) {
 	delete_option( 'alg_custom_order_numbers_time_of_update_now' );
 	delete_option( 'alg_custom_order_numbers_no_old_orders_to_update' );
 	delete_option( 'alg_custom_order_numbers_success_notice' );
-	delete_option( 'alg_wc_custom_order_numbers_settings_to_apply' );
+	delete_option( 'alg_custom_order_numbers_new_order_time' );
 	delete_option( 'alg_custom_order_numbers_show_admin_notice' );
+	delete_option( 'alg_wc_custom_order_numbers_settings_to_apply' );
+	delete_option( 'alg_wc_custom_order_numbers_settings_to_apply_from_date' );
+	delete_option( 'alg_wc_custom_order_numbers_settings_to_apply_from_order_id' );
 	// License.
 	delete_option( 'edd_license_key_con' );
 
 	// Version Number.
 	delete_option( 'alg_custom_order_numbers_version' );
+
+	delete_option( 'con_general_settings' );
+	delete_option( 'edd_license_key_con_status' );
 
 }
 // Clear any cached data that has been removed.
