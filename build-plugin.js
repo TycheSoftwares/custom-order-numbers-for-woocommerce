@@ -3,8 +3,16 @@ const path = require("path");
 const archiver = require("archiver");
 
 const PLUGIN_SLUG = "custom-order-numbers-for-woocommerce";
-const variant = process.argv.includes("--variant=wc") ? "wc" : "standard";
-const DEST_BASE = path.join("dist", variant === "wc" ? "wc-version" : "standard-version");
+const variant = process.argv.includes("--variant=wc")
+    ? "wc"
+    : process.argv.includes("--variant=svn")
+        ? "svn"
+        : "standard";
+
+// SVN places the plugin folder directly inside dist/ (no version subfolder).
+const DEST_BASE = variant === "svn"
+    ? "dist"
+    : path.join("dist", variant === "wc" ? "wc-version" : "standard-version");
 const DEST = path.join(DEST_BASE, PLUGIN_SLUG);
 const ZIP_PATH = path.join(DEST_BASE, `${PLUGIN_SLUG}.zip`);
 
@@ -24,11 +32,13 @@ if (!fs.existsSync("build")) {
     throw new Error("Missing /build — run `npm run build` first.");
 }
 
-// Clean and recreate the dist folder.
-rmSync(DEST_BASE);
+// Clean and recreate the destination.
+// For SVN, only wipe the plugin subfolder so other dist variants are preserved.
+rmSync(variant === "svn" ? DEST : DEST_BASE);
 fs.mkdirSync(DEST, { recursive: true });
 
-console.log(`\nPackaging ${variant === "wc" ? "WC Marketplace" : "Standard"} version…`);
+const variantLabel = variant === "wc" ? "WC Marketplace" : variant === "svn" ? "SVN" : "Standard";
+console.log(`\nPackaging ${variantLabel} version…`);
 
 // Copy all included files.
 INCLUDE.forEach((item) => {
@@ -90,8 +100,6 @@ function patchWcVersion(dest) {
         console.warn("  ⚠  Skipped missing: includes/tyche/");
     }
 
-    patchFilesPhp(path.join(dest, "includes/class-files.php"));
-    patchAdminApiSettingsPhp(path.join(dest, "includes/api/class-admin-api-settings.php"));
     patchAdminScriptsPhp(path.join(dest, "includes/admin/class-admin-scripts.php"));
 }
 
@@ -106,11 +114,13 @@ function patchAdminScriptsPhp(file) {
         "\t\t\t\t\t'paymentGateways'  => CON_Functions::get_payment_gateways(),\n" +
         "\t\t\t\t\t'userRoles'        => $user_roles,\n" +
         "\t\t\t\t\t'currentUserRoles' => (array) $user->roles,\n" +
+        "\t\t\t\t\t'upgradeUrl'       => 'https://www.tychesoftwares.com/products/woocommerce-custom-order-numbers-plugin?utm_source=conupgradetopro&utm_medium=link&utm_campaign=CustomOrderNumbersLite',\n" +
         "\t\t\t\t)",
         "\t\t\t\tarray(\n" +
         "\t\t\t\t\t'paymentGateways'  => CON_Functions::get_payment_gateways(),\n" +
         "\t\t\t\t\t'userRoles'        => $user_roles,\n" +
         "\t\t\t\t\t'currentUserRoles' => (array) $user->roles,\n" +
+        "\t\t\t\t\t'upgradeUrl'       => 'https://www.tychesoftwares.com/products/woocommerce-custom-order-numbers-plugin?utm_source=conupgradetopro&utm_medium=link&utm_campaign=CustomOrderNumbersLite',\n" +
         "\t\t\t\t\t'isWcVariant'      => true,\n" +
         "\t\t\t\t)",
         file,
@@ -120,72 +130,6 @@ function patchAdminScriptsPhp(file) {
     fs.writeFileSync(file, content);
 }
 
-// Removes the plugin-license include line from class-files.php.
-function patchFilesPhp(file) {
-    let content = fs.readFileSync(file, "utf8");
-
-    content = replaceOrWarn(
-        content,
-        "\n\t\tCON()::include_file( 'tyche/components/plugin-license/class-tyche-license-api.php' );\n",
-        "\n",
-        file,
-        "plugin-license include"
-    );
-
-    fs.writeFileSync(file, content);
-}
-
-// Removes the Tyche_Plugin_Tracking use statement, reset-tracking endpoint,
-// and reset_tracking() method from class-admin-api-settings.php.
-function patchAdminApiSettingsPhp(file) {
-    let content = fs.readFileSync(file, "utf8");
-
-    // 1. Remove the use statement.
-    content = replaceOrWarn(
-        content,
-        "\nuse Tyche\\CON\\Tyche_Plugin_Tracking;\n",
-        "\n",
-        file,
-        "use Tyche_Plugin_Tracking"
-    );
-
-    // 2. Remove the reset-tracking route registration block.
-    content = replaceOrWarn(
-        content,
-        "\n\t\t// Reset tracking.\n" +
-        "\t\tregister_rest_route(\n" +
-        "\t\t\tself::$base_endpoint,\n" +
-        "\t\t\t'reset-tracking',\n" +
-        "\t\t\tarray(\n" +
-        "\t\t\t\tarray(\n" +
-        "\t\t\t\t\t'methods'             => \\WP_REST_Server::CREATABLE,\n" +
-        "\t\t\t\t\t'callback'            => array( __CLASS__, 'reset_tracking' ),\n" +
-        "\t\t\t\t\t'permission_callback' => array( __CLASS__, 'get_permission' ),\n" +
-        "\t\t\t\t),\n" +
-        "\t\t\t)\n" +
-        "\t\t);\n",
-        "",
-        file,
-        "reset-tracking route"
-    );
-
-    // 3. Remove the reset_tracking() method.
-    content = replaceOrWarn(
-        content,
-        "\n\t/**\n" +
-        "\t * Resets usage tracking by deleting the tracking options.\n" +
-        "\t */\n" +
-        "\tpublic static function reset_tracking( $request ) {\n" +
-        "\t\tTyche_Plugin_Tracking::reset_tracker_setting( 'con' );\n" +
-        "\t\treturn self::return_response( array( 'message' => 'Tracking has been successfully reset.' ) );\n" +
-        "\t}\n",
-        "",
-        file,
-        "reset_tracking() method"
-    );
-
-    fs.writeFileSync(file, content);
-}
 
 // ---------------------------------------------------------------------------
 // Helpers
