@@ -24,13 +24,13 @@ This plugin lets you set [custom order numbers](https://www.tychesoftwares.com/s
 * Custom numbers will be assigned to **new orders** automatically.
 * There is also a tool to **renumerate** (i.e. recount) existing orders.
 * Optionally you can add **prefix** to order number.
+* Add the **order date** as a prefix to custom order numbers.
 * You can also enable **order tracking** by custom number.
 * Optionally you can enable **admin order search** by custom number.
 
 ### Check out the PRO version of [Custom Order Numbers for WooCommerce plugin](https://www.tychesoftwares.com/store/premium-plugins/custom-order-numbers-woocommerce/?utm_source=wprepo&utm_medium=prolink&utm_campaign=CustomNumbers).
 = Features of Premium Version =
 * Order number **template**.
-* Order number **date prefix**.
 * Order number **width**.
 * Order number custom **suffix**.
 * Order number **date suffix**.
