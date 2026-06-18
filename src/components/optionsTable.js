@@ -113,8 +113,25 @@ const OptionsTable = ({
                     }
                 </CardBody>
             </Card>
-            <HStack> 
-                <Button className='con-button-add-option' onClick={() => append( defaultValue )} disabled={ 'prefix_suffix_rules' === id ? true : false }>{__('+ Add Rule', 'custom-order-numbers-for-woocommerce')}</Button>
+            <HStack alignment="left">
+                { 'prefix_suffix_rules' === id ? (
+                    <Tooltip
+                        text={
+                            <span>
+                                { __( 'Upgrade to Pro to add more rules.', 'custom-order-numbers-for-woocommerce' ) }{ ' ' }
+                                <a href={ upgradeUrl } target="_blank" rel="noopener noreferrer" style={{ color: '#a8c4ff' }}>
+                                    { __( 'Upgrade now', 'custom-order-numbers-for-woocommerce' ) }
+                                </a>
+                            </span>
+                        }
+                    >
+                        <span style={{ display: 'inline-block', cursor: 'not-allowed' }}>
+                            <Button className='con-button-add-option' disabled style={{ pointerEvents: 'none' }}>{ __( '+ Add Rule', 'custom-order-numbers-for-woocommerce' ) }</Button>
+                        </span>
+                    </Tooltip>
+                ) : (
+                    <Button className='con-button-add-option' onClick={() => append( defaultValue )}>{ __( '+ Add Rule', 'custom-order-numbers-for-woocommerce' ) }</Button>
+                ) }
             </HStack>
         </>
     );

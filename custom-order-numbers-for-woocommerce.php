@@ -38,8 +38,8 @@ if ( ! class_exists( 'Custom_Order_Numbers', false ) ) {
  *
  * @since  1.0
  */
-function CON() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
+function CON_Lite() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 	return Custom_Order_Numbers::instance();
 }
 
-CON();
+CON_Lite();

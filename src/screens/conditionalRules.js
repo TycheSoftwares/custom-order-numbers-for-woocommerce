@@ -133,7 +133,22 @@ function ConditionalRules( { noticeOperations, noticeUI, parentRef, settingsData
     const rulesDefaults = {
         enable_prefix_suffix: false,
         custom_order_numbers_template: '{prefix}{date_prefix}{number}{suffix}{date_suffix}',
-        prefix_suffix_rules: [],
+        prefix_suffix_rules: [ 
+            {
+                condition_type: 'custom',
+                condition_value: '',
+                prefix: '',
+                suffix: '',
+                sequential: false
+            },
+            {
+                condition_type: 'date',
+                condition_value: '',
+                prefix: '',
+                suffix: '',
+                sequential: false
+            }
+        ],
     };
 
     const resetSettings = async () => {
@@ -175,14 +190,6 @@ function ConditionalRules( { noticeOperations, noticeUI, parentRef, settingsData
         if (nextCursorPosition !== null) {
             cursorPositionRef.current = nextCursorPosition;
         }
-    };
-
-    const handlePlaceholderInsert = (placeholder) => {
-        const currentValue = orderTemplate || '';
-        const insertAt = Math.max(0, cursorPositionRef.current);
-        const newValue = currentValue.substring(0, insertAt) + placeholder + currentValue.substring(insertAt);
-
-        handleTemplateChange(newValue, insertAt + placeholder.length);
     };
 
     const handleSettingsUpdate = async (data) => {
