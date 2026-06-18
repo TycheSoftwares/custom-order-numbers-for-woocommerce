@@ -28,8 +28,8 @@ class Files {
 	 */
 	public static function include_files() {
 
-        CON()::include_file( 'api/class-admin-api.php' );
-        CON()::include_file( 'api/class-admin-api-settings.php' );
+        CON_Lite()::include_file( 'api/class-admin-api.php' );
+        CON_Lite()::include_file( 'api/class-admin-api-settings.php' );
 
         $tyche_files = array(
             'class-tyche-con-tracking.php',
@@ -38,20 +38,20 @@ class Files {
 
         foreach ( $tyche_files as $tyche_file ) {
             if ( file_exists( CON_PLUGIN_DIR_PATH . '/includes/' . $tyche_file ) ) {
-                CON()::include_file( $tyche_file );
+                CON_Lite()::include_file( $tyche_file );
             }
         }
 
-		CON()::include_file( 'class-functions.php' );
+		CON_Lite()::include_file( 'class-functions.php' );
 
-		CON()::include_file( 'admin/class-admin.php' );
+		CON_Lite()::include_file( 'admin/class-admin.php' );
 
 		// Scripts.
-		CON()::include_file( 'admin/class-admin-scripts.php' );
+		CON_Lite()::include_file( 'admin/class-admin-scripts.php' );
 		new \Tyche\CON\Admin\Admin_Scripts();
 
 		//Frontend
-		CON()::include_file( 'class-core.php' );
+		CON_Lite()::include_file( 'class-core.php' );
 	}
 
 	/**
