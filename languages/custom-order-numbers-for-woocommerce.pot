@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-16T04:57:43+00:00\n"
+"POT-Creation-Date: 2026-06-18T08:29:18+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: custom-order-numbers-for-woocommerce\n"
@@ -111,7 +111,18 @@ msgid "Click any placeholder to insert it at cursor position"
 msgstr ""
 
 #: build/admin.js:1
-#: src/components/optionsTable.js:117
+#: src/components/optionsTable.js:121
+msgid "Upgrade to Pro to add more rules."
+msgstr ""
+
+#: build/admin.js:1
+#: src/components/optionsTable.js:123
+msgid "Upgrade now"
+msgstr ""
+
+#: build/admin.js:1
+#: src/components/optionsTable.js:129
+#: src/components/optionsTable.js:133
 msgid "+ Add Rule"
 msgstr ""
 
@@ -403,7 +414,7 @@ msgid "Usage Data"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:435
+#: src/screens/conditionalRules.js:442
 #: src/screens/general.js:603
 msgid "Save Changes"
 msgstr ""
@@ -414,19 +425,19 @@ msgid "Reset plugin settings to default values."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:440
+#: src/screens/conditionalRules.js:447
 #: src/screens/general.js:609
 msgid "Reset Settings"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:445
+#: src/screens/conditionalRules.js:452
 #: src/screens/general.js:614
 msgid "Cancel"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:446
+#: src/screens/conditionalRules.js:453
 #: src/screens/general.js:615
 msgid "Reset"
 msgstr ""
@@ -437,7 +448,7 @@ msgid "Settings have been successfully reset to default values."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:163
+#: src/screens/conditionalRules.js:178
 #: src/screens/general.js:253
 msgid "Error resetting the settings."
 msgstr ""
@@ -448,148 +459,148 @@ msgid "Are you sure you want to reset all settings to their default values? This
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:240
+#: src/screens/conditionalRules.js:247
 msgid "Order Number Template"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:241
+#: src/screens/conditionalRules.js:248
 msgid "Configure the template for order numbers using available placeholders to create custom numbering formats."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:266
+#: src/screens/conditionalRules.js:273
 msgid "Replaced values: {prefix}, {date_prefix}, {number}, {suffix}, {date_suffix}."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:270
+#: src/screens/conditionalRules.js:277
 msgid "Upgrade to Pro to customize the order number template"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:307
+#: src/screens/conditionalRules.js:314
 msgid "Prefix & Suffix Rules"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:309
+#: src/screens/conditionalRules.js:316
 msgid "Set a custom or date-based prefix for your order numbers. Upgrade to Pro to unlock suffix rules and conditional rules based on product, category, payment method, and more."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:320
+#: src/screens/conditionalRules.js:327
 msgid "Condition Type"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:321
+#: src/screens/conditionalRules.js:328
 msgid "Select what the condition should be based on (e.g., product, category, user role, etc.)."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:324
+#: src/screens/conditionalRules.js:331
 msgid "Condition Value"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:325
+#: src/screens/conditionalRules.js:332
 msgid "Select the specific value that matches the selected condition type (e.g., a specific product, category, etc.)."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:329
+#: src/screens/conditionalRules.js:336
 msgid "Prefix"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:330
+#: src/screens/conditionalRules.js:337
 msgid "Set a custom prefix using static text or placeholders. For example, using {product_name} will add the full product name of the ordered item as a prefix. Available placeholders: {product_name}, {category_name}, {user_role_name}, {payment_method_name}, {country_name}."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:333
+#: src/screens/conditionalRules.js:340
 msgid "Suffix"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:334
+#: src/screens/conditionalRules.js:341
 msgid "Set a custom suffix using static text or placeholders. For example, using {product_name} will add the full product name of the ordered item as a suffix. Available placeholders: {product_name}, {category_name}, {user_role_name}, {payment_method_name}, {country_name}."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:338
+#: src/screens/conditionalRules.js:345
 msgid "Separate Counter"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:339
+#: src/screens/conditionalRules.js:346
 msgid "Use a separate order number counter for orders that match this rule."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:343
+#: src/screens/conditionalRules.js:350
 msgid "Action"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:344
+#: src/screens/conditionalRules.js:351
 msgid "Remove this rule row."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:357
+#: src/screens/conditionalRules.js:364
 msgid "Custom"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:358
+#: src/screens/conditionalRules.js:365
 msgid "Date"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:359
+#: src/screens/conditionalRules.js:366
 msgid "Product (PRO)"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:360
+#: src/screens/conditionalRules.js:367
 msgid "Category (PRO)"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:361
+#: src/screens/conditionalRules.js:368
 msgid "Payment Method (PRO)"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:362
+#: src/screens/conditionalRules.js:369
 msgid "Country (PRO)"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:363
+#: src/screens/conditionalRules.js:370
 msgid "User Role (PRO)"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:364
+#: src/screens/conditionalRules.js:371
 msgid "Free Orders (PRO)"
 msgstr ""
 
 #: build/admin.js:1
 #: src/components/conditionalValueField.js:155
-#: src/screens/conditionalRules.js:378
+#: src/screens/conditionalRules.js:385
 msgid "(no condition value needed)"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:156
+#: src/screens/conditionalRules.js:171
 msgid "Rules settings have been successfully reset to default values."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/conditionalRules.js:450
+#: src/screens/conditionalRules.js:457
 msgid "Are you sure you want to reset all rules settings to their default values? This will clear all prefix/suffix rules and reset the order number template."
 msgstr ""
 

@@ -12,6 +12,7 @@ import {
     SelectControl,
     RadioControl,
     CheckboxControl,
+    ExternalLink,
     DatePicker,
     withNotices,
     Spinner,
@@ -27,6 +28,7 @@ import { updateSettings, resetTracking as resetTrackingApi, getBatchStatus } fro
 function General({ noticeOperations, noticeUI, parentRef, settingsData, onSettingsSaved }) {
     const noticesStore = window?.wp?.data?.dispatch?.("core/notices");
     const isWcVariant = !! window?.conAdminData?.isWcVariant;
+    const upgradeUrl = window?.conAdminData?.upgradeUrl || '#';
     const toBoolean = (value) => value === 'yes' || value === true;
     const [showLoader, setShowLoader] = useState(false);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -426,7 +428,7 @@ function General({ noticeOperations, noticeUI, parentRef, settingsData, onSettin
                                 label: __( 'Minimum Digits in Order Number', 'custom-order-numbers-for-woocommerce' ),
                                 render: ( field ) => (
                                     <NumberControl
-                                        help={ __( 'Pad order numbers with leading zeros to reach this length. For example, set to 5 to show "00001" instead of "1". Set to 0 to disable padding. Upgrade to Pro', 'custom-order-numbers-for-woocommerce' ) }
+                                        help={ <span>{ __( 'Pad order numbers with leading zeros to reach this length. For example, set to 5 to show "00001" instead of "1". Set to 0 to disable padding.', 'custom-order-numbers-for-woocommerce' ) }{ ' ' }<ExternalLink href={ upgradeUrl } style={{ fontSize: '12px', color: '#3858e9', textDecoration: 'none', fontWeight: 'bold' }}>{ __( 'Upgrade to Pro', 'custom-order-numbers-for-woocommerce' ) }</ExternalLink></span> }
                                         value={ field.value }
                                         onChange={ field.onChange }
                                         min={0}
@@ -505,7 +507,7 @@ function General({ noticeOperations, noticeUI, parentRef, settingsData, onSettin
                                 render: ( field ) => (
                                     <CheckboxControl
                                         label={ __( 'Enable', 'custom-order-numbers-for-woocommerce' ) }
-                                        help={ __( 'Adds an "Order Number" field on each order\'s edit page, so you can enter the number yourself. Requires the Order Number Format to be set to Sequential.', 'custom-order-numbers-for-woocommerce' ) }
+                                        help={ <span>{ __( 'Adds an "Order Number" field on each order\'s edit page, so you can enter the number yourself. Requires the Order Number Format to be set to Sequential.', 'custom-order-numbers-for-woocommerce' ) }{ ' ' }<ExternalLink href={ upgradeUrl } style={{ fontSize: '12px', color: '#3858e9', textDecoration: 'none', fontWeight: 'bold' }}>{ __( 'Upgrade to Pro', 'custom-order-numbers-for-woocommerce' ) }</ExternalLink></span> }
                                         checked={ toBoolean(field.value) }
                                         onChange={ field.onChange }
                                         disabled={true}
