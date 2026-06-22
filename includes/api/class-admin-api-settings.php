@@ -92,32 +92,45 @@ class Admin_API_Settings extends Admin_API {
 	}
 
 	/**
-	 * Returns whether a rules batch processing job is still pending or running.
+	 * Returns whether a rules batch processing job or renumeration job is still pending or running.
 	 */
 	public static function get_batch_status() {
-		$in_progress = false;
+		$in_progress           = false;
+		$renumerate_in_progress = false;
 
 		if ( function_exists( 'as_get_scheduled_actions' ) ) {
-			$pending = as_get_scheduled_actions(
-				array(
-					'hook'     => 'con_process_rules_batch',
-					'status'   => \ActionScheduler_Store::STATUS_PENDING,
-					'per_page' => 1,
-				),
-				'ids'
-			);
-			$running = as_get_scheduled_actions(
-				array(
-					'hook'     => 'con_process_rules_batch',
-					'status'   => \ActionScheduler_Store::STATUS_RUNNING,
-					'per_page' => 1,
-				),
-				'ids'
-			);
-			$in_progress = ! empty( $pending ) || ! empty( $running );
+			foreach ( array( 'con_process_rules_batch', 'con_renumerate_batch' ) as $hook ) {
+				$pending = as_get_scheduled_actions(
+					array(
+						'hook'     => $hook,
+						'status'   => \ActionScheduler_Store::STATUS_PENDING,
+						'per_page' => 1,
+					),
+					'ids'
+				);
+				$running = as_get_scheduled_actions(
+					array(
+						'hook'     => $hook,
+						'status'   => \ActionScheduler_Store::STATUS_RUNNING,
+						'per_page' => 1,
+					),
+					'ids'
+				);
+				$hook_active = ! empty( $pending ) || ! empty( $running );
+				if ( 'con_renumerate_batch' === $hook ) {
+					$renumerate_in_progress = $hook_active;
+				} else {
+					$in_progress = $hook_active;
+				}
+			}
 		}
 
-		return self::return_response( array( 'in_progress' => $in_progress ) );
+		return self::return_response(
+			array(
+				'in_progress'            => $in_progress,
+				'renumerate_in_progress' => $renumerate_in_progress,
+			)
+		);
 	}
 
 	/**
@@ -152,6 +165,10 @@ class Admin_API_Settings extends Admin_API {
 
 		if ( is_null( $result ) ) {
 			return self::return_response( array( 'error' => 'Renumeration could not be triggered. Ensure the plugin is enabled.' ) );
+		}
+
+		if ( isset( $result['scheduled'] ) && $result['scheduled'] ) {
+			return self::return_response( array( 'scheduled' => true ) );
 		}
 
 		return self::return_response(
