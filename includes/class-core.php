@@ -73,19 +73,48 @@ if ( ! class_exists( 'Tyche\CON\Core' ) ) :
 			}
 
 			add_action( 'con_process_rules_batch', array( $this, 'process_rules_batch' ) );
+			add_action( 'con_renumerate_batch', array( $this, 'process_renumerate_batch' ) );
 			add_action( 'admin_notices', array( $this, 'maybe_show_batch_notice' ) );
+			add_action( 'wp_ajax_con_dismiss_renumerate_complete', array( $this, 'dismiss_renumerate_complete' ) );
+		}
+
+		/**
+		 * AJAX handler — deletes the renumeration complete transient when the notice is dismissed.
+		 */
+		public function dismiss_renumerate_complete() {
+			check_ajax_referer( 'con_dismiss_renumerate_complete', 'nonce' );
+			if ( current_user_can( 'manage_options' ) || current_user_can( 'manage_woocommerce' ) ) {
+				delete_transient( 'con_renumerate_complete' );
+			}
+			wp_die();
 		}
 
 		/**
 		 * Display an admin notice while the rules batch is processing.
 		 */
 		public function maybe_show_batch_notice() {
-			if ( ! get_transient( 'con_rules_batch_in_progress' ) ) {
-				return;
+			if ( get_transient( 'con_renumerate_complete' ) ) {
+				echo '<div class="notice notice-success is-dismissible" id="con-renumerate-complete-notice"><p>'
+					. esc_html__( 'Renumeration complete. All order numbers have been updated.', 'custom-order-numbers-for-woocommerce' )
+					. '</p></div>';
+				printf(
+					'<script>
+						jQuery( document ).on( "click", "#con-renumerate-complete-notice .notice-dismiss", function() {
+							jQuery.post( ajaxurl, { action: "con_dismiss_renumerate_complete", nonce: "%s" } );
+						} );
+					</script>',
+					esc_js( wp_create_nonce( 'con_dismiss_renumerate_complete' ) )
+				);
 			}
-			echo '<div id="con-batch-notice" class="notice notice-info"><p>'
-				. esc_html__( 'Custom order numbers are being updated in the background.', 'custom-order-numbers-for-woocommerce' )
-				. '</p></div>';
+			if ( get_transient( 'con_renumerate_batch_in_progress' ) ) {
+				echo '<div id="con-batch-notice" class="notice notice-info"><p>'
+					. esc_html__( 'Custom order numbers are being renumbered in the background.', 'custom-order-numbers-for-woocommerce' )
+					. '</p></div>';
+			} elseif ( get_transient( 'con_rules_batch_in_progress' ) ) {
+				echo '<div id="con-batch-notice" class="notice notice-info"><p>'
+					. esc_html__( 'Custom order numbers are being updated in the background.', 'custom-order-numbers-for-woocommerce' )
+					. '</p></div>';
+			}
 		}
 
 		/**
@@ -269,63 +298,78 @@ if ( ! class_exists( 'Tyche\CON\Core' ) ) :
 
 		/**
 		 * Renumerate orders function.
+		 * Schedules async batch processing via Action Scheduler to avoid memory exhaustion on large stores.
 		 *
-		 * @version 1.1.2
+		 * @version 1.2.3
 		 * @since   1.0.0
 		 */
 		public function renumerate_orders() {
 			if ( 'sequential' === CON_Functions::get_setting( 'counter_type', 'sequential' ) && 'no' != CON_Functions::get_setting( 'counter_reset_enabled', 'no' ) ) { // phpcs:ignore
 				update_option( 'alg_wc_custom_order_numbers_counter_previous_order_date', 0 );
 			}
-			$total_renumerated    = 0;
-			$last_renumerated     = 0;
-			$offset               = 0;
-			$block_size           = 512;
+
+			as_unschedule_all_actions( 'con_renumerate_batch' );
+			set_transient( 'con_renumerate_batch_in_progress', true, HOUR_IN_SECONDS * 2 );
+			as_schedule_single_action( time(), 'con_renumerate_batch', array( 1 ), 'con' );
+
+			return array( 'scheduled' => true );
+		}
+
+		/**
+		 * Process a single batch of orders during renumeration.
+		 * Scheduled via Action Scheduler; reschedules itself until all orders are processed.
+		 *
+		 * @param int $page 1-based page number.
+		 */
+		public function process_renumerate_batch( $page ) {
+			$batch_size           = 100;
 			$subscriptions_active = in_array( 'woocommerce-subscriptions/woocommerce-subscriptions.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ), true );
 			$order_types          = $subscriptions_active ? array( 'shop_order', 'shop_subscription' ) : array( 'shop_order' );
-			while ( true ) {
-				if ( $this->con_wc_hpos_enabled() ) {
-					$args        = array(
-						'type'           => $order_types,
-						'status'         => 'any',
-						'posts_per_page' => $block_size,
-						'orderby'        => 'date',
-						'order'          => 'ASC',
-						'offset'         => $offset,
-					);
-					$loop_orders = wc_get_orders( $args );
-					if ( count( $loop_orders ) <= 0 ) {
-						break;
-					}
-					foreach ( $loop_orders as $order_ids ) {
-						$order_id         = $order_ids->get_id();
-						$last_renumerated = $this->add_order_number_meta( $order_id, true );
-						++$total_renumerated;
-					}
-					$offset += $block_size;
-				} else {
-					$args = array(
+			$order_ids            = array();
+
+			if ( CON_Functions::con_wc_hpos_enabled() ) {
+				$order_ids = wc_get_orders(
+					array(
+						'type'    => $order_types,
+						'status'  => 'any',
+						'limit'   => $batch_size,
+						'page'    => $page,
+						'orderby' => 'date',
+						'order'   => 'ASC',
+						'return'  => 'ids',
+					)
+				);
+			} else {
+				$query = new \WP_Query(
+					array(
 						'post_type'      => $order_types,
 						'post_status'    => 'any',
-						'posts_per_page' => $block_size,
+						'posts_per_page' => $batch_size,
+						'paged'          => $page,
 						'orderby'        => 'date',
 						'order'          => 'ASC',
-						'offset'         => $offset,
 						'fields'         => 'ids',
-					);
-					$loop = new \WP_Query( $args );
-					if ( ! $loop->have_posts() ) {
-						break;
-					}
-					foreach ( $loop->posts as $order_id ) {
-						$last_renumerated = $this->add_order_number_meta( $order_id, true );
-						++$total_renumerated;
-					}
-					$offset += $block_size;
-				}
+					)
+				);
+				$order_ids = $query->posts;
 			}
 
-			return array( $total_renumerated, $last_renumerated );
+			if ( empty( $order_ids ) ) {
+				delete_transient( 'con_renumerate_batch_in_progress' );
+				set_transient( 'con_renumerate_complete', true, DAY_IN_SECONDS );
+				return;
+			}
+
+			foreach ( $order_ids as $order_id ) {
+				$this->add_order_number_meta( $order_id, true );
+			}
+
+			if ( count( $order_ids ) === $batch_size ) {
+				as_schedule_single_action( time(), 'con_renumerate_batch', array( $page + 1 ), 'con' );
+			} else {
+				delete_transient( 'con_renumerate_batch_in_progress' );
+				set_transient( 'con_renumerate_complete', true, DAY_IN_SECONDS );
+			}
 		}
 
 		/**

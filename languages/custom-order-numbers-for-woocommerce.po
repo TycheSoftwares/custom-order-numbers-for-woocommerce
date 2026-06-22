@@ -24,123 +24,123 @@ msgid "General"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:291
+#: src/screens/general.js:293
 msgid "Custom Order Numbers Options"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:292
+#: src/screens/general.js:294
 msgid "Enable sequential order numbering, set custom number prefix, suffix and number width."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:298
+#: src/screens/general.js:300
 msgid "WooCommerce Custom Order Numbers"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:317
+#: src/screens/general.js:319
 msgid "Sequential"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:318
+#: src/screens/general.js:320
 msgid "Order ID"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:319
+#: src/screens/general.js:321
 msgid "Pseudorandom - crc32 Hash (max 10 digits)"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:367
+#: src/screens/general.js:369
 msgid "Disabled"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:368
+#: src/screens/general.js:370
 msgid "Daily"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:369
+#: src/screens/general.js:371
 msgid "Weekly"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:370
+#: src/screens/general.js:372
 msgid "Monthly"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:371
+#: src/screens/general.js:373
 msgid "Yearly"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:392
+#: src/screens/general.js:394
 msgid "Monday"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:393
+#: src/screens/general.js:395
 msgid "Tuesday"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:394
+#: src/screens/general.js:396
 msgid "Wednesday"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:395
+#: src/screens/general.js:397
 msgid "Thursday"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:396
+#: src/screens/general.js:398
 msgid "Friday"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:397
+#: src/screens/general.js:399
 msgid "Saturday"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:398
+#: src/screens/general.js:400
 msgid "Sunday"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:447
+#: src/screens/general.js:449
 msgid "To all new orders only"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:448
+#: src/screens/general.js:450
 msgid "To orders from a certain order number"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:449
+#: src/screens/general.js:451
 msgid "To orders from a specific date"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:450
+#: src/screens/general.js:452
 msgid "To all orders"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:494
-#: src/screens/general.js:507
+#: src/screens/general.js:496
+#: src/screens/general.js:509
 msgid "Enable"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/renumerateOrders.js:75
+#: src/screens/renumerateOrders.js:135
 msgid "With the help of this tool, you can change the custom order numbers for all the existing orders in a sequence and will maintain the sequence for the upcoming orders also."
 msgstr ""
 
@@ -186,13 +186,13 @@ msgstr ""
 
 #: build/admin.js:1
 #: src/screens/conditionalRules.js:447
-#: src/screens/general.js:609
+#: src/screens/general.js:611
 msgid "Reset Settings"
 msgstr ""
 
 #: build/admin.js:1
 #: src/screens/conditionalRules.js:453
-#: src/screens/general.js:615
+#: src/screens/general.js:617
 msgid "Reset"
 msgstr ""
 
@@ -202,13 +202,13 @@ msgstr ""
 
 #: includes/tyche/components/plugin-tracking/class-con-data-tracking.php:51
 #: build/admin.js:1
-#: src/screens/general.js:591
+#: src/screens/general.js:593
 msgid "Reset Usage Tracking"
 msgstr ""
 
 #: includes/tyche/components/plugin-tracking/class-con-data-tracking.php:52
 #: build/admin.js:1
-#: src/screens/general.js:590
+#: src/screens/general.js:592
 msgid "This will reset your usage tracking settings, causing it to show the opt-in banner again and not sending any data."
 msgstr ""
 
@@ -236,10 +236,10 @@ msgstr ""
 msgid "Guest"
 msgstr ""
 
-#: includes/class-core.php:87
+#: includes/class-core.php:115
 #: build/admin.js:1
 #: src/screens/conditionalRules.js:42
-#: src/screens/general.js:40
+#: src/screens/general.js:42
 msgid "Custom order numbers are being updated in the background."
 msgstr ""
 
@@ -284,196 +284,196 @@ msgid "(no condition value needed)"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:268
+#: src/screens/general.js:270
 msgid "Tracking has been successfully reset."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:275
+#: src/screens/general.js:277
 msgid "Error resetting tracking."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:301
+#: src/screens/general.js:303
 msgid "Enable Custom Order Numbers"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:302
+#: src/screens/general.js:304
 msgid "Turn this on to start using custom order numbering for your store."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:311
+#: src/screens/general.js:313
 msgid "Order Numbers Counter"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:324
+#: src/screens/general.js:326
 msgid "Choose how order numbers are generated: Sequential (1, 2, 3…), Order ID, or Random (a unique scrambled number, max 10 digits)."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:333
+#: src/screens/general.js:335
 msgid "Include Characters"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:336
+#: src/screens/general.js:338
 msgid "Enable to include charaters in order number"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:346
+#: src/screens/general.js:348
 msgid "Next Order Number"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:349
+#: src/screens/general.js:351
 msgid "The next order placed will be assigned this number. To renumber existing orders, use the Renumber Orders tab."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:361
+#: src/screens/general.js:363
 msgid "Auto-Reset Order Count"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:377
+#: src/screens/general.js:379
 msgid "Automatically reset the order number counter at the start of each day, week, month, or year. Useful if you want numbers to restart periodically."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:386
+#: src/screens/general.js:388
 msgid "Weekly Counter Reset Day"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:403
+#: src/screens/general.js:405
 msgid "Select the day of the week on which the order number counter will automatically reset."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:412
+#: src/screens/general.js:414
 msgid "Reset Counter Value"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:415
+#: src/screens/general.js:417
 msgid "Counter value to reset to. This will be ignored if \"Auto-Reset Order Count\" option is set to \"Disabled\"."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:426
+#: src/screens/general.js:428
 msgid "Minimum Digits in Order Number"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:441
+#: src/screens/general.js:443
 msgid "Apply These Settings To"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:456
+#: src/screens/general.js:458
 msgid "Choose which orders should use your new numbering settings."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:464
+#: src/screens/general.js:466
 msgid "Starting Order ID"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:467
+#: src/screens/general.js:469
 msgid "New numbering settings will be applied to all orders from this order ID onwards."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:478
+#: src/screens/general.js:480
 msgid "Starting Order Date"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:481
+#: src/screens/general.js:483
 msgid "New numbering settings will be applied to all orders from this date onwards. Note : Only applies to past dates."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:491
+#: src/screens/general.js:493
 msgid "Order Tracking by Custom Number"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:497
+#: src/screens/general.js:499
 msgid "This will allow customers to track their orders using custom order numbers on the \"Track your order\" page. This page must be created using [woocommerce_order_tracking] shortcode."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:504
+#: src/screens/general.js:506
 msgid "Set Order Number Manually"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:508
+#: src/screens/general.js:510
 msgid "Adds an \"Order Number\" field on each order's edit page, so you can enter the number yourself. Requires the Order Number Format to be set to Sequential."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:518
+#: src/screens/general.js:520
 msgid "Hide Renumber Orders tab for User Roles"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:539
-#: src/screens/general.js:569
+#: src/screens/general.js:541
+#: src/screens/general.js:571
 msgid "Search for a user role..."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:540
+#: src/screens/general.js:542
 msgid "Hide \"Renumber Orders\" admin menu for selected user roles. All user roles are listed here - even those which do not see the menu by default."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:548
+#: src/screens/general.js:550
 msgid "Hide Plugin Settings for User Roles"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:570
+#: src/screens/general.js:572
 msgid "Hide \"Custom Order Numbers\" admin settings tab for selected user roles. Tab can not be hidden for administrators. All user roles are listed here - even those which do not see the tab by default."
 msgstr ""
 
 #: build/admin.js:1
 #: src/screens/conditionalRules.js:442
-#: src/screens/general.js:603
+#: src/screens/general.js:605
 msgid "Save Changes"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:607
+#: src/screens/general.js:609
 msgid "Reset plugin settings to default values."
 msgstr ""
 
 #: build/admin.js:1
 #: src/screens/conditionalRules.js:452
-#: src/screens/general.js:614
+#: src/screens/general.js:616
 msgid "Cancel"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:246
+#: src/screens/general.js:248
 msgid "Settings have been successfully reset to default values."
 msgstr ""
 
 #: build/admin.js:1
 #: src/screens/conditionalRules.js:178
-#: src/screens/general.js:253
+#: src/screens/general.js:255
 msgid "Error resetting the settings."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:619
+#: src/screens/general.js:621
 msgid "Are you sure you want to reset all settings to their default values? This will also clear all prefix/suffix rules."
 msgstr ""
 
@@ -533,34 +533,35 @@ msgid "Are you sure you want to reset all rules settings to their default values
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/renumerateOrders.js:36
+#: src/screens/renumerateOrders.js:96
+#: src/screens/renumerateOrders.js:105
 msgid "Error renumbering orders."
 msgstr ""
 
 #: build/admin.js:1
 #: src/app.js:74
-#: src/screens/renumerateOrders.js:60
-#: src/screens/renumerateOrders.js:83
+#: src/screens/renumerateOrders.js:120
+#: src/screens/renumerateOrders.js:149
 msgid "Renumber Orders"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/renumerateOrders.js:62
+#: src/screens/renumerateOrders.js:122
 msgid "Use this tool to reassign order numbers to all your existing orders in sequence."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/renumerateOrders.js:69
+#: src/screens/renumerateOrders.js:129
 msgid "Important:"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/renumerateOrders.js:70
+#: src/screens/renumerateOrders.js:130
 msgid "Before proceeding, please ensure you have created a complete backup of your database. This tool will modify existing order numbers and cannot be easily undone."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/renumerateOrders.js:77
+#: src/screens/renumerateOrders.js:136
 msgid "The starting order number will always be 1, and all orders will be numbered sequentially from there."
 msgstr ""
 
@@ -761,12 +762,7 @@ msgid "Unlock All"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/general.js:429
-msgid "Pad order numbers with leading zeros to reach this length. For example, set to 5 to show \"00001\" instead of \"1\". Set to 0 to disable padding. Upgrade to Pro"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/general.js:580
+#: src/screens/general.js:582
 msgid "Usage Data"
 msgstr ""
 
@@ -823,4 +819,27 @@ msgstr ""
 #: build/admin.js:1
 #: src/components/optionsTable.js:123
 msgid "Upgrade now"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:431
+msgid "Pad order numbers with leading zeros to reach this length. For example, set to 5 to show \"00001\" instead of \"1\". Set to 0 to disable padding."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/general.js:431
+#: src/screens/general.js:510
+msgid "Upgrade to Pro"
+msgstr ""
+
+#: includes/class-core.php:98
+#: build/admin.js:1
+#: src/screens/renumerateOrders.js:54
+msgid "Renumeration complete. All order numbers have been updated."
+msgstr ""
+
+#: includes/class-core.php:111
+#: build/admin.js:1
+#: src/screens/renumerateOrders.js:84
+msgid "Custom order numbers are being renumbered in the background."
 msgstr ""
