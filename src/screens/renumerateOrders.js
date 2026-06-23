@@ -1,4 +1,4 @@
-import { useState, useEffect } from "@wordpress/element";
+import { useEffect } from "@wordpress/element";
 import { useForm } from "react-hook-form";
 import {
     Card,
@@ -13,15 +13,13 @@ import {
     withNotices
 } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
-import { renumerateOrders, getBatchStatus } from "../data/api";
+import { renumerateOrders } from "../data/api";
 
 function RenumerateOrders( { noticeOperations, noticeUI } ) {
 
     const { handleSubmit, formState: { isSubmitting } } = useForm({
         defaultValues: {},
     });
-
-    const [ isRenumerating, setIsRenumerating ] = useState( false );
 
     // Auto-dismiss notices after 4 seconds.
     useEffect( () => {
@@ -33,57 +31,23 @@ function RenumerateOrders( { noticeOperations, noticeUI } ) {
         }
     }, [ noticeUI ] );
 
-    // Poll batch-status while renumeration is running; show complete notice when done.
-    useEffect( () => {
-        if ( ! isRenumerating ) return;
-
-        let timeoutId;
-        let cancelled = false;
-        let delay = 3000;
-        const maxDelay = 30000;
-
-        const poll = async () => {
-            try {
-                const status = await getBatchStatus();
-                if ( cancelled ) return;
-                if ( ! status?.renumerate_in_progress ) {
-                    setIsRenumerating( false );
-                    noticeOperations.removeAllNotices();
-                    noticeOperations.createNotice( {
-                        status: 'success',
-                        content: __( 'Renumeration complete. All order numbers have been updated.', 'custom-order-numbers-for-woocommerce' ),
-                    } );
-                    return;
-                }
-            } catch {
-                if ( ! cancelled ) {
-                    setIsRenumerating( false );
-                }
-                return;
-            }
-            delay = Math.min( delay * 2, maxDelay );
-            timeoutId = setTimeout( poll, delay );
-        };
-
-        timeoutId = setTimeout( poll, delay );
-
-        return () => {
-            cancelled = true;
-            clearTimeout( timeoutId );
-        };
-    }, [ isRenumerating ] );
-
     const onSubmit = async () => {
         try {
             const response = await renumerateOrders();
             noticeOperations.removeAllNotices();
             if ( response.scheduled ) {
-                setIsRenumerating( true );
                 noticeOperations.createNotice( {
                     status: 'info',
                     content: __( 'Custom order numbers are being renumbered in the background.', 'custom-order-numbers-for-woocommerce' ),
                 } );
             } else {
+                if ( response.error ) {
+                    noticeOperations.createNotice( {
+                        status: 'error',
+                        content: __( `Error renumbering orders: ${ response.error }`, 'custom-order-numbers-for-woocommerce' ),
+                    } );
+                    return;
+                }
                 noticeOperations.createNotice( {
                     status: 'success',
                     content: __( `Renumeration complete. ${ response.total_renumerated } order(s) updated.`, 'custom-order-numbers-for-woocommerce' ),
@@ -143,8 +107,8 @@ function RenumerateOrders( { noticeOperations, noticeUI } ) {
                                     className="con-renumerate-button"
                                     variant="primary"
                                     type="submit"
-                                    isBusy={ isSubmitting || isRenumerating }
-                                    disabled={ isSubmitting || isRenumerating }
+                                    isBusy={ isSubmitting }
+                                    disabled={ isSubmitting }
                                 >
                                     { __( 'Renumber Orders', 'custom-order-numbers-for-woocommerce' ) }
                                 </Button>
