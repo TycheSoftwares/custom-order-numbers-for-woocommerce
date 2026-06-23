@@ -140,7 +140,7 @@ msgid "Enable"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/renumerateOrders.js:92
+#: src/screens/renumerateOrders.js:155
 msgid "With the help of this tool, you can change the custom order numbers for all the existing orders in a sequence and will maintain the sequence for the upcoming orders also."
 msgstr ""
 
@@ -533,200 +533,80 @@ msgid "Are you sure you want to reset all rules settings to their default values
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/renumerateOrders.js:53
-#: src/screens/renumerateOrders.js:62
+#: src/screens/renumerateOrders.js:112
+#: src/screens/renumerateOrders.js:121
 msgid "Error renumbering orders."
 msgstr ""
 
 #: build/admin.js:1
 #: src/app.js:74
-#: src/screens/renumerateOrders.js:77
-#: src/screens/renumerateOrders.js:106
+#: src/screens/renumerateOrders.js:140
+#: src/screens/renumerateOrders.js:181
 msgid "Renumber Orders"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/renumerateOrders.js:79
+#: src/screens/renumerateOrders.js:142
 msgid "Use this tool to reassign order numbers to all your existing orders in sequence."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/renumerateOrders.js:86
+#: src/screens/renumerateOrders.js:149
 msgid "Important:"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/renumerateOrders.js:87
+#: src/screens/renumerateOrders.js:150
 msgid "Before proceeding, please ensure you have created a complete backup of your database. This tool will modify existing order numbers and cannot be easily undone."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/renumerateOrders.js:93
+#: src/screens/renumerateOrders.js:156
 msgid "The starting order number will always be 1, and all orders will be numbered sequentially from there."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/faq.js:15
-msgid "I just enabled the plugin — why do my existing orders still show old numbers?"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/faq.js:16
-msgid "Existing orders are not modified automatically. The plugin applies custom order numbering only to new orders created after the settings are saved. To apply the same numbering format to existing orders, use the Renumerate Orders tool. This will reassign order numbers based on the current configuration."
-msgstr ""
-
-#: build/admin.js:1
 #: src/screens/faq.js:19
-msgid " I added a prefix or suffix, but it is not showing. What should I check?"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/faq.js:21
-msgid "Verify the following settings:"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/faq.js:22
-msgid "1. Prefix/Suffix option is enabled in the Prefix/Suffix Rules tab"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/faq.js:23
-msgid "2. The format includes {number} (for example: ORD-{number})"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/faq.js:24
-msgid "A static value without {number} will not generate a valid order number. After saving changes, create a test order to confirm the updated format."
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/faq.js:28
 msgid "What happens when I click “Renumber All Orders”? Can it be undone?"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/faq.js:30
+#: src/screens/faq.js:21
 msgid "This action reassigns order numbers for all existing orders based on the current configuration."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/faq.js:31
+#: src/screens/faq.js:22
 msgid "There is no built-in option to undo this operation."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/faq.js:32
+#: src/screens/faq.js:23
 msgid "After execution:"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/faq.js:33
+#: src/screens/faq.js:24
 msgid "1. All existing order numbers are replaced"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/faq.js:34
+#: src/screens/faq.js:25
 msgid "2. Order references in emails and invoices may no longer match"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/faq.js:35
+#: src/screens/faq.js:26
 msgid "3. External systems relying on order numbers may lose synchronization"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/faq.js:39
-msgid "I changed the Next Order Number and now see duplicate order numbers. How can this be fixed?"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/faq.js:41
-msgid "This occurs when the configured value overlaps with existing order numbers."
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/faq.js:42
-msgid "To resolve this:"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/faq.js:43
-msgid "1. Identify the latest order number in the store"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/faq.js:44
-msgid "2. Set “Next Order Number” to a value higher than the latest order"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/faq.js:45
-msgid "3. Save changes"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/faq.js:46
-msgid "New orders will follow the corrected sequence."
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/faq.js:50
-msgid "My license shows inactive even after entering the key. What should I check?"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/faq.js:52
-msgid "Check the following conditions:"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/faq.js:53
-msgid "1. No extra spaces are present in the license key"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/faq.js:54
-msgid "2. The license has not exceeded its activation limit"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/faq.js:55
-msgid "3. The server allows outbound requests for license validation"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/faq.js:56
-msgid "If the issue persists, contact support with the purchase order number and domain details."
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/faq.js:60
-msgid " What happens if I disable or uninstall the plugin?"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/faq.js:62
-msgid "Existing order numbers remain unchanged"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/faq.js:63
-msgid "1. If disabled — New orders will use WooCommerce default numbering"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/faq.js:64
-msgid "2. If uninstalled — Plugin settings are removed, but existing order numbers remain stored on orders"
-msgstr ""
-
-#: build/admin.js:1
-#: src/screens/faq.js:76
+#: src/screens/faq.js:74
 msgid "Frequently Asked Questions"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/faq.js:79
+#: src/screens/faq.js:77
 msgid "Find answers to the most common questions about Custom Order Numbers for WooCommerce."
 msgstr ""
 
@@ -811,6 +691,16 @@ msgstr ""
 msgid "Free Orders (PRO)"
 msgstr ""
 
+#: includes/class-core.php:98
+#: build/admin.js:1
+#: src/screens/renumerateOrders.js:65
+msgid "Renumeration complete. All order numbers have been updated."
+msgstr ""
+
+#: includes/class-core.php:111
+msgid "Custom order numbers are being renumbered in the background."
+msgstr ""
+
 #: build/admin.js:1
 #: src/components/optionsTable.js:121
 msgid "Upgrade to Pro to add more rules."
@@ -832,12 +722,77 @@ msgstr ""
 msgid "Upgrade to Pro"
 msgstr ""
 
-#: includes/class-core.php:98
-msgid "Renumeration complete. All order numbers have been updated."
+#: build/admin.js:1
+#: src/screens/renumerateOrders.js:166
+msgid "Renumbering orders…"
 msgstr ""
 
-#: includes/class-core.php:111
 #: build/admin.js:1
-#: src/screens/renumerateOrders.js:41
-msgid "Custom order numbers are being renumbered in the background."
+#: src/screens/faq.js:15
+msgid "I just enabled the plugin, but my existing orders still show their old order numbers. Why?"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:16
+msgid "Existing orders are not modified automatically. The plugin applies custom order numbering only to new orders created after the settings are saved. To apply the same numbering format to existing orders, use the Renumber Orders tool. This will reassign order numbers based on the current configuration."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:30
+msgid "I enabled custom order numbers, but new orders still do not start from 1. Why?"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:32
+msgid "New orders use the value configured in Next Order Number. If this setting contains a higher number, the sequence will continue from that value instead of starting from 1."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:36
+msgid "Why are my order numbers restarting automatically?"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:38
+msgid "Check the Auto-Reset Order Count setting. When enabled, the order number counter can restart daily, weekly, monthly, or yearly."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:42
+msgid "I changed my numbering settings, but only some orders are using them. Why?"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:44
+msgid "The Apply These Settings To option determines which orders use the current numbering configuration. Depending on the selected option, changes may apply only to new orders or to a specific range of orders."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:48
+msgid "Can I add a prefix to my order numbers?"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:50
+msgid "Yes. The Prefix & Suffix Rules tab allows you to add custom prefixes and date-based prefixes to your order numbers. "
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:54
+msgid "Can I add a suffix to my order numbers?"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:56
+msgid "Custom suffix rules are available in the Pro version."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:60
+msgid "Can I create prefixes based on products, categories, payment methods, or user roles?"
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/faq.js:62
+msgid "Conditional prefix and suffix rules based on products, categories, payment methods, countries, user roles, and other conditions are available in the Pro version."
 msgstr ""
