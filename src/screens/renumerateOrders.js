@@ -10,6 +10,7 @@ import {
     __experimentalHeading as Heading,
     Button,
     Notice,
+    ProgressBar,
     withNotices
 } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
@@ -22,6 +23,7 @@ function RenumerateOrders( { noticeOperations, noticeUI } ) {
     });
 
     const [ isRenumerating, setIsRenumerating ] = useState( false );
+    const [ progress, setProgress ] = useState( { processed: 0, total: 0 } );
 
     // Auto-dismiss notices after 4 seconds.
     useEffect( () => {
@@ -33,21 +35,30 @@ function RenumerateOrders( { noticeOperations, noticeUI } ) {
         }
     }, [ noticeUI ] );
 
-    // Poll batch-status while renumeration is running; show complete notice when done.
+    // Poll batch-status while renumeration is running; update progress bar.
     useEffect( () => {
         if ( ! isRenumerating ) return;
 
         let timeoutId;
         let cancelled = false;
-        let delay = 3000;
-        const maxDelay = 30000;
+        let delay = 2000;
+        const maxDelay = 10000;
 
         const poll = async () => {
             try {
                 const status = await getBatchStatus();
                 if ( cancelled ) return;
+
+                if ( status?.renumerate_total != null ) {
+                    setProgress( {
+                        processed: status.renumerate_processed ?? 0,
+                        total: status.renumerate_total,
+                    } );
+                }
+
                 if ( ! status?.renumerate_in_progress ) {
                     setIsRenumerating( false );
+                    setProgress( { processed: 0, total: 0 } );
                     noticeOperations.removeAllNotices();
                     noticeOperations.createNotice( {
                         status: 'success',
@@ -58,10 +69,11 @@ function RenumerateOrders( { noticeOperations, noticeUI } ) {
             } catch {
                 if ( ! cancelled ) {
                     setIsRenumerating( false );
+                    setProgress( { processed: 0, total: 0 } );
                 }
                 return;
             }
-            delay = Math.min( delay * 2, maxDelay );
+            delay = Math.min( delay * 1.5, maxDelay );
             timeoutId = setTimeout( poll, delay );
         };
 
@@ -79,11 +91,15 @@ function RenumerateOrders( { noticeOperations, noticeUI } ) {
             noticeOperations.removeAllNotices();
             if ( response.scheduled ) {
                 setIsRenumerating( true );
-                noticeOperations.createNotice( {
-                    status: 'info',
-                    content: __( 'Custom order numbers are being renumbered in the background.', 'custom-order-numbers-for-woocommerce' ),
-                } );
+                setProgress( { processed: 0, total: response.total ?? 0 } );
             } else {
+                if ( response.error ) {
+                    noticeOperations.createNotice( {
+                        status: 'error',
+                        content: __( `Error renumbering orders: ${ response.error }`, 'custom-order-numbers-for-woocommerce' ),
+                    } );
+                    return;
+                }
                 noticeOperations.createNotice( {
                     status: 'success',
                     content: __( `Renumeration complete. ${ response.total_renumerated } order(s) updated.`, 'custom-order-numbers-for-woocommerce' ),
@@ -105,6 +121,10 @@ function RenumerateOrders( { noticeOperations, noticeUI } ) {
             content: __( 'Error renumbering orders.', 'custom-order-numbers-for-woocommerce' ),
         } );
     };
+
+    const progressPercent = progress.total > 0
+        ? Math.min( Math.round( ( progress.processed / progress.total ) * 100 ), 100 )
+        : 0;
 
     return (
         <VStack style={ { margin: '30px' } }>
@@ -137,6 +157,18 @@ function RenumerateOrders( { noticeOperations, noticeUI } ) {
                             </VStack>
 
                             <div className="con-renumerate-divider"></div>
+
+                            { isRenumerating && (
+                                <VStack style={ { marginBottom: '20px' } }>
+                                    <Text isBlock={ true }>
+                                        { progress.total > 0
+                                            ? __( `Renumbering orders… ${ progress.processed } / ${ progress.total }`, 'custom-order-numbers-for-woocommerce' )
+                                            : __( 'Renumbering orders…', 'custom-order-numbers-for-woocommerce' )
+                                        }
+                                    </Text>
+                                    <ProgressBar value={ progress.total > 0 ? progressPercent : undefined } />
+                                </VStack>
+                            ) }
 
                             <HStack spacing={ 3 } expanded={ false } justify="left">
                                 <Button

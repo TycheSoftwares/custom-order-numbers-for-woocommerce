@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-22T06:42:53+00:00\n"
+"POT-Creation-Date: 2026-06-23T05:41:46+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: custom-order-numbers-for-woocommerce\n"
@@ -46,14 +46,12 @@ msgid "Guest"
 msgstr ""
 
 #: includes/class-core.php:98
-#: build/admin.js:1
-#: src/screens/renumerateOrders.js:54
 msgid "Renumeration complete. All order numbers have been updated."
 msgstr ""
 
 #: includes/class-core.php:111
 #: build/admin.js:1
-#: src/screens/renumerateOrders.js:84
+#: src/screens/renumerateOrders.js:41
 msgid "Custom order numbers are being renumbered in the background."
 msgstr ""
 
@@ -623,40 +621,40 @@ msgid "Are you sure you want to reset all rules settings to their default values
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/renumerateOrders.js:96
-#: src/screens/renumerateOrders.js:105
+#: src/screens/renumerateOrders.js:53
+#: src/screens/renumerateOrders.js:62
 msgid "Error renumbering orders."
 msgstr ""
 
 #: build/admin.js:1
 #: src/app.js:74
-#: src/screens/renumerateOrders.js:120
-#: src/screens/renumerateOrders.js:149
+#: src/screens/renumerateOrders.js:77
+#: src/screens/renumerateOrders.js:106
 msgid "Renumber Orders"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/renumerateOrders.js:122
+#: src/screens/renumerateOrders.js:79
 msgid "Use this tool to reassign order numbers to all your existing orders in sequence."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/renumerateOrders.js:129
+#: src/screens/renumerateOrders.js:86
 msgid "Important:"
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/renumerateOrders.js:130
+#: src/screens/renumerateOrders.js:87
 msgid "Before proceeding, please ensure you have created a complete backup of your database. This tool will modify existing order numbers and cannot be easily undone."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/renumerateOrders.js:135
+#: src/screens/renumerateOrders.js:92
 msgid "With the help of this tool, you can change the custom order numbers for all the existing orders in a sequence and will maintain the sequence for the upcoming orders also."
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/renumerateOrders.js:136
+#: src/screens/renumerateOrders.js:93
 msgid "The starting order number will always be 1, and all orders will be numbered sequentially from there."
 msgstr ""
 

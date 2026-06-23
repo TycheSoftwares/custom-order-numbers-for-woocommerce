@@ -125,10 +125,17 @@ class Admin_API_Settings extends Admin_API {
 			}
 		}
 
+		$total_raw            = get_transient( 'con_renumerate_total_orders' );
+		$processed_raw        = get_transient( 'con_renumerate_processed_count' );
+		$renumerate_total     = false !== $total_raw ? (int) $total_raw : null;
+		$renumerate_processed = false !== $processed_raw ? (int) $processed_raw : 0;
+
 		return self::return_response(
 			array(
 				'in_progress'            => $in_progress,
 				'renumerate_in_progress' => $renumerate_in_progress,
+				'renumerate_total'       => $renumerate_total,
+				'renumerate_processed'   => $renumerate_processed,
 			)
 		);
 	}
@@ -168,7 +175,8 @@ class Admin_API_Settings extends Admin_API {
 		}
 
 		if ( isset( $result['scheduled'] ) && $result['scheduled'] ) {
-			return self::return_response( array( 'scheduled' => true ) );
+			$total = false !== get_transient( 'con_renumerate_total_orders' ) ? (int) get_transient( 'con_renumerate_total_orders' ) : null;
+			return self::return_response( array( 'scheduled' => true, 'total' => $total ) );
 		}
 
 		return self::return_response(
