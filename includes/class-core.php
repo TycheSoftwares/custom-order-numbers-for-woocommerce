@@ -309,10 +309,45 @@ if ( ! class_exists( 'Tyche\CON\Core' ) ) :
 			}
 
 			as_unschedule_all_actions( 'con_renumerate_batch' );
+
+			$total = $this->get_total_order_count();
+			set_transient( 'con_renumerate_total_orders', $total, HOUR_IN_SECONDS * 2 );
+			delete_transient( 'con_renumerate_processed_count' );
+
 			set_transient( 'con_renumerate_batch_in_progress', true, HOUR_IN_SECONDS * 2 );
 			as_schedule_single_action( time(), 'con_renumerate_batch', array( 1 ), 'con' );
 
 			return array( 'scheduled' => true );
+		}
+
+		/**
+		 * Returns the total number of orders (and subscriptions if active) in the store.
+		 */
+		private function get_total_order_count() {
+			$subscriptions_active = in_array( 'woocommerce-subscriptions/woocommerce-subscriptions.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ), true );
+			$order_types          = $subscriptions_active ? array( 'shop_order', 'shop_subscription' ) : array( 'shop_order' );
+
+			if ( CON_Functions::con_wc_hpos_enabled() ) {
+				$result = wc_get_orders(
+					array(
+						'type'     => $order_types,
+						'status'   => 'any',
+						'limit'    => 1,
+						'paginate' => true,
+					)
+				);
+				return isset( $result->total ) ? (int) $result->total : 0;
+			} else {
+				$query = new \WP_Query(
+					array(
+						'post_type'      => $order_types,
+						'post_status'    => 'any',
+						'posts_per_page' => 1,
+						'fields'         => 'ids',
+					)
+				);
+				return (int) $query->found_posts;
+			}
 		}
 
 		/**
@@ -356,6 +391,8 @@ if ( ! class_exists( 'Tyche\CON\Core' ) ) :
 
 			if ( empty( $order_ids ) ) {
 				delete_transient( 'con_renumerate_batch_in_progress' );
+				delete_transient( 'con_renumerate_total_orders' );
+				delete_transient( 'con_renumerate_processed_count' );
 				set_transient( 'con_renumerate_complete', true, DAY_IN_SECONDS );
 				return;
 			}
@@ -364,10 +401,15 @@ if ( ! class_exists( 'Tyche\CON\Core' ) ) :
 				$this->add_order_number_meta( $order_id, true );
 			}
 
+			$processed = (int) get_transient( 'con_renumerate_processed_count' ) + count( $order_ids );
+			set_transient( 'con_renumerate_processed_count', $processed, HOUR_IN_SECONDS * 2 );
+
 			if ( count( $order_ids ) === $batch_size ) {
 				as_schedule_single_action( time(), 'con_renumerate_batch', array( $page + 1 ), 'con' );
 			} else {
 				delete_transient( 'con_renumerate_batch_in_progress' );
+				delete_transient( 'con_renumerate_total_orders' );
+				delete_transient( 'con_renumerate_processed_count' );
 				set_transient( 'con_renumerate_complete', true, DAY_IN_SECONDS );
 			}
 		}
