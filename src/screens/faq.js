@@ -12,17 +12,8 @@ import { __ } from '@wordpress/i18n';
 
 const faqs = [
     {
-        question: __( 'I just enabled the plugin — why do my existing orders still show old numbers?', 'custom-order-numbers-for-woocommerce' ),
-        answer: __( 'Existing orders are not modified automatically. The plugin applies custom order numbering only to new orders created after the settings are saved. To apply the same numbering format to existing orders, use the Renumerate Orders tool. This will reassign order numbers based on the current configuration.', 'custom-order-numbers-for-woocommerce' ),
-    },
-    {
-        question: __( ' I added a prefix or suffix, but it is not showing. What should I check?', 'custom-order-numbers-for-woocommerce' ),
-        answer: <>
-            <Text>{ __( 'Verify the following settings:', 'custom-order-numbers-for-woocommerce' ) }</Text>
-            <p>{ __( '1. Prefix/Suffix option is enabled in the Prefix/Suffix Rules tab', 'custom-order-numbers-for-woocommerce' ) }</p>
-            <p>{ __( '2. The format includes {number} (for example: ORD-{number})', 'custom-order-numbers-for-woocommerce' ) }</p>
-            <Text>{ __( 'A static value without {number} will not generate a valid order number. After saving changes, create a test order to confirm the updated format.', 'custom-order-numbers-for-woocommerce')}</Text>
-        </>
+        question: __( 'I just enabled the plugin, but my existing orders still show their old order numbers. Why?', 'custom-order-numbers-for-woocommerce' ),
+        answer: __( 'Existing orders are not modified automatically. The plugin applies custom order numbering only to new orders created after the settings are saved. To apply the same numbering format to existing orders, use the Renumber Orders tool. This will reassign order numbers based on the current configuration.', 'custom-order-numbers-for-woocommerce' ),
     },
     {
         question: __( 'What happens when I click “Renumber All Orders”? Can it be undone?', 'custom-order-numbers-for-woocommerce' ),
@@ -36,32 +27,39 @@ const faqs = [
         </>
     },
     {
-        question: __( 'I changed the Next Order Number and now see duplicate order numbers. How can this be fixed?', 'custom-order-numbers-for-woocommerce' ),
+        question: __( 'I enabled custom order numbers, but new orders still do not start from 1. Why?', 'custom-order-numbers-for-woocommerce' ),
         answer: <>
-            <Text>{ __('This occurs when the configured value overlaps with existing order numbers.', 'custom-order-numbers-for-woocommerce')}</Text>
-            <Text>{ __('To resolve this:', 'custom-order-numbers-for-woocommerce')}</Text>
-            <p>{ __('1. Identify the latest order number in the store', 'custom-order-numbers-for-woocommerce')}</p>
-            <p>{ __('2. Set “Next Order Number” to a value higher than the latest order', 'custom-order-numbers-for-woocommerce')}</p>
-            <p>{ __('3. Save changes', 'custom-order-numbers-for-woocommerce')}</p>
-            <Text>{ __( 'New orders will follow the corrected sequence.', 'custom-order-numbers-for-woocommerce')}</Text>
+            <Text>{ __('New orders use the value configured in Next Order Number. If this setting contains a higher number, the sequence will continue from that value instead of starting from 1.', 'custom-order-numbers-for-woocommerce')}</Text>
         </>
     },
     {
-        question: __( 'My license shows inactive even after entering the key. What should I check?', 'custom-order-numbers-for-woocommerce' ),
+        question: __( 'Why are my order numbers restarting automatically?', 'custom-order-numbers-for-woocommerce' ),
         answer: <>
-            <Text>{ __( 'Check the following conditions:', 'custom-order-numbers-for-woocommerce' )}</Text>
-            <p>{ __('1. No extra spaces are present in the license key', 'custom-order-numbers-for-woocommerce')}</p>
-            <p>{ __('2. The license has not exceeded its activation limit', 'custom-order-numbers-for-woocommerce')}</p>
-            <p>{ __('3. The server allows outbound requests for license validation', 'custom-order-numbers-for-woocommerce')}</p>
-            <Text>{ __( 'If the issue persists, contact support with the purchase order number and domain details.', 'custom-order-numbers-for-woocommerce')}</Text>
+            <Text>{ __( 'Check the Auto-Reset Order Count setting. When enabled, the order number counter can restart daily, weekly, monthly, or yearly.', 'custom-order-numbers-for-woocommerce' )}</Text>
         </>
     },
     {
-        question: __( ' What happens if I disable or uninstall the plugin?', 'custom-order-numbers-for-woocommerce' ),
+        question: __( 'I changed my numbering settings, but only some orders are using them. Why?', 'custom-order-numbers-for-woocommerce' ),
         answer: <>
-            <Text>{ __( 'Existing order numbers remain unchanged', 'custom-order-numbers-for-woocommerce' )}</Text>
-            <p>{ __( '1. If disabled — New orders will use WooCommerce default numbering', 'custom-order-numbers-for-woocommerce')}</p>
-            <p>{ __( '2. If uninstalled — Plugin settings are removed, but existing order numbers remain stored on orders', 'custom-order-numbers-for-woocommerce')}</p>
+            <Text>{ __( 'The Apply These Settings To option determines which orders use the current numbering configuration. Depending on the selected option, changes may apply only to new orders or to a specific range of orders.', 'custom-order-numbers-for-woocommerce' )}</Text>
+        </>
+    },
+    {
+        question: __( 'Can I add a prefix to my order numbers?', 'custom-order-numbers-for-woocommerce' ),
+        answer: <>
+            <Text>{ __( 'Yes. The Prefix & Suffix Rules tab allows you to add custom prefixes and date-based prefixes to your order numbers. ', 'custom-order-numbers-for-woocommerce' )}</Text>
+        </>
+    },
+    {
+        question: __( 'Can I add a suffix to my order numbers?', 'custom-order-numbers-for-woocommerce' ),
+        answer: <>
+            <Text>{ __( 'Custom suffix rules are available in the Pro version.', 'custom-order-numbers-for-woocommerce' )}</Text>
+        </>
+    },
+    {
+        question: __( 'Can I create prefixes based on products, categories, payment methods, or user roles?', 'custom-order-numbers-for-woocommerce' ),
+        answer: <>
+            <Text>{ __( 'Conditional prefix and suffix rules based on products, categories, payment methods, countries, user roles, and other conditions are available in the Pro version.', 'custom-order-numbers-for-woocommerce' )}</Text>
         </>
     },
 ];
