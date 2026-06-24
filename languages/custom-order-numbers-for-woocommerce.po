@@ -561,11 +561,6 @@ msgid "Before proceeding, please ensure you have created a complete backup of yo
 msgstr ""
 
 #: build/admin.js:1
-#: src/screens/renumerateOrders.js:156
-msgid "The starting order number will always be 1, and all orders will be numbered sequentially from there."
-msgstr ""
-
-#: build/admin.js:1
 #: src/screens/faq.js:19
 msgid "What happens when I click “Renumber All Orders”? Can it be undone?"
 msgstr ""
@@ -795,4 +790,9 @@ msgstr ""
 #: build/admin.js:1
 #: src/screens/faq.js:62
 msgid "Conditional prefix and suffix rules based on products, categories, payment methods, countries, user roles, and other conditions are available in the Pro version."
+msgstr ""
+
+#: build/admin.js:1
+#: src/screens/renumerateOrders.js:156
+msgid "All existing orders will be renumbered sequentially starting from the value set in 'Next Order Number'."
 msgstr ""

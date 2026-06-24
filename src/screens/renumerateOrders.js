@@ -153,7 +153,7 @@ function RenumerateOrders( { noticeOperations, noticeUI } ) {
 
                             <VStack style={ { marginBottom: '20px' } }>
                                 <Text isBlock={ true }>{ __( 'With the help of this tool, you can change the custom order numbers for all the existing orders in a sequence and will maintain the sequence for the upcoming orders also.', 'custom-order-numbers-for-woocommerce' ) }</Text>
-                                <Text isBlock={ true }>{ __( 'The starting order number will always be 1, and all orders will be numbered sequentially from there.', 'custom-order-numbers-for-woocommerce' ) }</Text>
+                                <Text isBlock={ true }>{ __( 'All existing orders will be renumbered sequentially starting from the value set in \'Next Order Number\'.', 'custom-order-numbers-for-woocommerce' ) }</Text>
                             </VStack>
 
                             <div className="con-renumerate-divider"></div>

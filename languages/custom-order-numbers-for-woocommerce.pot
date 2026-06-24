@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-23T06:57:01+00:00\n"
+"POT-Creation-Date: 2026-06-24T06:16:10+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: custom-order-numbers-for-woocommerce\n"
@@ -655,7 +655,7 @@ msgstr ""
 
 #: build/admin.js:1
 #: src/screens/renumerateOrders.js:156
-msgid "The starting order number will always be 1, and all orders will be numbered sequentially from there."
+msgid "All existing orders will be renumbered sequentially starting from the value set in 'Next Order Number'."
 msgstr ""
 
 #: build/admin.js:1
