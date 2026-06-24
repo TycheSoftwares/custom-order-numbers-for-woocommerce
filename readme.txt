@@ -152,6 +152,15 @@ $custom_order_number = $order->get_order_number(); //where $order is an order ob
 This plugin communicates with our tracking server to send usage data **only** if the user has explicitly opted in to usage tracking. For detailed information about what is tracked, please refer to our [usage tracking documentation](https://www.tychesoftwares.com/docs/woocommerce-custom-order-numbers/usage-tracking-order-numbers/).
 
 == Changelog ==
+
+= 2.0.0 - 24/06/2026 =
+* New - React-based admin interface for Settings, Prefix/Suffix rules, and FAQs pages.
+* Dev - Introduced a REST API layer (con/v1) for all admin data operations, with per-endpoint capability checks.
+* Dev - Plugin settings migrated from individual `alg_wc_pif_*` options to consolidated `con_general_settings` options.
+* Dev - Removed dead WooCommerce < 3.0 functions.
+* Tweak - Updated for compatibility with WordPress 7.0.
+* Tweak - Updated for compatibility with WooCommerce 10.8.1.
+
 = 1.13.0 - 29/01/2026 =
 * Enhancement - Added an Order Number Date Prefix setting to prepend the order date to custom order numbers.
 

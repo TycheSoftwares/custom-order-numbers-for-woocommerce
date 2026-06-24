@@ -1,4 +1,24 @@
 *** Custom Order Numbers for WooCommerce ***
+2026-06-24 - version 2.0.0
+* New - React-based admin interface for Settings, Prefix/Suffix rules, and FAQs pages.
+* Dev - Introduced a REST API layer (con/v1) for all admin data operations, with per-endpoint capability checks.
+* Dev - Plugin settings migrated from individual `alg_wc_pif_*` options to consolidated `con_general_settings` options.
+* Dev - Removed dead WooCommerce < 3.0 functions.
+* Tweak - Updated for compatibility with WordPress 7.0.
+* Tweak - Updated for compatibility with WooCommerce 10.8.1.
+
+2026-01-29 - version 1.13.0
+* Enhancement - Added an Order Number Date Prefix setting to prepend the order date to custom order numbers.
+
+2026-01-07 - version 1.12.0
+* Tweak - Updated for compatibility with WordPress 6.9.
+* Tweak - Updated for compatibility with WooCommerce 10.4.3.
+
+2025-11-18 - version 1.11.1
+* Fix - Cross Site Request Forgery (CSRF) vulnerability.
+* Tweak - Update compatibility with WordPress 6.8.3
+* Tweak - Update compatibility with WooCommerce 10.3.5
+
 2025-06-04 - version 1.11.0
 * Fix - Uncaught TypeError: Unsupported operand types: string + int on the checkout page.
 * Tweak - Update for compatibility with WordPress 6.8.1.
