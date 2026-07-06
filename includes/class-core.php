@@ -967,7 +967,6 @@ if ( ! class_exists( 'Tyche\CON\Core' ) ) :
 							if ( $this->con_wc_hpos_enabled() ) {
 								$order->update_meta_data( '_alg_wc_custom_order_number', $current_order_number );
 								$order->update_meta_data( '_alg_wc_full_custom_order_number', $full_custom_order_number );
-								$order->save();
 							} else {
 								update_post_meta( $order_id, '_alg_wc_custom_order_number', $current_order_number );
 								update_post_meta( $order_id, '_alg_wc_full_custom_order_number', $full_custom_order_number );
