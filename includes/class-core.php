@@ -880,11 +880,13 @@ if ( ! class_exists( 'Tyche\CON\Core' ) ) :
 					}
 
 					$data  = array(
-						'{prefix}'      => $prefix_data['custom'],
-						'{date_prefix}' => ( $prefix_data['date'] ? date_i18n( $prefix_data['date'], $custom_order_timestamp ) : '' ),
-						'{number}'      => sprintf( '%0' . $order_number_width . 's', $custom_order_number_by_width ),
-						'{suffix}'      => '',
-						'{date_suffix}' => '',
+						'{dynamic_prefix}' => $prefix_data['custom'],
+						'{prefix}'         => $prefix_data['custom'],
+						'{date_prefix}'    => ( $prefix_data['date'] ? date_i18n( $prefix_data['date'], $custom_order_timestamp ) : '' ),
+						'{number}'         => sprintf( '%0' . $order_number_width . 's', $custom_order_number_by_width ),
+						'{suffix}'         => '',
+						'{date_suffix}'    => '',
+						'{dynamic_suffix}' => '',
 					);
 
 					$final = str_replace( array_keys( $data ), $data, $template );
