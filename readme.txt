@@ -12,29 +12,40 @@ Set Sequential order numbers in WooCommerce. Custom order number with prefixes c
 
 == Description ==
 
-> ###🚀&nbsp;&nbsp;New Launch: Flexi BOGO for WooCommerce
->
-> The only BOGO plugin with a revenue tracking feature. **Now, at an attractive introductory price**. [Check out our new plugin here](https://www.tychesoftwares.com/products/woocommerce-flexi-bogo-plugin/?utm_source=wprepo&utm_medium=pluginpagetop&utm_campaign=CustomNumbers).
+WooCommerce assigns order numbers based on the WordPress post ID, which means they aren't always sequential and can contain gaps caused by deleted posts, pages, or other content. This can make order management, accounting, customer communication, and reporting more difficult.
 
-This plugin lets you set [custom order numbers](https://www.tychesoftwares.com/store/premium-plugins/custom-order-numbers-woocommerce/?utm_source=wprepo&utm_medium=topprolink&utm_campaign=CustomNumbers) in WooCommerce.
+**Custom Order Numbers for WooCommerce** gives you complete control over how order numbers are generated. Create sequential order numbers, use the WooCommerce order ID, or generate pseudorandom order numbers based on a CRC32 hash. You can also add prefixes, include the order date in the order number, choose a custom starting number, and automatically reset the numbering sequence on a daily, monthly, or yearly basis.
 
-= Main Features =
-* WooCommerce order numbers can be **sequential**, **random** or by **order ID**.
-* Sequential counter can be set to **automatically reset** on daily, monthly or yearly basis.
-* Custom numbers will be assigned to **new orders** automatically.
-* There is also a tool to **renumerate** (i.e. recount) existing orders.
-* Optionally you can add **prefix** to order number.
-* Add the **order date** as a prefix to custom order numbers.
-* You can also enable **order tracking** by custom number.
-* Optionally you can enable **admin order search** by custom number.
+= Key Features =
 
-### Check out the PRO version of [Custom Order Numbers for WooCommerce plugin](https://www.tychesoftwares.com/store/premium-plugins/custom-order-numbers-woocommerce/?utm_source=wprepo&utm_medium=prolink&utm_campaign=CustomNumbers).
-= Features of Premium Version =
-* Order number **template**.
-* Order number **width**.
-* Order number custom **suffix**.
-* Order number **date suffix**.
-* **Manual** order number counter.
+### Generate Order Numbers in a Sequence
+Choose how new order numbers are generated. Use sequential numbering, WooCommerce Order IDs, or pseudorandom (CRC32 hash) values depending on your business requirements.
+
+### Continue Your Existing Numbering Sequence
+Migrating from another platform? Starting a new financial year? Choose the number you'd like WooCommerce to begin using for future orders.
+
+### Automatically Reset Order Numbers
+Restart your numbering sequence automatically to match your business workflow.
+
+You can reset order numbers:
+* Daily
+* Monthly
+* Yearly
+
+This is particularly useful for accounting, financial reporting, and yearly record keeping.
+
+### Add Meaningful Prefixes
+Make order numbers easier to identify by adding:
+* Custom text prefixes
+* Order date as a prefix
+
+For example: **WEB-10025**, **2026-10025**
+
+### Renumber Existing Orders
+Already have WooCommerce orders? Use the built-in Renumerate Orders tool to assign custom order numbers to your existing orders, creating a consistent numbering system across your store.
+
+### Search and Track Custom Order Numbers Easily
+Use custom order numbers to quickly find WooCommerce orders in the admin dashboard. Customers can also track their orders through the standard WooCommerce Order Tracking page by entering their custom order number.
 
 ### Compatibility With Invoice Plugins:
 
@@ -45,41 +56,72 @@ Custom Order Numbers plugin is compatible with all popular invoice plugins such 
 * Invoices for WooCommerce
 * WooCommerce PDF Invoices & Packing Slips
 * Booster for Woocommerce
-* Challan – PDF Invoice & Packing Slip for WooCommerce
+* Challan â€“ PDF Invoice & Packing Slip for WooCommerce
 
-### Some of our other Pro plugins
+= Common Use Cases =
 
-1. **[Flexi BOGO for WooCommerce](https://www.tychesoftwares.com/products/woocommerce-flexi-bogo-plugin/?utm_source=wprepo&utm_medium=link&utm_campaign=CustomNumbers "Flexi BOGO for WooCommerce")**
+Custom Order Numbers for WooCommerce is ideal for stores that want to:
+* Create sequential WooCommerce order numbers
+* Continue order numbering after migrating from another ecommerce platform
+* Add branded prefixes to order numbers
+* Reset order numbers every month or year
+* Organize orders for accounting or tax purposes
+* Allow customers to track orders using custom order numbers
+* Display custom order numbers on invoices and order documents
 
-1. **[Abandoned Cart Pro for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/woocommerce-abandoned-cart-pro/?utm_source=wprepo&utm_medium=link&utm_campaign=CustomNumbers "Abandoned Cart Pro for WooCommerce")**
+= Documentation & Support =
 
-2. **[Booking & Appointment Plugin for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/woocommerce-booking-plugin/?utm_source=wprepo&utm_medium=link&utm_campaign=CustomNumbers "Booking & Appointment Plugin for WooCommerce")**
+* Visit the [WordPress support forums](https://wordpress.org/support/plugin/custom-order-numbers-for-woocommerce/)
+* Check the [documentation](https://www.tychesoftwares.com/docs/woocommerce-custom-order-numbers/) for common answers
+* Try the [live demo](https://app.instawp.io/launch?d=v1&t=custom-order-numbers-for-woocommerce) to see how the plugin works on the storefront.
 
-3. **[Order Delivery Date Pro for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=wprepo&utm_medium=link&utm_campaign=CustomNumbers "Order Delivery Date Pro for WooCommerce")**
+If you find the plugin useful, a **â­ 5-star rating** is always appreciated â€” it helps other store owners discover the plugin.
 
-4. **[Product Delivery Date Pro for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/product-delivery-date-pro-for-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=CustomNumbers "Product Delivery Date Pro for WooCommerce")**
+= Looking for More Advanced Features? =
 
-5. **[Deposits For WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/deposits-for-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=CustomNumbers "Deposits For WooCommerce")**
+Upgrade to [Custom Order Numbers for WooCommerce Pro](https://www.tychesoftwares.com/products/woocommerce-custom-order-numbers-plugin/) to unlock advanced order number templates, custom suffixes, configurable order number width, conditional prefixes and suffixes, manual order number counters, and additional customization options.
 
-6. **[Payment Gateway Based Fees and Discounts for WooCommerce - Pro](https://www.tychesoftwares.com/store/premium-plugins/payment-gateway-based-fees-and-discounts-for-woocommerce-plugin/?utm_source=wprepo&utm_medium=link&utm_campaign=CustomNumbers "Payment Gateway Based Fees and Discounts for WooCommerce - Pro")**
+See the complete Lite vs Pro comparison: [https://www.tychesoftwares.com/differences-between-pro-and-lite-versions-of-custom-order-numbers-for-woocommerce-plugin/](https://www.tychesoftwares.com/differences-between-pro-and-lite-versions-of-custom-order-numbers-for-woocommerce-plugin/)
 
-7. **[Custom Order Status for WooCommerce - Pro](https://www.tychesoftwares.com/store/premium-plugins/custom-order-status-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=CustomNumbers "Custom Order Status for WooCommerce - Pro")**
+= About Tyche Softwares =
 
-8. **[Product Input Fields for WooCommerce - Pro](https://www.tychesoftwares.com/store/premium-plugins/product-input-fields-for-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=CustomNumbers "Product Input Fields for WooCommerce - Pro")**
+Tyche Softwares has been building WooCommerce plugins since 2009, helping merchants simplify order management, delivery scheduling, pricing, checkout customization, product personalization, and other essential ecommerce workflows.
 
-9. **[Call for Price for WooCommerce - Pro](https://www.tychesoftwares.com/store/premium-plugins/woocommerce-call-for-price-plugin/?utm_source=wprepo&utm_medium=link&utm_campaign=CustomNumbers "Call for Price for WooCommerce - Pro")**
+= Explore More WooCommerce Plugins =
 
-10. **[Price based on User Role for WooCommerce - Pro](https://www.tychesoftwares.com/store/premium-plugins/price-user-role-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=CustomNumbers "Price based on User Role for WooCommerce - Pro")**
+Tyche Softwares also develops plugins for abandoned cart recovery, order delivery scheduling, bookings, invoices and packing slips, custom order statuses, product input fields, BOGO offers, payment gateway fees, call for price, currency management, and other WooCommerce enhancements.
 
-11. **[Currency per Product for WooCommerce - Pro](https://www.tychesoftwares.com/store/premium-plugins/currency-per-product-for-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=CustomNumbers "Currency per Product for WooCommerce - Pro")**
+**Some of our Pro plugins:**
 
-### Some of our other free plugins
+1. **[Flexi BOGO for WooCommerce](https://www.tychesoftwares.com/products/woocommerce-flexi-bogo-plugin/?utm_source=wprepo&utm_medium=link&utm_campaign=WCDeliveryNotes "Flexi BOGO for WooCommerce")**
+
+2. **[Abandoned Cart Pro for WooCommerce](https://www.tychesoftwares.com/products/woocommerce-abandoned-cart-pro-plugin/?utm_source=wprepo&utm_medium=link&utm_campaign=WCDeliveryNotes "Abandoned Cart Pro for WooCommerce")**
+
+3. **[Booking & Appointment Plugin for WooCommerce](https://www.tychesoftwares.com/products/woocommerce-booking-and-appointment-plugin/?utm_source=wprepo&utm_medium=link&utm_campaign=WCDeliveryNotes "Booking & Appointment Plugin for WooCommerce")**
+
+4. **[Order Delivery Date Pro for WooCommerce](https://www.tychesoftwares.com/products/woocommerce-order-delivery-date-pro-plugin/?utm_source=wprepo&utm_medium=link&utm_campaign=WCDeliveryNotes "Order Delivery Date Pro for WooCommerce")**
+
+5. **[Product Delivery Date Pro for WooCommerce](https://www.tychesoftwares.com/products/woocommerce-product-delivery-date-pro-plugin/?utm_source=wprepo&utm_medium=link&utm_campaign=WCDeliveryNotes "Product Delivery Date Pro for WooCommerce")**
+
+6. **[Deposits For WooCommerce](https://www.tychesoftwares.com/products/woocommerce-deposit-plugin/?utm_source=wprepo&utm_medium=link&utm_campaign=WCDeliveryNotes "Deposits For WooCommerce")**
+
+7. **[Payment Gateway Based Fees and Discounts for WooCommerce - Pro](https://www.tychesoftwares.com/products/woocommerce-payment-gateway-based-fees-and-discounts-plugin/?utm_source=wprepo&utm_medium=link&utm_campaign=WCDeliveryNotes "Payment Gateway Based Fees and Discounts for WooCommerce - Pro")**
+
+8. **[Custom Order Status for WooCommerce - Pro](https://www.tychesoftwares.com/products/woocommerce-custom-order-status-plugin/?utm_source=wprepo&utm_medium=link&utm_campaign=WCDeliveryNotes "Custom Order Status for WooCommerce - Pro")**
+
+9. **[Product Input Fields for WooCommerce - Pro](https://www.tychesoftwares.com/products/woocommerce-product-input-fields-plugin/?utm_source=wprepo&utm_medium=link&utm_campaign=WCDeliveryNotes "Product Input Fields for WooCommerce - Pro")**
+
+10. **[Call for Price for WooCommerce - Pro](https://www.tychesoftwares.com/products/woocommerce-call-for-price-plugin/?utm_source=wprepo&utm_medium=link&utm_campaign=WCDeliveryNotes "Call for Price for WooCommerce - Pro")**
+
+11. **[Price based on User Role for WooCommerce - Pro](https://www.tychesoftwares.com/products/woocommerce-price-user-role-plugin/?utm_source=wprepo&utm_medium=link&utm_campaign=WCDeliveryNotes "Price based on User Role for WooCommerce - Pro")**
+
+12. **[Currency per Product for WooCommerce - Pro](https://www.tychesoftwares.com/products/woocommerce-currency-per-product-plugin/?utm_source=wprepo&utm_medium=link&utm_campaign=WCDeliveryNotes "Currency per Product for WooCommerce - Pro")**
+
+**Some of our other free plugins:**
 
 1. **[Abandoned Cart for WooCommerce](https://wordpress.org/plugins/woocommerce-abandoned-cart/ "Abandoned Cart for WooCommerce")**
 
 2. **[Order Delivery Date for WooCommerce - Lite](https://wordpress.org/plugins/order-delivery-date-for-woocommerce/ "Order Delivery Date for WooCommerce - Lite")**
-
-3. **[Print Invoice & Delivery Notes for WooCommerce](https://wordpress.org/plugins/woocommerce-delivery-notes/ "Print Invoice & Delivery Notes for WooCommerce")**
 
 3. **[Product Delivery Date for WooCommerce - Lite](https://wordpress.org/plugins/product-delivery-date-for-woocommerce-lite/ "Product Delivery Date for WooCommerce")**
 
@@ -108,6 +150,18 @@ Custom Order Numbers plugin is compatible with all popular invoice plugins such 
 
 == Frequently Asked Questions ==
 
+= Why aren't WooCommerce order numbers sequential? =
+
+WooCommerce uses the WordPress post ID as the order number by default. Since posts, pages, products, and orders all share the same ID sequence, order numbers often contain gaps.
+
+= Can customers track orders using custom order numbers? =
+
+Yes. Customers can use the assigned custom order number together with their billing email address on the WooCommerce Order Tracking page.
+
+= Does the plugin work with invoice plugins? =
+
+Yes. The plugin is compatible with many popular WooCommerce invoice plugins, allowing invoices to display custom order numbers instead of the default WooCommerce order ID.
+
 = How can I use custom order numbers instead of default WooCommerce order numbers in third-party plugins like Invoice plugins, Integration plugins, etc.? =
 
 When you use the Custom Order Number Lite plugin, in the Database, the original Order ID created by WooCommerce remains unchanged because that Order ID is used for many core functions and by multiple plugins and themes.
@@ -135,7 +189,7 @@ This is not possible in the Lite plugin. But using the [Pro version](https://www
 
 = If somehow the sequential order number breaks down, what should be done to put all orders in a correct sequence? = 
 
-Custom Order Numbers plugin has a tool called ‘Renumerate Orders’. Using this tool, you can easily renumerate all the existing orders in a correct sequence.
+Custom Order Numbers plugin has a tool called â€˜Renumerate Ordersâ€™. Using this tool, you can easily renumerate all the existing orders in a correct sequence.
 
 = Is it possible to add prefix/suffix based on different user roles? =
 
@@ -150,6 +204,14 @@ $custom_order_number = $order->get_order_number(); //where $order is an order ob
 
 == External Services ==
 This plugin communicates with our tracking server to send usage data **only** if the user has explicitly opted in to usage tracking. For detailed information about what is tracked, please refer to our [usage tracking documentation](https://www.tychesoftwares.com/docs/woocommerce-custom-order-numbers/usage-tracking-order-numbers/).
+
+== Screenshots ==
+
+1. Auto-reset order counter settings â€” automatically reset the order number counter daily, weekly, monthly, or yearly, with a configurable reset counter value.
+2. Renumber Orders tool â€” reassign custom order numbers to all existing orders in sequence.
+3. General settings with sequential order numbering enabled, and the resulting sequential order numbers shown on the WooCommerce Orders page.
+4. Custom order numbers with prefixes (e.g. product or region-based) shown on the WooCommerce Orders page.
+5. General settings page â€” enable Custom Order Numbers, choose the order numbers counter, and set the next order number.
 
 == Changelog ==
 
@@ -202,12 +264,12 @@ This plugin communicates with our tracking server to send usage data **only** if
 * Fix - Fixed Cross Site Request Forgery (CSRF) vulnerability.
 
 = 1.6.0 - 22/08/2023 =
-* Fix – Fixed Compatibility with PHP 8.2.
+* Fix â€“ Fixed Compatibility with PHP 8.2.
 * Fix - Fixed fatal error when users have a large number orders & the plugin tries to update them.
 * Fix - The order number is not in sequence while we create new order manually, This is fixed now.
 
 = 1.5.0 - 27/06/2023 =
-* Enhancement – You can now choose to apply the prefix to new orders, from a past date, from a certain order ID or to all orders.
+* Enhancement â€“ You can now choose to apply the prefix to new orders, from a past date, from a certain order ID or to all orders.
 * Enhancement - Added deactivation survey v2.
 * Fix - While Renumerating the orders, got fatal error. This is fixed now.
 
