@@ -887,6 +887,19 @@ if ( ! class_exists( 'Tyche\CON\Core' ) ) :
 						'{suffix}'         => '',
 						'{date_suffix}'    => '',
 						'{dynamic_suffix}' => '',
+						// Placeholders for future expansion or additional rules.
+						'{product_prefix}'        => '',
+						'{category_prefix}'       => '',
+						'{user_role_prefix}'      => '',
+						'{payment_method_prefix}' => '',
+						'{country_prefix}'        => '',
+						'{free_orders_prefix}'    => '',
+						'{product_suffix}'        => '',
+						'{category_suffix}'       => '',
+						'{user_role_suffix}'      => '',
+						'{payment_method_suffix}' => '',
+						'{country_suffix}'        => '',
+						'{free_orders_suffix}'    => '',
 					);
 
 					$final = str_replace( array_keys( $data ), $data, $template );
