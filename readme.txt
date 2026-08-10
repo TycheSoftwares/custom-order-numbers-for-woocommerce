@@ -2,8 +2,8 @@
 Contributors: tychesoftwares
 Tags: woocommerce, custom order numbers, sequential order numbers
 Requires at least: 4.4
-Tested up to: 7.0.0
-Stable tag: 2.0.0
+Tested up to: 7.0.3
+Stable tag: 2.0.1
 Requires PHP: 7.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -152,6 +152,10 @@ $custom_order_number = $order->get_order_number(); //where $order is an order ob
 This plugin communicates with our tracking server to send usage data **only** if the user has explicitly opted in to usage tracking. For detailed information about what is tracked, please refer to our [usage tracking documentation](https://www.tychesoftwares.com/docs/woocommerce-custom-order-numbers/usage-tracking-order-numbers/).
 
 == Changelog ==
+
+= 2.0.1 - 10/08/2026 =
+* Fix - Fatal error occurs when creating a manual order with HPOS enabled.
+* Fix - Dynamic prefix and suffix placeholders are displayed in newly generated order numbers when switching from the Pro version to the Lite version.
 
 = 2.0.0 - 24/06/2026 =
 * New - React-based admin interface for Settings, Prefix/Suffix rules, and FAQs pages.
