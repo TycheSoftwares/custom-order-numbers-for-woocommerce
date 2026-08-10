@@ -28,7 +28,7 @@ final class Custom_Order_Numbers {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-	protected static $plugin_version = '2.0.0';
+	protected static $plugin_version = '2.0.1';
 
 	/**
 	 * Minimum version of WordPress required.

@@ -1,4 +1,8 @@
 *** Custom Order Numbers for WooCommerce ***
+2026-08-10 - version 2.0.1
+* Fix - Fatal error occurs when creating a manual order with HPOS enabled.
+* Fix - Dynamic prefix and suffix placeholders are displayed in newly generated order numbers when switching from the Pro version to the Lite version.
+
 2026-06-24 - version 2.0.0
 * New - React-based admin interface for Settings, Prefix/Suffix rules, and FAQs pages.
 * Dev - Introduced a REST API layer (con/v1) for all admin data operations, with per-endpoint capability checks.
