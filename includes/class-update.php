@@ -100,6 +100,10 @@ class Update {
 			),
 		);
 
+		$existing_settings = get_option( 'con_general_settings', array() );
+		if ( ! empty( $existing_settings ) ) {
+			$general_settings = array_merge( $general_settings, $existing_settings );
+		}
 		update_option( 'con_general_settings', $general_settings );
 	}
 
