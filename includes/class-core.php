@@ -682,59 +682,67 @@ if ( ! class_exists( 'Tyche\CON\Core' ) ) :
 					$matched_sequential_rule = null;
 					$current_order_number    = 0;
 
-					// Fallback: Global sequential.
-					// Acquire a named MySQL lock to prevent race conditions when two checkout
-					// processes read the same counter value and assign duplicate order numbers.
 					global $wpdb;
-					$lock_name    = 'con_sequential_counter_lock';
-					$lock_timeout = 10; // seconds to wait for the lock.
-					$lock_result  = $wpdb->get_var( $wpdb->prepare( 'SELECT GET_LOCK(%s, %d)', $lock_name, $lock_timeout ) );//phpcs:ignore
+					$wpdb->query( 'START TRANSACTION' ); //phpcs:ignore
+					$wp_options_table    = $wpdb->prefix . 'options';
+					$con_settings_option = 'con_general_settings';
+					$result_select       = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM `' . $wpdb->prefix . 'options` WHERE option_name = %s FOR UPDATE', $con_settings_option ) ); //phpcs:ignore
 
-					if ( '1' !== (string) $lock_result ) {
-						// Could not acquire the lock within the timeout — bail out safely.
-						return false;
-					}
+					if ( null !== $result_select ) {
+						$con_settings = maybe_unserialize( $result_select->option_value );
+						if ( ! is_array( $con_settings ) ) {
+							$con_settings = array();
+						}
+						$current_counter = array_key_exists( 'counter', $con_settings ) ? $con_settings['counter'] : null;
 
-					$current_counter = CON_Functions::get_setting( 'counter', null );
-
-					if ( NULL != $current_counter ) {//phpcs:ignore
-						$current_order_number = $this->maybe_reset_sequential_counter( $current_counter, $order_id );
-						$result_update        = CON_Functions::update_setting( 'counter', $current_order_number + 1 );
-
-						if ( NULL != $result_update || $current_counter == ( $current_order_number  ) ) {//phpcs:ignore
-							$custom_prefix = CON_Functions::get_rule_prefix_by_type( 'custom' );
-
-							$full_custom_order_number = apply_filters(
-								'alg_wc_custom_order_numbers',
-								sprintf( '%s%s', do_shortcode( $custom_prefix ), $current_order_number ),
-								'value',
-								array(
-									'order_timestamp'   => $order_timestamp,
-									'order_number_meta' => $current_order_number,
-									'order_number_sku'  => $sku_new,
-									'free_order'        => $free_order,
-									'order_object'      => $order,
-								)
+						if ( null !== $current_counter ) {
+							$current_order_number    = (int) $this->maybe_reset_sequential_counter( $current_counter, $order_id );
+							$con_settings['counter'] = $current_order_number + 1;
+							$result_update           = $wpdb->update( // phpcs:ignore
+								$wp_options_table,
+								array( 'option_value' => maybe_serialize( $con_settings ) ),
+								array( 'option_name' => $con_settings_option )
 							);
 
-							if ( $this->con_wc_hpos_enabled() ) {
-								$order->update_meta_data( '_alg_wc_custom_order_number', $current_order_number );
-								$order->update_meta_data( '_alg_wc_full_custom_order_number', $full_custom_order_number );
-								$order->save();
+							if ( false !== $result_update ) {
+								$custom_prefix = CON_Functions::get_rule_prefix_by_type( 'custom' );
+
+								$full_custom_order_number = apply_filters(
+									'alg_wc_custom_order_numbers',
+									sprintf( '%s%s', do_shortcode( $custom_prefix ), $current_order_number ),
+									'value',
+									array(
+										'order_timestamp'   => $order_timestamp,
+										'order_number_meta' => $current_order_number,
+										'order_number_sku'  => $sku_new,
+										'free_order'        => $free_order,
+										'order_object'      => $order,
+									)
+								);
+
+								$wpdb->query( 'COMMIT' ); //phpcs:ignore
+								wp_cache_delete( $con_settings_option, 'options' );
+
+								if ( $this->con_wc_hpos_enabled() ) {
+									$order->update_meta_data( '_alg_wc_custom_order_number', $current_order_number );
+									$order->update_meta_data( '_alg_wc_full_custom_order_number', $full_custom_order_number );
+									$order->save();
+								} else {
+									update_post_meta( $order_id, '_alg_wc_custom_order_number', $current_order_number );
+									update_post_meta( $order_id, '_alg_wc_full_custom_order_number', $full_custom_order_number );
+								}
 							} else {
-								update_post_meta( $order_id, '_alg_wc_custom_order_number', $current_order_number );
-								update_post_meta( $order_id, '_alg_wc_full_custom_order_number', $full_custom_order_number );
+								$wpdb->query( 'ROLLBACK' ); //phpcs:ignore
+								return false;
 							}
 						} else {
-							$wpdb->query( $wpdb->prepare( 'SELECT RELEASE_LOCK(%s)', $lock_name ) );//phpcs:ignore
+							$wpdb->query( 'ROLLBACK' ); //phpcs:ignore
 							return false;
 						}
 					} else {
-						$wpdb->query( $wpdb->prepare( 'SELECT RELEASE_LOCK(%s)', $lock_name ) );//phpcs:ignore
+						$wpdb->query( 'ROLLBACK' ); //phpcs:ignore
 						return false;
 					}
-
-					$wpdb->query( $wpdb->prepare( 'SELECT RELEASE_LOCK(%s)', $lock_name ) );//phpcs:ignore
 				} elseif ( 'hash_crc32' === $counter_type ) {
 					if ( CON_Functions::get_setting( 'include_character_enabled', false ) ) {
 						$current_order_number = sprintf( '%x', crc32( $order_id ) );
@@ -945,57 +953,66 @@ if ( ! class_exists( 'Tyche\CON\Core' ) ) :
 				}
 
 				if ( 'sequential' === $counter_type ) {
-					// Acquire a named MySQL lock to prevent race conditions when two checkout
-					// processes read the same counter value and assign duplicate order numbers.
 					global $wpdb;
-					$lock_name    = 'con_sequential_counter_lock';
-					$lock_timeout = 10; // seconds to wait for the lock.
-					$lock_result  = $wpdb->get_var( $wpdb->prepare( 'SELECT GET_LOCK(%s, %d)', $lock_name, $lock_timeout ) );//phpcs:ignore
+					$wpdb->query( 'START TRANSACTION' ); //phpcs:ignore
+					$wp_options_table    = $wpdb->prefix . 'options';
+					$con_settings_option = 'con_general_settings';
+					$result_select       = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM `' . $wpdb->prefix . 'options` WHERE option_name = %s FOR UPDATE', $con_settings_option ) ); //phpcs:ignore
 
-					if ( '1' !== (string) $lock_result ) {
-						// Could not acquire the lock within the timeout — bail out safely.
-						return false;
-					}
+					if ( null !== $result_select ) {
+						$con_settings = maybe_unserialize( $result_select->option_value );
+						if ( ! is_array( $con_settings ) ) {
+							$con_settings = array();
+						}
+						$current_counter = array_key_exists( 'counter', $con_settings ) ? $con_settings['counter'] : null;
 
-					$current_counter = CON_Functions::get_setting( 'counter', null );
-
-					if ( NULL != $current_counter ) {//phpcs:ignore
-						$current_order_number = $this->maybe_reset_sequential_counter( $current_counter, $order_id );
-						$result_update        = CON_Functions::update_setting( 'counter', $current_order_number + 1 );
-
-						if ( NULL != $result_update || $current_counter == ( $current_order_number  ) ) {//phpcs:ignore
-							$custom_prefix = CON_Functions::get_rule_prefix_by_type( 'custom' );
-
-							$full_custom_order_number = apply_filters(
-								'alg_wc_custom_order_numbers',
-								sprintf( '%s%s', do_shortcode( $custom_prefix ), $current_order_number ),
-								'value',
-								array(
-									'order_timestamp'   => $order_timestamp,
-									'order_number_meta' => $current_order_number,
-									'order_number_sku'  => $sku_new,
-									'free_order'        => $free_order,
-									'order_object'      => $order,
-								)
+						if ( null !== $current_counter ) {
+							$current_order_number    = (int) $this->maybe_reset_sequential_counter( $current_counter, $order_id );
+							$con_settings['counter'] = $current_order_number + 1;
+							$result_update           = $wpdb->update( // phpcs:ignore
+								$wp_options_table,
+								array( 'option_value' => maybe_serialize( $con_settings ) ),
+								array( 'option_name' => $con_settings_option )
 							);
 
-							if ( $this->con_wc_hpos_enabled() ) {
-								$order->update_meta_data( '_alg_wc_custom_order_number', $current_order_number );
-								$order->update_meta_data( '_alg_wc_full_custom_order_number', $full_custom_order_number );
+							if ( false !== $result_update ) {
+								$custom_prefix = CON_Functions::get_rule_prefix_by_type( 'custom' );
+
+								$full_custom_order_number = apply_filters(
+									'alg_wc_custom_order_numbers',
+									sprintf( '%s%s', do_shortcode( $custom_prefix ), $current_order_number ),
+									'value',
+									array(
+										'order_timestamp'   => $order_timestamp,
+										'order_number_meta' => $current_order_number,
+										'order_number_sku'  => $sku_new,
+										'free_order'        => $free_order,
+										'order_object'      => $order,
+									)
+								);
+
+								$wpdb->query( 'COMMIT' ); //phpcs:ignore
+								wp_cache_delete( $con_settings_option, 'options' );
+
+								if ( $this->con_wc_hpos_enabled() ) {
+									$order->update_meta_data( '_alg_wc_custom_order_number', $current_order_number );
+									$order->update_meta_data( '_alg_wc_full_custom_order_number', $full_custom_order_number );
+									} else {
+									update_post_meta( $order_id, '_alg_wc_custom_order_number', $current_order_number );
+									update_post_meta( $order_id, '_alg_wc_full_custom_order_number', $full_custom_order_number );
+								}
 							} else {
-								update_post_meta( $order_id, '_alg_wc_custom_order_number', $current_order_number );
-								update_post_meta( $order_id, '_alg_wc_full_custom_order_number', $full_custom_order_number );
+								$wpdb->query( 'ROLLBACK' ); //phpcs:ignore
+								return false;
 							}
 						} else {
-							$wpdb->query( $wpdb->prepare( 'SELECT RELEASE_LOCK(%s)', $lock_name ) );//phpcs:ignore
+							$wpdb->query( 'ROLLBACK' ); //phpcs:ignore
 							return false;
 						}
 					} else {
-						$wpdb->query( $wpdb->prepare( 'SELECT RELEASE_LOCK(%s)', $lock_name ) );//phpcs:ignore
+						$wpdb->query( 'ROLLBACK' ); //phpcs:ignore
 						return false;
 					}
-
-					$wpdb->query( $wpdb->prepare( 'SELECT RELEASE_LOCK(%s)', $lock_name ) );//phpcs:ignore
 				} elseif ( 'hash_crc32' === $counter_type ) {
 					if ( CON_Functions::get_setting( 'include_character_enabled', false ) ) {
 						$current_order_number = sprintf( '%x', crc32( $order_id ) );
