@@ -2,8 +2,8 @@
 Contributors: tychesoftwares
 Tags: woocommerce, custom order numbers, sequential order numbers
 Requires at least: 4.4
-Tested up to: 7.0.3
-Stable tag: 2.0.1
+Tested up to: 7.0.4
+Stable tag: 2.1.0
 Requires PHP: 7.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -214,6 +214,10 @@ This plugin communicates with our tracking server to send usage data **only** if
 5. General settings page — enable Custom Order Numbers, choose the order numbers counter, and set the next order number.
 
 == Changelog ==
+
+= 2.1.0 - 14/08/2026 =
+* Fix - Sequential order number stops incrementing and generates duplicate order numbers.
+* Fix - Resolved an issue that caused the admin interface to not load correctly after updating to 2.0.1.
 
 = 2.0.1 - 10/08/2026 =
 * Fix - Fatal error occurs when creating a manual order with HPOS enabled.

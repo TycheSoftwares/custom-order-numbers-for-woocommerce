@@ -1,4 +1,8 @@
 *** Custom Order Numbers for WooCommerce ***
+2026-08-14 - version 2.1.0
+* Fix - Sequential order number stops incrementing and generates duplicate order numbers.
+* Fix - Resolved an issue that caused the admin interface to not load correctly after updating to 2.0.1.
+
 2026-08-10 - version 2.0.1
 * Fix - Fatal error occurs when creating a manual order with HPOS enabled.
 * Fix - Dynamic prefix and suffix placeholders are displayed in newly generated order numbers when switching from the Pro version to the Lite version.
