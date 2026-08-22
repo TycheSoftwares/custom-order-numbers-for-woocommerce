@@ -60,7 +60,7 @@ function General({ noticeOperations, noticeUI, parentRef, settingsData, onSettin
             counter_reset_enabled: 'no',
             day_of_counter_reset_weekly: 'mon',
             counter_reset_counter_value: 1,
-            min_width: 1,
+            min_width: 0,
             settings_to_apply: 'new_order',
             settings_to_apply_from_order_id: 0,
             settings_to_apply_from_date: '',
@@ -224,7 +224,7 @@ function General({ noticeOperations, noticeUI, parentRef, settingsData, onSettin
         counter_reset_enabled: 'no',
         day_of_counter_reset_weekly: 'mon',
         counter_reset_counter_value: 1,
-        min_width: 1,
+        min_width: 0,
         settings_to_apply: 'new_order',
         settings_to_apply_from_order_id: 0,
         settings_to_apply_from_date: '',
@@ -424,7 +424,7 @@ function General({ noticeOperations, noticeUI, parentRef, settingsData, onSettin
                             },
                             {
                                 name: 'min_width',
-                                defaultValue: 1,
+                                defaultValue: 0,
                                 label: __( 'Minimum Digits in Order Number', 'custom-order-numbers-for-woocommerce' ),
                                 render: ( field ) => (
                                     <NumberControl
@@ -432,7 +432,7 @@ function General({ noticeOperations, noticeUI, parentRef, settingsData, onSettin
                                         value={ field.value }
                                         onChange={ field.onChange }
                                         min={0}
-                                        defaultValue={1}
+                                        defaultValue={0}
                                         disabled={true}
                                     />
                                 ),
