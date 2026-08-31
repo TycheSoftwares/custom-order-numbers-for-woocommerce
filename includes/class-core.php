@@ -34,6 +34,7 @@ if ( ! class_exists( 'Tyche\CON\Core' ) ) :
 		public function __construct() {
 			if ( CON_Functions::get_setting( 'enabled', false ) ) {
 				add_action( 'woocommerce_checkout_order_processed', array( $this, 'add_new_order_number' ), 10 );
+				add_action( 'woocommerce_new_order', array( $this, 'add_new_order_number' ), 10 );
 				add_action( 'woocommerce_store_api_checkout_update_order_from_request', array( $this, 'add_new_order_number_block_checkout' ), 10 );
 				add_filter( 'woocommerce_order_number', array( $this, 'display_order_number' ), PHP_INT_MAX, 2 );
 
