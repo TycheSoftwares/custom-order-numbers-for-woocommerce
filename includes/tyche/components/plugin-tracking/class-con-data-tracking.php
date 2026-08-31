@@ -88,7 +88,7 @@ if ( ! class_exists( 'Tyche\CON\Con_Data_Tracking' ) ) :
 		 */
 		public static function ts_admin_notices_scripts() {
 			$nonce            = wp_create_nonce( 'tracking_notice' );
-			$plugin_url       = plugins_url() . '/custom-order-numbers-for-woocommerce-pro';
+			$plugin_url       = plugins_url() . '/custom-order-numbers-for-woocommerce';
 			wp_enqueue_script(
 				'con_ts_dismiss_notice',
 				$plugin_url . '/includes/tyche/assets/js/tyche-dismiss-tracking-notice.js',
@@ -101,7 +101,7 @@ if ( ! class_exists( 'Tyche\CON\Con_Data_Tracking' ) ) :
 				'con_ts_dismiss_notice',
 				'con_ts_dismiss_notice',
 				array(
-					'ts_prefix_of_plugin' => 'con',
+					'ts_prefix_of_plugin' => 'con_lite',
 					'ts_admin_url'        => admin_url( 'admin-ajax.php' ),
 					'tracking_notice'     => $nonce,
 				)
