@@ -1,4 +1,10 @@
 *** Custom Order Numbers for WooCommerce ***
+
+2026-09-28 - version 2.2.0
+* Fix - Tracking notice script failed to load with a 404 error due to an incorrect plugin path in the asset URL.
+* Fix - Order numbers were truncated to a single digit when using the Pseudorandom crc32 Hash (max 10 digits) counter type.
+* Fix - Custom order numbers were not applied to orders created programmatically via the REST API or wc_create_order().
+
 2026-08-14 - version 2.1.0
 * Fix - Sequential order number stops incrementing and generates duplicate order numbers.
 * Fix - Resolved an issue that caused the admin interface to not load correctly after updating to 2.0.1.
