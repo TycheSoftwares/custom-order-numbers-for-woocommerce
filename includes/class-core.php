@@ -723,6 +723,7 @@ if ( ! class_exists( 'Tyche\CON\Core' ) ) :
 
 								$wpdb->query( 'COMMIT' ); //phpcs:ignore
 								wp_cache_delete( $con_settings_option, 'options' );
+								wp_cache_delete( 'alloptions', 'options' );
 
 								if ( $this->con_wc_hpos_enabled() ) {
 									$order->update_meta_data( '_alg_wc_custom_order_number', $current_order_number );
@@ -994,6 +995,7 @@ if ( ! class_exists( 'Tyche\CON\Core' ) ) :
 
 								$wpdb->query( 'COMMIT' ); //phpcs:ignore
 								wp_cache_delete( $con_settings_option, 'options' );
+								wp_cache_delete( 'alloptions', 'options' );
 
 								if ( $this->con_wc_hpos_enabled() ) {
 									$order->update_meta_data( '_alg_wc_custom_order_number', $current_order_number );
