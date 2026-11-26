@@ -509,7 +509,7 @@ if ( ! class_exists( 'Tyche\CON\Core' ) ) :
 				if ( '' === $order_number_meta && 'all_orders' !== $apply_settings_to ) {
 					$custom_number_set = false;
 					if ( 'new_order' === $apply_settings_to && 'sequential' === CON_Functions::get_setting( 'counter_type', 'sequential' ) ) {
-						if ( ( isset( $_GET['action'] ) && 'new' == $_GET['action'] ) || 'post-new.php' === $GLOBALS['pagenow'] ) { //phpcs:ignore
+						if ( is_admin() && current_user_can( 'manage_woocommerce' ) && ( ( isset( $_GET['action'] ) && 'new' == $_GET['action'] ) || 'post-new.php' === $GLOBALS['pagenow'] ) ) { //phpcs:ignore
 							$order_number = $this->add_order_number_meta_new( $order_id, false, $order );
 						}
 					}
@@ -518,7 +518,7 @@ if ( ! class_exists( 'Tyche\CON\Core' ) ) :
 				if ( '' === $order_number_meta ) {
 					$custom_number_set = false;
 					global $pagenow;
-					if ( ( isset( $_GET['action'] ) && 'new' == $_GET['action'] ) || 'post-new.php' == $pagenow ) { //phpcs:ignore
+					if ( is_admin() && current_user_can( 'manage_woocommerce' ) && ( ( isset( $_GET['action'] ) && 'new' == $_GET['action'] ) || 'post-new.php' == $pagenow ) ) { //phpcs:ignore
 						$order_number_meta = $this->add_order_number_meta_new( $order_id, false, $order );
 					} else {
 						$order_number_meta = $order_id;
